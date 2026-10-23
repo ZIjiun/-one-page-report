@@ -5,6 +5,8 @@ description: "Turn project or business material into a one-page visual report (1
 
 # One-page report
 
+Version 1.0.0 · source: https://github.com/ZIjiun/-one-page-report · see `CHANGELOG.md` in the repo
+
 Make one 16:9 page that a busy reader understands in ten seconds, from the user's own material.
 The page is the last step. Most of the value is in the thinking before it: who reads it, what
 they must decide, and the one sentence they should remember.
