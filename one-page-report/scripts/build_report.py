@@ -8,7 +8,7 @@ Standard library only. The HTML is self-contained: CSS, icons and only the font
 pieces that the text needs are embedded, so the file opens anywhere offline.
 See references/spec-format.md for the spec format.
 """
-import argparse, base64, html, json, os, re, sys
+import argparse, base64, html, json, os, re, sys, zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -28,17 +28,24 @@ def load_style(name):
 
 
 _icon_cache = {}
+_icon_set = None
+def icon_names():
+    """All bundled icon names (assets/icons.json, Lucide, ISC)."""
+    global _icon_set
+    if _icon_set is None:
+        with open(os.path.join(ASSETS, "icons.json"), encoding="utf-8") as f:
+            _icon_set = json.load(f)["icons"]
+    return _icon_set
+
+
 def icon(name, cls="ic"):
     if not name:
         return ""
     if name not in _icon_cache:
-        p = os.path.join(ASSETS, "icons", f"{name}.svg")
-        if not os.path.isfile(p):
+        body = icon_names().get(name)
+        if body is None:
             print(f"! icon not found: {name} (skipped)", file=sys.stderr)
-            _icon_cache[name] = None
-        else:
-            t = open(p, encoding="utf-8").read()
-            _icon_cache[name] = re.search(r"<svg[^>]*>(.*)</svg>", t, re.S).group(1).strip()
+        _icon_cache[name] = body
     body = _icon_cache[name]
     if body is None:
         return ""
@@ -327,7 +334,17 @@ def parse_ranges(css_rule):
     return rs
 
 
-def subset_font(path, codepoints):
+def font_file(bundle, name):
+    """Read one file from the bundled font archives (assets/fonts/<bundle>*.zip)."""
+    import glob
+    for arc in sorted(glob.glob(os.path.join(ASSETS, "fonts", f"{bundle}*.zip"))):
+        with zipfile.ZipFile(arc) as z:
+            if name in z.namelist():
+                return z.read(name)
+    raise FileNotFoundError(f"{name} not found in assets/fonts/{bundle}*.zip")
+
+
+def subset_font(raw, codepoints):
     """Shrink a woff2 piece to the characters used. Needs fontTools + brotli; otherwise keep the piece."""
     try:
         import logging; logging.getLogger("fontTools").setLevel(logging.ERROR)
@@ -335,30 +352,29 @@ def subset_font(path, codepoints):
         import brotli  # noqa: F401  (woff2 support)
         import io
         opts = fts.Options(); opts.flavor = "woff2"; opts.layout_features = ["*"]
-        font = fts.load_font(path, opts)
+        font = fts.load_font(io.BytesIO(raw), opts)
         sub = fts.Subsetter(opts); sub.populate(unicodes=codepoints); sub.subset(font)
         buf = io.BytesIO(); fts.save_font(font, buf, opts)
         return buf.getvalue()
     except Exception:
-        return open(path, "rb").read()
+        return raw
 
 
 def font_css(bundle, used_chars):
     """Embed only the font files whose unicode-range covers characters the report uses."""
     if not bundle:
         return ""
-    d = os.path.join(ASSETS, "fonts", bundle)
     if bundle == "lxgw-wenkai-tc":
         out = []
         cps = {ord(ch) for ch in used_chars}
         for f in ("regular.css", "bold.css"):
-            css = open(os.path.join(d, f), encoding="utf-8").read()
+            css = font_file(bundle, f).decode("utf-8")
             for rule in re.findall(r"@font-face\s*\{[^}]*\}", css):
                 rs = parse_ranges(rule)
                 if rs and not any(a <= cp <= b for cp in cps for a, b in rs):
                     continue
                 fn = re.search(r"url\('\./([^']+)'\)", rule).group(1)
-                raw = subset_font(os.path.join(d, fn), {cp for cp in cps if rs is None or any(a <= cp <= b for a, b in rs)})
+                raw = subset_font(font_file(bundle, fn), {cp for cp in cps if rs is None or any(a <= cp <= b for a, b in rs)})
                 data = base64.b64encode(raw).decode()
                 out.append(re.sub(r"url\('\./[^']+'\)", f"url(data:font/woff2;base64,{data})", rule))
         return "\n".join(out)
@@ -366,7 +382,7 @@ def font_css(bundle, used_chars):
              "patrick-hand": [("Patrick Hand", 400, "patrick-hand-latin-400-normal.woff2"), ("Patrick Hand", 700, "patrick-hand-latin-400-normal.woff2")]}[bundle]
     out = []
     for fam, w, fn in faces:
-        data = base64.b64encode(open(os.path.join(d, fn), "rb").read()).decode()
+        data = base64.b64encode(font_file(bundle, fn)).decode()
         out.append(f"@font-face{{font-family:'{fam}';font-weight:{w};font-style:normal;src:url(data:font/woff2;base64,{data}) format('woff2')}}")
     return "\n".join(out)
 

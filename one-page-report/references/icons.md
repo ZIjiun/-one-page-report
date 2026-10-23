@@ -21,7 +21,7 @@ make the page look machine-made.
    category labels, list items, platform or role rows, timeline events. If it is a title, a big
    number or body text: **no icon**.
 2. **5-second rule.** No obvious icon within about five seconds → no icon.
-3. **Pick from the table below** (Lucide names; files in `assets/icons/`). Add new pairs to the
+3. **Pick from the table below** (Lucide names; all bundled in `assets/icons.json`). Add new pairs to the
    table in your reply if you use one not listed.
 4. **One concept = one icon, across the whole page.** If "problem" is a warning triangle, nothing
    else uses the warning triangle.

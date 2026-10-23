@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.1 — 2026-10-23
+
+- claude.ai allows at most 200 files per skill; 1.0.0 had 399. Icons are now one file
+  (`assets/icons.json`) and fonts are zip archives (`assets/fonts/*.zip`): 41 files in total.
+  Output is pixel-identical to 1.0.0 (checked on all six examples).
+
 ## 1.0.0 — 2026-10-23
 
 First release.

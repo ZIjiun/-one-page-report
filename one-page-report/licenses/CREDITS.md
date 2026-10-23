@@ -6,10 +6,10 @@ It bundles or adapts the following.
 | Item | Where | Licence | How it is used |
 |---|---|---|---|
 | enterprise-ai-skills by Sruthi Reddy (github.com/sruthir28/enterprise-ai-skills, commit ae8fe60) | `references/storyline.md`, `references/review-checklist.md`, `scripts/build_pptx.py` | MIT (`enterprise-ai-skills-MIT.txt`) | Methods from synthesis, top-down-memo, decision-memo-builder, mckinsey-critic and mckinsey-charts rewritten in our own words; no files copied |
-| Lucide icons (lucide.dev) | `assets/icons/` (163 icons) | ISC (`Lucide-ISC.txt`) | SVG files copied unchanged |
-| LXGW WenKai TC (霞鶩文楷 TC) by LXGW | `assets/fonts/lxgw-wenkai-tc/` | SIL OFL 1.1 (`LXGW-WenKai-TC-OFL.txt`) | Web font pieces copied unchanged; reports embed only the glyphs used |
-| Inter by Rasmus Andersson | `assets/fonts/inter/` | SIL OFL 1.1 (`Inter-OFL.txt`) | Latin web font files |
-| Patrick Hand by Patrick Wagesreiter | `assets/fonts/patrick-hand/` | SIL OFL 1.1 (`Patrick-Hand-OFL.txt`) | Latin web font file |
+| Lucide icons (lucide.dev) | `assets/icons.json` (163 icons) | ISC (`Lucide-ISC.txt`) | SVG markup copied unchanged into one JSON file |
+| LXGW WenKai TC (霞鶩文楷 TC) by LXGW | `assets/fonts/lxgw-wenkai-tc-*.zip` | SIL OFL 1.1 (`LXGW-WenKai-TC-OFL.txt`) | Web font pieces and CSS copied unchanged into one archive; reports embed only the glyphs used |
+| Inter by Rasmus Andersson | `assets/fonts/inter.zip` | SIL OFL 1.1 (`Inter-OFL.txt`) | Latin web font files |
+| Patrick Hand by Patrick Wagesreiter | `assets/fonts/patrick-hand.zip` | SIL OFL 1.1 (`Patrick-Hand-OFL.txt`) | Latin web font file |
 
 ## Ideas and sources cited (no code or text copied)
 
