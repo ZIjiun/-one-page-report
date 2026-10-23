@@ -335,13 +335,18 @@ def parse_ranges(css_rule):
 
 
 def font_file(bundle, name):
-    """Read one file from the bundled font archives (assets/fonts/<bundle>*.zip)."""
+    """Read one file from the bundled fonts (assets/fonts/<bundle>*.json; older copies used .zip)."""
     import glob
+    for arc in sorted(glob.glob(os.path.join(ASSETS, "fonts", f"{bundle}*.json"))):
+        with open(arc, encoding="utf-8") as f:
+            entry = json.load(f).get("files", {}).get(name)
+        if entry is not None:
+            return entry["text"].encode("utf-8") if "text" in entry else base64.b64decode(entry["base64"])
     for arc in sorted(glob.glob(os.path.join(ASSETS, "fonts", f"{bundle}*.zip"))):
         with zipfile.ZipFile(arc) as z:
             if name in z.namelist():
                 return z.read(name)
-    raise FileNotFoundError(f"{name} not found in assets/fonts/{bundle}*.zip")
+    raise FileNotFoundError(f"{name} not found in assets/fonts/{bundle}*.json")
 
 
 def subset_font(raw, codepoints):

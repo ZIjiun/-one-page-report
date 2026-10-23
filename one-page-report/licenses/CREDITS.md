@@ -7,9 +7,9 @@ It bundles or adapts the following.
 |---|---|---|---|
 | enterprise-ai-skills by Sruthi Reddy (github.com/sruthir28/enterprise-ai-skills, commit ae8fe60) | `references/storyline.md`, `references/review-checklist.md`, `scripts/build_pptx.py` | MIT (`enterprise-ai-skills-MIT.txt`) | Methods from synthesis, top-down-memo, decision-memo-builder, mckinsey-critic and mckinsey-charts rewritten in our own words; no files copied |
 | Lucide icons (lucide.dev) | `assets/icons.json` (163 icons) | ISC (`Lucide-ISC.txt`) | SVG markup copied unchanged into one JSON file |
-| LXGW WenKai TC (霞鶩文楷 TC) by LXGW | `assets/fonts/lxgw-wenkai-tc-*.zip` | SIL OFL 1.1 (`LXGW-WenKai-TC-OFL.txt`) | Web font pieces and CSS copied unchanged into one archive; reports embed only the glyphs used |
-| Inter by Rasmus Andersson | `assets/fonts/inter.zip` | SIL OFL 1.1 (`Inter-OFL.txt`) | Latin web font files |
-| Patrick Hand by Patrick Wagesreiter | `assets/fonts/patrick-hand.zip` | SIL OFL 1.1 (`Patrick-Hand-OFL.txt`) | Latin web font file |
+| LXGW WenKai TC (霞鶩文楷 TC) by LXGW | `assets/fonts/lxgw-wenkai-tc-*.json` | SIL OFL 1.1 (`LXGW-WenKai-TC-OFL.txt`) | Web font pieces and CSS copied unchanged (base64) into one JSON file per weight; reports embed only the glyphs used |
+| Inter by Rasmus Andersson | `assets/fonts/inter.json` | SIL OFL 1.1 (`Inter-OFL.txt`) | Latin web font files |
+| Patrick Hand by Patrick Wagesreiter | `assets/fonts/patrick-hand.json` | SIL OFL 1.1 (`Patrick-Hand-OFL.txt`) | Latin web font file |
 
 ## Watching the adapted sources
 

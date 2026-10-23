@@ -1,9 +1,15 @@
 # Changelog
 
+## 1.0.4 — 2026-10-23
+
+- claude.ai also rejects skills that contain zip files ("Zip cannot contain nested zip files").
+  Fonts are now stored as JSON (`assets/fonts/*.json`, base64 font data) instead of zip archives.
+  Still 42 files; output is pixel-identical on all six examples.
+
 ## 1.0.3 — 2026-10-23
 
 - A missing font archive no longer stops the build: the report falls back to system fonts and prints a
-  warning. This makes it safe to drop the large `lxgw-wenkai-tc-*.zip` files when an upload size limit
+  warning. This makes it safe to drop the large `lxgw-wenkai-tc-*` font files when an upload size limit
   gets in the way.
 
 ## 1.0.2 — 2026-10-23
