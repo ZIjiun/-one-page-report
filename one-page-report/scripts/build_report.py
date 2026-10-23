@@ -361,9 +361,18 @@ def subset_font(raw, codepoints):
 
 
 def font_css(bundle, used_chars):
-    """Embed only the font files whose unicode-range covers characters the report uses."""
+    """Embed only the font files whose unicode-range covers characters the report uses.
+    A missing font archive is not an error: the style's fallback (system) fonts are used instead."""
     if not bundle:
         return ""
+    try:
+        return _font_css(bundle, used_chars)
+    except FileNotFoundError as e:
+        print(f"warning: bundled font '{bundle}' not found ({e}); using system fonts instead", file=sys.stderr)
+        return ""
+
+
+def _font_css(bundle, used_chars):
     if bundle == "lxgw-wenkai-tc":
         out = []
         cps = {ord(ch) for ch in used_chars}

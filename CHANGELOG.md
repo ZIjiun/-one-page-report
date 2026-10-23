@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3 — 2026-10-23
+
+- A missing font archive no longer stops the build: the report falls back to system fonts and prints a
+  warning. This makes it safe to drop the large `lxgw-wenkai-tc-*.zip` files when an upload size limit
+  gets in the way.
+
 ## 1.0.2 — 2026-10-23
 
 - Added `one-page-report/upstream-sources.json`: the three sources whose methods were rewritten
