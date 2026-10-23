@@ -50,6 +50,7 @@ without a browser it delivers the HTML for you to print to PDF.
 | `one-page-report/examples/` | Complete specs: results, progress, proposal (zh + en) |
 | `one-page-report/portable/` | One-file instructions for other AI tools |
 | `one-page-report/licenses/` | Third-party licences and credits |
+| `one-page-report/upstream-sources.json` | Versions of the adapted sources last reviewed; skill-update-check reports when they change |
 
 ## Licence
 

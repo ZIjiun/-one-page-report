@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.2 — 2026-10-23
+
+- Added `one-page-report/upstream-sources.json`: the three sources whose methods were rewritten
+  into this skill (enterprise-ai-skills, storytelling-with-data, dataviz) and the versions last
+  reviewed. skill-update-check uses it to report when a source changes (at most once a day), so the
+  owner can decide whether to merge. Nothing is merged automatically; the skill itself never reads it.
+  No change to how reports are made.
+
 ## 1.0.1 — 2026-10-23
 
 - claude.ai allows at most 200 files per skill; 1.0.0 had 399. Icons are now one file

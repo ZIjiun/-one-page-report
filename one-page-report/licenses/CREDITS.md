@@ -11,6 +11,12 @@ It bundles or adapts the following.
 | Inter by Rasmus Andersson | `assets/fonts/inter.zip` | SIL OFL 1.1 (`Inter-OFL.txt`) | Latin web font files |
 | Patrick Hand by Patrick Wagesreiter | `assets/fonts/patrick-hand.zip` | SIL OFL 1.1 (`Patrick-Hand-OFL.txt`) | Latin web font file |
 
+## Watching the adapted sources
+
+`upstream-sources.json` records the repository, paths and reviewed commit of enterprise-ai-skills and
+storytelling-with-data (sammcj/agentic-coding, `Skills/storytelling-with-data`), and a content hash of
+the built-in `dataviz` skill files that `scripts/check_colors.py` was checked against.
+
 ## Ideas and sources cited (no code or text copied)
 
 - Colour checks in `scripts/check_colors.py` are written from public sources: OKLab (Björn Ottosson,

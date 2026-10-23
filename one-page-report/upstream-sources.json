@@ -1,0 +1,83 @@
+{
+  "_about": "Skills whose methods were rewritten (not copied) into one-page-report. skill-update-check compares them with the versions recorded here and reports changes; nothing is merged automatically. The skill itself never reads this file.",
+  "skill": "one-page-report",
+  "sources": [
+    {
+      "name": "enterprise-ai-skills",
+      "type": "github",
+      "repo": "https://github.com/sruthir28/enterprise-ai-skills",
+      "licence": "MIT",
+      "paths": [
+        {
+          "path": "synthesis",
+          "last_commit": "0aa561395517912e45a6db4c271280f3ce282aa5",
+          "tree": "3d422d13fded639a7d64fd8ecd0cd64b94ec0cd0"
+        },
+        {
+          "path": "top-down-memo",
+          "last_commit": "0aa561395517912e45a6db4c271280f3ce282aa5",
+          "tree": "e2b512204e902fbacb47e0ec63c3e8bf012c8aef"
+        },
+        {
+          "path": "decision-memo-builder",
+          "last_commit": "5f1deef80fffbc0d98dd33e05d1baf1fcaa5aeac",
+          "tree": "4f173cdd8bf53292a3d7902158acd3c3128d54ac"
+        },
+        {
+          "path": "mckinsey-critic",
+          "last_commit": "01dca3637edc5dfb4baff3275fe7ef3b992e4386",
+          "tree": "d9fd4ba9a6082b140e168b943dd6c19453e72ac9"
+        },
+        {
+          "path": "mckinsey-charts",
+          "last_commit": "0aa561395517912e45a6db4c271280f3ce282aa5",
+          "tree": "63a67dfb0dbf9a6a78aeea7cd8d2be24b58d3652"
+        }
+      ],
+      "used_in": [
+        "references/storyline.md",
+        "references/review-checklist.md",
+        "references/charts-and-color.md",
+        "scripts/build_pptx.py"
+      ],
+      "reviewed_commit": "ae8fe60a765cc766e0c598bfe8a7a33fd5faac1b",
+      "reviewed_at": "2026-10-23"
+    },
+    {
+      "name": "storytelling-with-data",
+      "type": "github",
+      "repo": "https://github.com/sammcj/agentic-coding",
+      "paths": [
+        {
+          "path": "Skills/storytelling-with-data",
+          "last_commit": "7fd44001c1d6e26c2d34090b7290de74b6da0727",
+          "tree": "6392059017aebac5ba9710a56f947c30dc00b799"
+        }
+      ],
+      "used_in": [
+        "references/charts-and-color.md"
+      ],
+      "reviewed_commit": "d5c9cae02904270e37e0a374a0c819020c5fefc2",
+      "reviewed_at": "2026-10-23"
+    },
+    {
+      "name": "dataviz",
+      "type": "local",
+      "skill": "dataviz",
+      "note": "Built into Claude, not published on GitHub; compared with the copy found on this computer.",
+      "files": [
+        "scripts/validate_palette.py",
+        "references/color-formula.md",
+        "references/palette.md",
+        "references/choosing-a-form.md",
+        "references/anti-patterns.md"
+      ],
+      "used_in": [
+        "scripts/check_colors.py",
+        "references/charts-and-color.md"
+      ],
+      "sha256": "0bdb4b6c10e42d6fa2be9f8b1b2529be529e33163a8640f55181077e30fa12fb",
+      "reviewed_at": "2026-10-23"
+    }
+  ]
+}

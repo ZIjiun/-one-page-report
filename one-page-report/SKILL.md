@@ -5,7 +5,7 @@ description: "Turn project or business material into a one-page visual report (1
 
 # One-page report
 
-Version 1.0.1 · source: https://github.com/ZIjiun/-one-page-report · see `CHANGELOG.md` in the repo
+Version 1.0.2 · source: https://github.com/ZIjiun/-one-page-report · see `CHANGELOG.md` in the repo
 
 Make one 16:9 page that a busy reader understands in ten seconds, from the user's own material.
 The page is the last step. Most of the value is in the thinking before it: who reads it, what
@@ -108,3 +108,4 @@ validator. Otherwise run the offline stand-in, which gives the same pass/fail re
 - `examples/` complete specs for three report types, both languages
 - `portable/` the same method as one instruction file for other AI tools
 - `licenses/` third-party licences and credits
+- `upstream-sources.json` the skills this one adapted and the versions last reviewed; read only by skill-update-check, never by this skill
