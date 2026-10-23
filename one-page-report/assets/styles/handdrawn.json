@@ -1,0 +1,26 @@
+{
+  "name": "handdrawn",
+  "description": "Warm paper, hand-written fonts, slightly wobbly lines. For internal sharing and casual updates.",
+  "rough": true,
+  "texture": true,
+  "fonts": {
+    "zh": {"family": "\"LXGW WenKai TC\", \"Noto Sans CJK TC\", \"Microsoft JhengHei\", \"PingFang TC\", sans-serif", "bundled": "lxgw-wenkai-tc"},
+    "en": {"family": "\"Patrick Hand\", \"Segoe Print\", \"Comic Sans MS\", sans-serif", "bundled": "patrick-hand"}
+  },
+  "tokens": {
+    "paper": "#fbf8f1", "ink": "#2b2a28", "soft": "#52514e", "mute": "#8a857c", "grain": "rgba(120,100,70,.05)",
+    "card": "#ffffff", "card-ring": "#e6e0d4", "rule": "#ddd6ca", "chip-ring": "#ddd6ca",
+    "issue-ring": "#f1cfcb", "step-ring": "#cfe6d6",
+    "c-blue": "#2c5cb0", "bg-blue": "#f2f6fc", "c-red": "#d03b3b", "bg-red": "#fdf3f1",
+    "c-gray": "#6b665e", "bg-gray": "#f5f2eb", "c-green": "#2f8a4c", "bg-green": "#f1f8f3",
+    "c-orange": "#e2913a", "bg-orange": "#fdf7ee", "c-purple": "#6250d6", "bg-purple": "#f4f2fd",
+    "c-teal": "#1a8f86", "bg-teal": "#eef8f7",
+    "hi": "#2a78d6", "hi-bg": "#eef4fc", "hi-text": "#1c5cab",
+    "good-text": "#1f7a3a", "bad-text": "#d03b3b", "critical": "#d03b3b", "marker": "rgba(226,145,58,.45)",
+    "border-w": "2.2px", "radius": "13px 9px 15px 8px", "tab-radius": "9px 13px 8px 12px",
+    "card-radius": "10px 13px 9px 14px", "chip-radius": "9px 7px 10px 6px",
+    "zone-gap-y": "26px", "grid-top": "26px"
+  },
+  "chart": {"highlight": "#2a78d6", "context": "#c9c4bb", "axis": "#c3c2b7", "reference": "#898781", "text": "#52514e", "strong": "#0b0b0b"},
+  "status": {"good": "#0ca30c", "warning": "#fab219", "serious": "#ec835a", "critical": "#d03b3b"}
+}

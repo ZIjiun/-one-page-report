@@ -1,0 +1,67 @@
+# Layout
+
+## The page
+
+- 16:9, 1920×1080 CSS px, exported at 2x (3840×2160). One page; no scrolling.
+- Top: a short kicker line (report type | project | owner), then the **title = one-sentence
+  conclusion** (one or two lines). Mark the key phrase: `^^marker^^`, good news `==green==`,
+  the problem or ask `!!red!!`.
+- Body: 4–6 zones on a grid. Footer: sources, estimates note, data date, version, author,
+  confidentiality mark.
+
+## Zones = the reader's questions
+
+Each zone has a coloured tab with an icon and a short label, and at the right a **lead line
+with the zone's conclusion**. Add the reader's question ("Results — was it worth it?") only
+where it helps; a question on every tab reads like a template.
+Reading only the tabs and leads should tell the whole story (horizontal logic).
+
+## Position carries meaning
+
+```
+┌───────────────────────┬────────────┐
+│ main message (largest)│ problems / │   top: results
+│                       │ risks      │
+├───────────────────────┼────────────┤
+│ how / details         │ next / ask │   bottom: process and action
+├───────────────────────┴────────────┤
+│ timeline (full width)              │
+└────────────────────────────────────┘
+ left 2/3: what we did well   right 1/3: what to watch and what to do
+```
+
+Spec: `"layout": {"columns": "2fr 1fr", "areas": ["outcome problems", "method next", "timeline timeline"]}`.
+Other grids are fine (e.g. 3 columns for a comparison). Keep the order of reading = the order
+of the reader's questions.
+
+## Weight follows importance
+
+- The most important zone gets the most area, the biggest numbers and the strongest colour.
+- Detail zones use small text and grey tones.
+- At most 4 font sizes on the page. Squint test: the thing that stands out must be the thing
+  that matters.
+
+## Each number appears once, next to what it proves
+
+Do not repeat a figure in a KPI row, a card, a chart and the timeline. Put it where it is the
+evidence for a claim. The title may restate the one headline figure.
+
+## Evidence sits right under its claim
+
+Card order: claim (title) → number or chart → comparison → "because we did …" at the bottom.
+The reader never has to match a number to a claim across the page.
+
+## Density
+
+- `render.py` zoom 0.95–1.10 is ideal. Below 0.8: too dense, cut. Rows stretch to fill the page,
+  so a short page does not leave a blank strip; if `render.py` says the content is thin, the
+  zones were stretched: add evidence or use fewer zones.
+- A zone spanning two rows next to a short zone gets tall. Fill it with evidence (a chart, a
+  table) or rearrange the grid so zones of similar length share a row.
+- Prefer white space over squeezing. One page holds about 250–450 Chinese characters of body
+  text, or 180–320 English words.
+
+## Bilingual sets
+
+Design for the **English length** (about 1.5–2x the Chinese width). Build Chinese first, then
+translate inside the same spec structure. Same zones, same order, same numbers.

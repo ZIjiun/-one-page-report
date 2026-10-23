@@ -1,0 +1,105 @@
+{
+  "lang": "en",
+  "report_type": "results",
+  "style": "handdrawn",
+  "doc_title": "The Witcher 3 Remastered free update: project results",
+  "meta": {
+    "kicker": "Project results｜**The Witcher 3: Wild Hunt – Remastered free update**｜Developer: CD PROJEKT RED",
+    "as_of": "Data as of mid-Oct 2026",
+    "version": "v1",
+    "author": "Demo",
+    "sources": "Demo only, not an official report. Sources: PC Gamer, TheSixthAxis, Inven Global, God is a Geek, KitGuru, PC Guide, GamesRadar+, Push Square, GamePro, TweakTown (May–Oct 2026). 68% and 65% are estimated from reported negative-review shares."
+  },
+  "title": "Remaster ^^shipped free and on time^^: players ==at an 11-year high==, Metacritic 94;\nlaunch GPU issues fixed, positive reviews back to 92%. Next: !!the Switch 2 fix!!",
+  "layout": {
+    "columns": "2fr 1fr",
+    "areas": ["outcome problems", "method next", "timeline timeline"]
+  },
+  "zones": [
+    {
+      "id": "outcome", "color": "blue", "icon": "trophy", "label": "Results", "question": "Was it worth it?",
+      "lead": "Bottom line: quality, reach and ecosystem all hit",
+      "blocks": [
+        {"type": "cards", "items": [
+          {"icon": "star", "tag": "QUALITY", "title": "An 11-year-old game earned 2026's top score",
+           "big": "94", "big_note": "Metacritic score", "sub": "Highest of all 2026 releases at launch",
+           "foot": "**Because we:** rebuilt the visuals (path tracing, new global illumination) and reworked combat, skill tree and horse riding"},
+          {"icon": "users", "tag": "REACH", "title": "Old and new players poured in: Steam peak at an 11-year high",
+           "chart": {"kind": "bar", "data": [
+             {"label": "2015 launch", "value": 9.2, "display": "92K"},
+             {"label": "2020 TV show", "value": 10.3, "display": "103K"},
+             {"label": "2026 remaster", "value": 12.1, "display": "121K", "highlight": true}]},
+           "sub": "++▲17%++ vs. old record, ++▲31%++ vs. launch (Steam only)",
+           "foot": "**Because we:** made the upgrade free for owners, made both expansions free, and ran a launch-week discount"},
+          {"icon": "puzzle", "tag": "ECOSYSTEM", "title": "Mods carried over: players did not have to choose",
+           "big": "450+", "big_note": "mods ready on day one", "sub": "65M owners upgraded with the mods they already use",
+           "foot": "**Because we:** supported cross-platform mods and helped modders update before launch"}
+        ]}
+      ]
+    },
+    {
+      "id": "problems", "color": "red", "icon": "triangle-alert", "label": "Issues", "question": "What went wrong?",
+      "lead": "Bottom line: rough launch, fixed within a week",
+      "blocks": [
+        {"type": "chart", "kind": "line", "title": "Steam recent positive reviews", "note": "68% and 65% estimated from negative-review shares",
+         "reference": {"value": 95, "label": "Original game: Overwhelmingly Positive (95%+)"}, "y_min": 55, "y_max": 97,
+         "data": [{"label": "9/29 launch day", "value": 68, "display": "68%"},
+                  {"label": "9/30 AMD issue peaks", "value": 65, "display": "65% (low)"},
+                  {"label": "Early Oct, after fixes", "value": 92, "display": "92%"}]},
+        {"type": "issues", "items": [
+          {"icon": "image-off", "problem": "AMD GPU artifacts, Steam Deck freezes", "detail": "(1,100+ negative reviews on day one)", "fix": "AMD shipped driver 26.9.2 the same day; Steam lets players roll back"},
+          {"icon": "bug", "problem": "Runaway boats, broken skills and other bugs", "fix": "Patch 5.01 on 10/8 (PC, PS5, Xbox)"},
+          {"icon": "tablet", "problem": "Switch 2 not yet fixed; consoles cannot roll back", "fix": "Dedicated update in progress, date not announced"}
+        ]}
+      ]
+    },
+    {
+      "id": "method", "color": "gray", "icon": "wrench", "label": "What we did", "question": "What exactly changed?",
+      "lead": "Goal: make an 11-year-old game feel like a 2026 release",
+      "blocks": [
+        {"type": "columns", "cols": "1.08fr 1fr", "children": [
+          [{"type": "chips", "title": "Update scope", "note": "outlined = key items", "rows": [
+            {"icon": "sun", "label": "Visuals", "items": ["*Path tracing", "*New global illumination", "Ray reconstruction", "RT hair", "New shading", "Subsurface scattering", "Tone mapper", "GTAO", "HDR", "Textures & foliage"]},
+            {"icon": "gamepad-2", "label": "Gameplay", "items": ["*Combat & finishers", "*Skill tree rework", "Monster AI", "Traversal", "Horse riding", "Transmog", "Sign effects", "Meditation", "Looting"]},
+            {"icon": "layout-dashboard", "label": "UI", "items": ["Quest tracking", "Menus", "Tutorial", "Accessibility", "Photo mode"]},
+            {"icon": "cpu", "label": "Tech", "items": ["*Cross-platform mods", "Native DX12", "DLSS 4.5", "FSR 4", "XeSS 2.0", "Xbox Play Anywhere"]}
+          ]}],
+          [{"type": "table", "title": "Platform differences", "note": "5 platforms, same day", "rows": [
+             {"icon": "monitor", "key": "PC", "value": "Path tracing and ray reconstruction (PC only); Steam rollback"},
+             {"icon": "tv", "key": "PS5 Pro", "value": "RT mode **60fps** (was 30); performance mode about **90fps**"},
+             {"icon": "tablet", "key": "Switch 2", "value": "720p handheld / 1080p TV, **30–40fps**; mouse and motion controls"}]},
+           {"type": "table", "title": "How players get it", "note": "CDPR: charging owners was never considered", "rows": [
+             {"icon": "user-check", "key": "Owners", "value": "**Free** upgrade; Hearts of Stone and Blood and Wine also free"},
+             {"icon": "user-plus", "key": "New players", "value": "Steam launch-week 50% off, **US$24.99** (to 10/1)"}]}]
+        ]}
+      ]
+    },
+    {
+      "id": "next", "color": "green", "icon": "flag", "label": "Next", "question": "What happens next?",
+      "blocks": [
+        {"type": "steps", "items": [
+          {"title": "Ship the dedicated Switch 2 fix", "sub": "Bring every platform to the same quality (date TBA)"},
+          {"title": "Keep collecting feedback and patching", "sub": "Lift recent reviews back to the original 95% level"},
+          {"title": "Release the Songs of the Past expansion in 2027", "sub": "Keep the returning players engaged"}
+        ]},
+        {"type": "note", "icon": "target", "text": "**Why it matters:** a free upgrade re-engages a 65M-copy player base ahead of the new expansion and The Witcher 4, expected in 2028."}
+      ]
+    },
+    {
+      "id": "timeline", "color": "orange", "icon": "calendar-days", "label": "Timeline", "question": "Where are we?",
+      "lead": "✓ done　… in progress　○ planned",
+      "blocks": [
+        {"type": "timeline", "events": [
+          {"date": "8/25", "label": "Gamescom reveal", "sub": "Expansions free same day", "icon": "megaphone", "status": "done"},
+          {"date": "9/29", "label": "Launch on 5 platforms", "sub": "Steam peak 121K", "icon": "rocket", "status": "done", "highlight": true},
+          {"date": "9/29", "label": "AMD driver 26.9.2", "sub": "Within hours", "icon": "download", "status": "done"},
+          {"date": "9/29–10/1", "label": "Steam launch sale", "sub": "US$24.99", "icon": "tag", "status": "done"},
+          {"date": "10/8", "label": "Patch 5.01", "sub": "PC, PS5, Xbox", "icon": "bandage", "status": "done"},
+          {"date": "In progress", "label": "Switch 2 fix", "sub": "Date TBA", "icon": "bandage", "status": "doing"},
+          {"date": "2027", "label": "New expansion", "sub": "Songs of the Past", "icon": "package-plus", "status": "plan"},
+          {"date": "2028", "label": "The Witcher 4", "sub": "Expected", "icon": "swords", "status": "plan"}
+        ]}
+      ]
+    }
+  ]
+}

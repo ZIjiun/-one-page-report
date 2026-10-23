@@ -1,0 +1,275 @@
+{
+ "lang": "en",
+ "report_type": "proposal",
+ "style": "handdrawn",
+ "doc_title": "AI reply assist for customer service: Option B pilot proposal",
+ "meta": {
+  "kicker": "Proposal | **AI reply assist for customer service** | Customer Service | 10/27 managers' meeting",
+  "as_of": "Data as of 2026/10/20",
+  "version": "v1",
+  "author": "Customer Service",
+  "confidential": "Internal",
+  "sources": "Benefits are estimates (source: vendor's pilot data at peer companies), not measured here. Amounts as in the source; currency not stated. Fictional demo data."
+ },
+ "title": "Please approve ^^Option B: an AI reply-assist pilot^^ on 10/27 — 600K setup, live in 4 weeks\nPilot on returns and shipping tickets; first reply time estimated ==under 3 hours==",
+ "layout": {
+  "columns": "1fr 1fr 1fr",
+  "areas": [
+   "problem options options",
+   "rec rec risk",
+   "ask ask ask"
+  ]
+ },
+ "zones": [
+  {
+   "id": "problem",
+   "color": "red",
+   "icon": "triangle-alert",
+   "label": "Problem",
+   "question": "Why now?",
+   "lead": "Replies are slow; peak season makes it worse",
+   "blocks": [
+    {
+     "type": "cards",
+     "cols": 3,
+     "items": [
+      {
+       "icon": "clock",
+       "tag": "First reply",
+       "big": "6.5",
+       "big_note": "hrs",
+       "sub": "Target: 2 hrs\n(18 agents, 21K tickets a month)"
+      },
+      {
+       "icon": "user",
+       "tag": "CSAT",
+       "big": "3.6",
+       "big_note": "/5",
+       "sub": "Last year: 4.1\n**58%** of complaints are about slow replies"
+      },
+      {
+       "icon": "flame",
+       "tag": "Peak season",
+       "big": "+40%",
+       "big_note": "",
+       "sub": "Tickets in Nov–Dec\nLast peak overtime:\n**860K**"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "options",
+   "color": "gray",
+   "icon": "git-branch",
+   "label": "Options",
+   "question": "What are the choices?",
+   "lead": "Only B is ready before this peak season",
+   "blocks": [
+    {
+     "type": "columns",
+     "cols": "1.7fr 1fr",
+     "children": [
+      [
+       {
+        "type": "table",
+        "header": [
+         "",
+         "A Hire 6 agents",
+         "B AI reply assist\n(agent reviews before sending)",
+         "C Outsource nights & weekends"
+        ],
+        "rows": [
+         [
+          "**Time to start**",
+          "no 3 months (hiring + training)",
+          "ok 4 weeks",
+          "Not given in material"
+         ],
+         [
+          "**Coverage**",
+          "Not given in material",
+          "Pilot: returns + shipping queries",
+          "no Off-hours only (25% of tickets)"
+         ],
+         [
+          "**Main trade-off**",
+          "no Misses this peak season",
+          "warn Agents still review every draft",
+          "no Daytime slow replies stay"
+         ]
+        ]
+       }
+      ],
+      [
+       {
+        "type": "chart",
+        "kind": "bar",
+        "title": "Cost per year",
+        "note": "B also has a one-off 600K setup",
+        "data": [
+         {
+          "label": "A Hire",
+          "value": 420,
+          "display": "~4.2M"
+         },
+         {
+          "label": "B AI assist",
+          "value": 180,
+          "display": "1.8M licence",
+          "highlight": true
+         },
+         {
+          "label": "C Outsource",
+          "value": 300,
+          "display": "3M"
+         }
+        ]
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "rec",
+   "color": "blue",
+   "icon": "thumbs-up",
+   "label": "Recommendation",
+   "question": "Why B?",
+   "lead": "Start small; decide on roll-out after 4 weeks of data",
+   "blocks": [
+    {
+     "type": "cards",
+     "items": [
+      {
+       "icon": "target",
+       "tag": "Pilot scope",
+       "title": "Returns + shipping queries",
+       "big": "46%",
+       "big_note": "of tickets",
+       "foot": "**Why these two:** nearly half of all tickets, so the effect is easy to see"
+      },
+      {
+       "icon": "file-chart-column",
+       "tag": "Vendor pilot at peers",
+       "title": "Faster first reply; most drafts usable",
+       "big": "−55%",
+       "big_note": "first reply time",
+       "sub": "Draft adoption rate **70%**",
+       "foot": "**Note:** vendor data from peer companies, not measured here"
+      },
+      {
+       "icon": "trending-up",
+       "tag": "Expected benefit",
+       "title": "First reply estimated under 3 hours",
+       "chart": {
+        "kind": "column",
+        "data": [
+         {
+          "label": "Now",
+          "value": 6.5,
+          "display": "6.5 hrs"
+         },
+         {
+          "label": "B pilot (est.)",
+          "value": 3,
+          "display": "≤3 hrs",
+          "highlight": true
+         },
+         {
+          "label": "Target",
+          "value": 2,
+          "display": "2 hrs"
+         }
+        ]
+       },
+       "foot": "**Also:** about 500K less peak overtime (estimate, from vendor pilot data)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "risk",
+   "color": "orange",
+   "icon": "shield-alert",
+   "label": "Risks",
+   "question": "What could go wrong?",
+   "lead": "Each has a safeguard",
+   "blocks": [
+    {
+     "type": "issues",
+     "items": [
+      {
+       "icon": "star",
+       "problem": "AI reply quality",
+       "fix": "Agents review every draft before sending; 100 checked each week"
+      },
+      {
+       "icon": "shield-check",
+       "problem": "Personal data",
+       "fix": "Data stays in-country, not used for training, written into the contract; Security review done by 11/3"
+      },
+      {
+       "icon": "users-round",
+       "problem": "Staff fear replacement",
+       "fix": "An assistant, no layoffs; CS supervisors help design the pilot"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ask",
+   "color": "green",
+   "icon": "scale",
+   "label": "Your decision",
+   "question": "What to approve?",
+   "lead": "Approve the B pilot: 600K setup + first-year licence paid monthly | Owner: Manager Chen, Customer Service",
+   "blocks": [
+    {
+     "type": "timeline",
+     "events": [
+      {
+       "date": "10/27",
+       "label": "Approval at meeting",
+       "sub": "Owner: Manager Chen",
+       "icon": "messages-square",
+       "status": "doing",
+       "highlight": true
+      },
+      {
+       "date": "By 11/3",
+       "label": "Security review done",
+       "sub": "Data and contract terms",
+       "icon": "clipboard-check",
+       "status": "plan"
+      },
+      {
+       "date": "11/24",
+       "label": "Pilot goes live",
+       "sub": "Returns + shipping queries",
+       "icon": "rocket",
+       "status": "plan"
+      },
+      {
+       "date": "Nov–Dec",
+       "label": "Peak season",
+       "sub": "Pilot runs into the peak",
+       "icon": "flame",
+       "status": "plan"
+      },
+      {
+       "date": "4 weeks after launch",
+       "label": "Decide on roll-out",
+       "sub": "Date not set",
+       "icon": "flag",
+       "status": "plan"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

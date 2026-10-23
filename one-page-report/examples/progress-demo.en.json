@@ -1,0 +1,195 @@
+{
+ "lang": "en",
+ "report_type": "progress",
+ "style": "business",
+ "doc_title": "ERP upgrade project: weekly progress",
+ "meta": {
+  "kicker": "Progress report | **ERP system upgrade** | For: VP Operations",
+  "as_of": "Data as of 2026/10/20",
+  "version": "v1",
+  "author": "ERP project team",
+  "confidential": "Internal",
+  "sources": "Source: weekly project meeting notes (fictional demo data). Status lights are the project team's judgement."
+ },
+ "title": "Two asks: warehouse releases ^^3 key users by 10/31^^, CFO confirms ^^6 reports by 10/28^^\nWithout those users, go-live !!slips from 1/5 to 1/19!!; the rest is under control",
+ "layout": {
+  "columns": "1fr 1.45fr",
+  "areas": [
+   "ask ask",
+   "risk status",
+   "timeline timeline"
+  ]
+ },
+ "zones": [
+  {
+   "id": "ask",
+   "color": "green",
+   "icon": "life-buoy",
+   "label": "Your help",
+   "question": "What do I need to do?",
+   "lead": "Two asks, each with an owner and a deadline",
+   "blocks": [
+    {
+     "type": "cards",
+     "items": [
+      {
+       "icon": "users-round",
+       "tag": "Warehouse manager",
+       "title": "Release 3 key users for purchasing UAT",
+       "big": "By 10/31",
+       "big_note": "2 days a week, 3 weeks in a row",
+       "sub": "The 3 are now helping with year-end stocktake, so purchasing UAT is 2 weeks late",
+       "foot": "**If not:** go-live slips 2 weeks (see Delay risk below)"
+      },
+      {
+       "icon": "file-text",
+       "tag": "CFO",
+       "title": "Confirm the formats of the last 6 reports",
+       "big": "By 10/28",
+       "big_note": "6 reports wait only for finance sign-off",
+       "foot": "**Now:** 26 of 32 reports done"
+      }
+     ],
+     "cols": 2
+    }
+   ]
+  },
+  {
+   "id": "risk",
+   "color": "red",
+   "icon": "shield-alert",
+   "label": "Delay risk",
+   "question": "Will it slip?",
+   "lead": "Yes, on warehouse staff",
+   "blocks": [
+    {
+     "type": "stat",
+     "value": "+2",
+     "unit": "weeks",
+     "label": "Go-live 2027/1/5 → 2027/1/19",
+     "compare": "If the 2-week purchasing UAT delay is not recovered"
+    },
+    {
+     "type": "issues",
+     "items": [
+      {
+       "icon": "users-round",
+       "problem": "Warehouse: 3 key users moved to year-end stocktake",
+       "detail": "(the only item that delays go-live)",
+       "fix": "Recovered if the warehouse releases them by 10/31 (see above)"
+      },
+      {
+       "icon": "calendar-clock",
+       "problem": "Year-end stocktake overlaps the pre-go-live cutover",
+       "detail": "(warehouse staff stretched)",
+       "fix": "No mitigation agreed yet"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "status",
+   "color": "gray",
+   "icon": "activity",
+   "label": "Workstreams & budget",
+   "question": "How is the rest going?",
+   "lead": "Gaps outside purchasing have a fix; budget is not overspent",
+   "blocks": [
+    {
+     "type": "status",
+     "items": [
+      {
+       "state": "serious",
+       "name": "Purchasing",
+       "note": "UAT 2 weeks late, waiting for warehouse users"
+      },
+      {
+       "state": "warning",
+       "name": "Data migration",
+       "note": "78% (plan 85%). 120K customer records moved; ~900 of 3,400 supplier records need manual cleanup; IT added 2 people, due 11/7"
+      },
+      {
+       "state": "warning",
+       "name": "Reports",
+       "note": "26/32 done; 6 wait for finance format sign-off"
+      },
+      {
+       "state": "good",
+       "name": "Finance module",
+       "note": "Test pass rate 94% (target 95%); month-end close run once in test"
+      },
+      {
+       "state": "good",
+       "name": "Training",
+       "note": "4 sessions planned; 1 done, 45 people, rated 4.3/5"
+      },
+      {
+       "state": "good",
+       "name": "Budget",
+       "note": "8.3M of 12M used (69%), below time elapsed (72%)"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "timeline",
+   "color": "orange",
+   "icon": "calendar-days",
+   "label": "Timeline",
+   "question": "Key dates?",
+   "lead": "✓ passed  … in progress  ○ ahead",
+   "blocks": [
+    {
+     "type": "timeline",
+     "events": [
+      {
+       "date": "10/20",
+       "label": "Weekly review",
+       "sub": "data date",
+       "icon": "clipboard-check",
+       "status": "done"
+      },
+      {
+       "date": "10/28",
+       "label": "CFO confirms reports",
+       "sub": "last 6",
+       "icon": "file-text",
+       "status": "plan"
+      },
+      {
+       "date": "10/31",
+       "label": "Warehouse users back",
+       "sub": "purchasing UAT restarts",
+       "icon": "users-round",
+       "status": "plan"
+      },
+      {
+       "date": "11/7",
+       "label": "Supplier data cleaned",
+       "sub": "IT added 2 people",
+       "icon": "database",
+       "status": "doing"
+      },
+      {
+       "date": "2027/1/5",
+       "label": "Go-live (target)",
+       "sub": "needs UAT recovered",
+       "icon": "rocket",
+       "status": "plan",
+       "highlight": true
+      },
+      {
+       "date": "2027/1/19",
+       "label": "Go-live (if not)",
+       "sub": "2 weeks late",
+       "icon": "clock",
+       "status": "plan"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

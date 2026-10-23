@@ -1,0 +1,275 @@
+{
+ "lang": "zh-Hant",
+ "report_type": "proposal",
+ "style": "handdrawn",
+ "doc_title": "客服導入 AI 回覆輔助：方案 B 試點提案",
+ "meta": {
+  "kicker": "提案｜**客服導入 AI 回覆輔助**｜客服部｜10/27 主管會議",
+  "as_of": "資料日期 2026/10/20",
+  "version": "v1",
+  "author": "客服部",
+  "confidential": "內部使用",
+  "sources": "效益為預估（來源：供應商同業試點數據），非本公司實測。虛構示範資料。"
+ },
+ "title": "請 10/27 核准^^方案 B：AI 回覆輔助試點^^，導入費 60 萬、4 週上線\n先試退貨與物流工單，首次回覆時間預估 ==降到 3 小時以內==",
+ "layout": {
+  "columns": "1fr 1fr 1fr",
+  "areas": [
+   "problem options options",
+   "rec rec risk",
+   "ask ask ask"
+  ]
+ },
+ "zones": [
+  {
+   "id": "problem",
+   "color": "red",
+   "icon": "triangle-alert",
+   "label": "問題",
+   "question": "為什麼現在要做？",
+   "lead": "回覆太慢，旺季會更糟",
+   "blocks": [
+    {
+     "type": "cards",
+     "cols": 3,
+     "items": [
+      {
+       "icon": "clock",
+       "tag": "首次回覆",
+       "big": "6.5",
+       "big_note": "小時",
+       "sub": "目標 2 小時\n（18 人處理每月 2.1 萬件）"
+      },
+      {
+       "icon": "user",
+       "tag": "滿意度",
+       "big": "3.6",
+       "big_note": "/5",
+       "sub": "去年 4.1\n客訴 **58%** 嫌回覆慢"
+      },
+      {
+       "icon": "flame",
+       "tag": "旺季",
+       "big": "+40%",
+       "big_note": "",
+       "sub": "11–12 月工單量\n去年旺季加班費\n**86 萬**"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "options",
+   "color": "gray",
+   "icon": "git-branch",
+   "label": "方案",
+   "question": "有哪些選擇？",
+   "lead": "只有 B 趕得上今年旺季",
+   "blocks": [
+    {
+     "type": "columns",
+     "cols": "1.7fr 1fr",
+     "children": [
+      [
+       {
+        "type": "table",
+        "header": [
+         "",
+         "A 增聘 6 名客服",
+         "B AI 回覆輔助\n（客服審核後送出）",
+         "C 外包夜間與假日"
+        ],
+        "rows": [
+         [
+          "**上線時間**",
+          "no 3 個月（招募＋訓練）",
+          "ok 4 週",
+          "素材未提供"
+         ],
+         [
+          "**涵蓋範圍**",
+          "素材未提供",
+          "試點：退貨＋物流查詢",
+          "no 只有非上班時段（佔工單 25%）"
+         ],
+         [
+          "**最大取捨**",
+          "no 趕不上今年旺季",
+          "warn 草稿仍需客服逐件審核",
+          "no 白天的慢回覆沒解決"
+         ]
+        ]
+       }
+      ],
+      [
+       {
+        "type": "chart",
+        "kind": "bar",
+        "title": "年成本",
+        "note": "B 另有一次性導入費 60 萬",
+        "data": [
+         {
+          "label": "A 加人",
+          "value": 420,
+          "display": "約 420 萬"
+         },
+         {
+          "label": "B AI 輔助",
+          "value": 180,
+          "display": "180 萬授權",
+          "highlight": true
+         },
+         {
+          "label": "C 外包",
+          "value": 300,
+          "display": "300 萬"
+         }
+        ]
+       }
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "rec",
+   "color": "blue",
+   "icon": "thumbs-up",
+   "label": "建議",
+   "question": "為什麼選 B？",
+   "lead": "先小範圍試點，4 週後看數據再決定是否擴大",
+   "blocks": [
+    {
+     "type": "cards",
+     "items": [
+      {
+       "icon": "target",
+       "tag": "試點範圍",
+       "title": "退貨＋物流查詢兩類工單",
+       "big": "46%",
+       "big_note": "的工單量",
+       "foot": "**為什麼先試這兩類：**佔近一半工單，效果最容易看出來"
+      },
+      {
+       "icon": "file-chart-column",
+       "tag": "供應商同業試點",
+       "title": "首次回覆時間縮短，草稿多數能用",
+       "big": "−55%",
+       "big_note": "首次回覆時間",
+       "sub": "草稿採用率 **70%**",
+       "foot": "**注意：**這是供應商在同業的數據，不是本公司實測"
+      },
+      {
+       "icon": "trending-up",
+       "tag": "預估效益",
+       "title": "首次回覆預估降到 3 小時以內",
+       "chart": {
+        "kind": "column",
+        "data": [
+         {
+          "label": "現況",
+          "value": 6.5,
+          "display": "6.5 小時"
+         },
+         {
+          "label": "B 試點後（預估）",
+          "value": 3,
+          "display": "≤3 小時",
+          "highlight": true
+         },
+         {
+          "label": "目標",
+          "value": 2,
+          "display": "2 小時"
+         }
+        ]
+       },
+       "foot": "**另外：**旺季可少加班費約 50 萬（預估，依供應商試點數據）"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "risk",
+   "color": "orange",
+   "icon": "shield-alert",
+   "label": "風險",
+   "question": "會出什麼事？",
+   "lead": "三項都有對策",
+   "blocks": [
+    {
+     "type": "issues",
+     "items": [
+      {
+       "icon": "star",
+       "problem": "AI 回覆品質",
+       "fix": "草稿一律客服審核才送出；每週抽檢 100 件"
+      },
+      {
+       "icon": "shield-check",
+       "problem": "個資外洩",
+       "fix": "資料不出境、不用於訓練，合約明訂；資安部 11/3 前完成審查"
+      },
+      {
+       "icon": "users-round",
+       "problem": "員工擔心被取代",
+       "fix": "定位為輔助、不裁員；客服主管參與試點設計"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ask",
+   "color": "green",
+   "icon": "scale",
+   "label": "請您決定",
+   "question": "要核准什麼？",
+   "lead": "核准 B 試點：導入費 60 萬＋首年授權按月付｜負責：客服部 陳經理",
+   "blocks": [
+    {
+     "type": "timeline",
+     "events": [
+      {
+       "date": "10/27",
+       "label": "主管會議核准",
+       "sub": "客服部 陳經理 負責",
+       "icon": "messages-square",
+       "status": "doing",
+       "highlight": true
+      },
+      {
+       "date": "11/3 前",
+       "label": "資安部完成審查",
+       "sub": "個資與合約條款",
+       "icon": "clipboard-check",
+       "status": "plan"
+      },
+      {
+       "date": "11/24",
+       "label": "試點上線",
+       "sub": "退貨＋物流查詢工單",
+       "icon": "rocket",
+       "status": "plan"
+      },
+      {
+       "date": "11–12 月",
+       "label": "旺季",
+       "sub": "試點期間即遇旺季",
+       "icon": "flame",
+       "status": "plan"
+      },
+      {
+       "date": "上線 4 週後",
+       "label": "看數據決定是否擴大",
+       "sub": "日期未定",
+       "icon": "flag",
+       "status": "plan"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,195 @@
+{
+ "lang": "zh-Hant",
+ "report_type": "progress",
+ "style": "business",
+ "doc_title": "ERP 系統升級專案：週進度報告",
+ "meta": {
+  "kicker": "專案進度報告｜**ERP 系統升級專案**｜呈：營運副總",
+  "as_of": "資料日期 2026/10/20",
+  "version": "v1",
+  "author": "ERP 專案組",
+  "confidential": "內部使用",
+  "sources": "來源：專案週會紀錄彙整（虛構示範資料）。狀態燈號為專案組判斷。"
+ },
+ "title": "請副總協調兩件事：^^10/31 前^^倉儲部釋出 3 位關鍵使用者、^^10/28 前^^財務長確認 6 張報表\n倉儲人力不到位，採購 UAT 追不回來，上線將從 1/5 !!延到 1/19!!；其他工作線與預算可控",
+ "layout": {
+  "columns": "1fr 1.45fr",
+  "areas": [
+   "ask ask",
+   "risk status",
+   "timeline timeline"
+  ]
+ },
+ "zones": [
+  {
+   "id": "ask",
+   "color": "green",
+   "icon": "life-buoy",
+   "label": "需要您協助",
+   "question": "要我做什麼？",
+   "lead": "兩件事，各有一位負責人與期限",
+   "blocks": [
+    {
+     "type": "cards",
+     "items": [
+      {
+       "icon": "users-round",
+       "tag": "倉儲部經理",
+       "title": "釋出 3 位關鍵使用者，參加採購 UAT",
+       "big": "10/31 前",
+       "big_note": "每週 2 天，連續 3 週",
+       "sub": "3 人目前被調去支援年底盤點，採購 UAT 因此延後 2 週",
+       "foot": "**若未到位：**上線延後 2 週（見下方延誤風險）"
+      },
+      {
+       "icon": "file-text",
+       "tag": "財務長",
+       "title": "確認剩下 6 張報表的格式",
+       "big": "10/28 前",
+       "big_note": "剩下 6 張等財務確認格式",
+       "foot": "**現況：**32 張報表已完成 26 張"
+      }
+     ],
+     "cols": 2
+    }
+   ]
+  },
+  {
+   "id": "risk",
+   "color": "red",
+   "icon": "shield-alert",
+   "label": "延誤風險",
+   "question": "會不會延誤？",
+   "lead": "會，卡在倉儲人力",
+   "blocks": [
+    {
+     "type": "stat",
+     "value": "+2",
+     "unit": "週",
+     "label": "上線日 2027/1/5 → 2027/1/19",
+     "compare": "前提：採購 UAT 延後 2 週沒有追回"
+    },
+    {
+     "type": "issues",
+     "items": [
+      {
+       "icon": "users-round",
+       "problem": "原因：倉儲 3 位關鍵使用者被調去年底盤點",
+       "detail": "（唯一會推遲上線的項目）",
+       "fix": "請倉儲部 10/31 前釋出人力即可追回（見上）"
+      },
+      {
+       "icon": "calendar-clock",
+       "problem": "年底盤點與上線前切換時間重疊",
+       "detail": "（倉儲人力吃緊）",
+       "fix": "對策尚未訂定"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "status",
+   "color": "gray",
+   "icon": "activity",
+   "label": "各工作線與預算",
+   "question": "其他進度如何？",
+   "lead": "除採購外，落差都有人在補；預算沒有超支",
+   "blocks": [
+    {
+     "type": "status",
+     "items": [
+      {
+       "state": "serious",
+       "name": "採購模組",
+       "note": "UAT 延後 2 週，等倉儲人力"
+      },
+      {
+       "state": "warning",
+       "name": "資料移轉",
+       "note": "78%（計畫 85%）。客戶主檔 12 萬筆已轉；供應商主檔 3,400 筆中約 900 筆需人工清理，IT 加派 2 人，預計 11/7 完成"
+      },
+      {
+       "state": "warning",
+       "name": "報表",
+       "note": "26/32 張完成，剩 6 張等財務確認"
+      },
+      {
+       "state": "good",
+       "name": "財務模組",
+       "note": "測試通過率 94%（目標 95%），月結流程已在測試環境跑完一次"
+      },
+      {
+       "state": "good",
+       "name": "教育訓練",
+       "note": "4 梯次已排，完成 1 梯 45 人，滿意度 4.3/5"
+      },
+      {
+       "state": "good",
+       "name": "預算",
+       "note": "已用 830 萬／1,200 萬（69%），低於時間進度 72%"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "timeline",
+   "color": "orange",
+   "icon": "calendar-days",
+   "label": "時程",
+   "question": "關鍵日期？",
+   "lead": "✓ 已到　… 進行中　○ 未到",
+   "blocks": [
+    {
+     "type": "timeline",
+     "events": [
+      {
+       "date": "10/20",
+       "label": "本週檢視",
+       "sub": "資料日期",
+       "icon": "clipboard-check",
+       "status": "done"
+      },
+      {
+       "date": "10/28",
+       "label": "財務長確認報表",
+       "sub": "剩 6 張",
+       "icon": "file-text",
+       "status": "plan"
+      },
+      {
+       "date": "10/31",
+       "label": "倉儲人力到位",
+       "sub": "採購 UAT 才能重啟",
+       "icon": "users-round",
+       "status": "plan"
+      },
+      {
+       "date": "11/7",
+       "label": "供應商主檔清理完成",
+       "sub": "IT 加派 2 人",
+       "icon": "database",
+       "status": "doing"
+      },
+      {
+       "date": "2027/1/5",
+       "label": "上線（目標）",
+       "sub": "需追回 UAT",
+       "icon": "rocket",
+       "status": "plan",
+       "highlight": true
+      },
+      {
+       "date": "2027/1/19",
+       "label": "上線（若未追回）",
+       "sub": "延後 2 週",
+       "icon": "clock",
+       "status": "plan"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

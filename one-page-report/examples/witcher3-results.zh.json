@@ -1,0 +1,105 @@
+{
+  "lang": "zh-Hant",
+  "report_type": "results",
+  "style": "handdrawn",
+  "doc_title": "巫師 3 重製版免費更新：專案成果報告",
+  "meta": {
+    "kicker": "專案成果報告｜**《巫師 3：狂獵》重製版免費更新**｜開發：CD PROJEKT RED",
+    "as_of": "資料統計至 2026/10 中",
+    "version": "v1",
+    "author": "示範",
+    "sources": "示範用作品，非官方報告。來源：PC Gamer、TheSixthAxis、Inven Global、God is a Geek、KitGuru、PC Guide、GamesRadar+、Push Square、GamePro、TweakTown（2026/5–10 報導）。68%、65% 由報導中的負評占比推算。"
+  },
+  "title": "重製版^^如期免費上線^^，玩家人數==創 11 年新高==、媒體評分 94；\n首發顯卡問題已修復、好評回升至 92%，下一步補齊 !!Switch 2 版修正!!",
+  "layout": {
+    "columns": "2fr 1fr",
+    "areas": ["outcome problems", "method next", "timeline timeline"]
+  },
+  "zones": [
+    {
+      "id": "outcome", "color": "blue", "icon": "trophy", "label": "成果", "question": "這次更新值得嗎？",
+      "lead": "結論：品質、人氣、生態三方面都達標",
+      "blocks": [
+        {"type": "cards", "items": [
+          {"icon": "star", "tag": "品質", "title": "11 年的老遊戲，拿下 2026 年最高分",
+           "big": "94", "big_note": "Metacritic 媒體評分", "sub": "上線時為 2026 年所有新作中最高",
+           "foot": "**因為做了：**畫面全面翻新（路徑追蹤、全域光照重做）＋戰鬥、技能樹、坐騎操作重做"},
+          {"icon": "users", "tag": "人氣", "title": "新舊玩家湧入，Steam 在線創 11 年新高",
+           "chart": {"kind": "bar", "data": [
+             {"label": "2015 首發", "value": 9.2, "display": "9.2 萬"},
+             {"label": "2020 影集", "value": 10.3, "display": "10.3 萬"},
+             {"label": "2026 重製版", "value": 12.1, "display": "12.1 萬", "highlight": true}]},
+           "sub": "比舊紀錄 ++▲17%++、比首發 ++▲31%++（僅計 Steam）",
+           "foot": "**因為做了：**舊玩家 0 元升級、兩個資料片轉免費、新玩家首週五折"},
+          {"icon": "puzzle", "tag": "生態", "title": "模組社群無縫接軌，玩家不用二選一",
+           "big": "450+", "big_note": "個模組首日相容", "sub": "累計銷量 6,500 萬套的玩家，帶著原本的模組直接升級",
+           "foot": "**因為做了：**支援跨平台模組，上線前協助社群完成更新"}
+        ]}
+      ]
+    },
+    {
+      "id": "problems", "color": "red", "icon": "triangle-alert", "label": "問題", "question": "有沒有出包？",
+      "lead": "結論：首發受挫，一週內止血",
+      "blocks": [
+        {"type": "chart", "kind": "line", "title": "Steam 近期好評率", "note": "68%、65% 由報導中的負評占比推算",
+         "reference": {"value": 95, "label": "原版水準：壓倒性好評（95%+）"}, "y_min": 55, "y_max": 97,
+         "data": [{"label": "9/29 首日", "value": 68, "display": "68%"},
+                  {"label": "9/30 AMD 問題延燒", "value": 65, "display": "65%（谷底）"},
+                  {"label": "10 月初・修正後", "value": 92, "display": "92%"}]},
+        {"type": "issues", "items": [
+          {"icon": "image-off", "problem": "AMD 顯卡破圖、Steam Deck 卡頓", "detail": "（首日負評 1,100+ 則）", "fix": "AMD 當天釋出 26.9.2 驅動；Steam 版可切回舊版"},
+          {"icon": "bug", "problem": "船隻失控、技能異常等錯誤", "fix": "10/8 修正檔 5.01（PC・PS5・Xbox）"},
+          {"icon": "tablet", "problem": "Switch 2 版尚未修正，主機版無法回退", "fix": "專屬更新開發中，日期未公布"}
+        ]}
+      ]
+    },
+    {
+      "id": "method", "color": "gray", "icon": "wrench", "label": "做法", "question": "具體做了什麼？",
+      "lead": "目標：讓 11 年老遊戲「像 2026 年的新作」",
+      "blocks": [
+        {"type": "columns", "cols": "1.08fr 1fr", "children": [
+          [{"type": "chips", "title": "更新內容", "note": "框起來的是重點項目", "rows": [
+            {"icon": "sun", "label": "畫面", "items": ["*路徑追蹤", "*全域光照重做", "光線重建", "光追毛髮", "新著色模型", "次表面散射", "新色調映射", "GTAO", "HDR", "材質・植被"]},
+            {"icon": "gamepad-2", "label": "玩法", "items": ["*戰鬥重做＋終結技", "*技能樹重做", "怪物行為", "移動攀爬", "坐騎操作", "裝備幻化", "法印特效", "沉浸式冥想", "拾取重做"]},
+            {"icon": "layout-dashboard", "label": "介面", "items": ["任務追蹤", "選單 UI", "新手教學", "無障礙", "拍照模式"]},
+            {"icon": "cpu", "label": "技術", "items": ["*跨平台模組", "原生 DX12", "DLSS 4.5", "FSR 4", "XeSS 2.0", "Xbox Play Anywhere"]}
+          ]}],
+          [{"type": "table", "title": "各平台差異", "note": "5 平台同日上線", "rows": [
+             {"icon": "monitor", "key": "PC", "value": "路徑追蹤、光線重建（PC 限定）；Steam 可切回舊版"},
+             {"icon": "tv", "key": "PS5 Pro", "value": "光追模式 **60fps**（原 30）；效能模式約 **90fps**"},
+             {"icon": "tablet", "key": "Switch 2", "value": "掌機 720p／電視 1080p、**30–40fps**；獨家滑鼠＋體感操作"}]},
+           {"type": "table", "title": "取得方式", "note": "CDPR：從沒考慮向舊玩家收費", "rows": [
+             {"icon": "user-check", "key": "舊玩家", "value": "**0 元**升級，「石之心」「血與酒」同步轉免費"},
+             {"icon": "user-plus", "key": "新玩家", "value": "Steam 首週五折 **US$24.99**（至 10/1）"}]}]
+        ]}
+      ]
+    },
+    {
+      "id": "next", "color": "green", "icon": "flag", "label": "下一步", "question": "接下來要做什麼？",
+      "blocks": [
+        {"type": "steps", "items": [
+          {"title": "推出 Switch 2 專屬修正", "sub": "拉齊各平台品質（日期未公布）"},
+          {"title": "持續收集回饋、追加修正", "sub": "把近期好評率拉回原版的 95% 水準"},
+          {"title": "2027 推出新資料片「Songs of the Past」", "sub": "承接這波回流玩家"}
+        ]},
+        {"type": "note", "icon": "target", "text": "**戰略意義：**用 0 元升級喚回 6,500 萬套的玩家基礎，為新資料片與預計 2028 年的《巫師 4》暖身。"}
+      ]
+    },
+    {
+      "id": "timeline", "color": "orange", "icon": "calendar-days", "label": "時程", "question": "進度到哪了？",
+      "lead": "✓ 完成　… 進行中　○ 規劃",
+      "blocks": [
+        {"type": "timeline", "events": [
+          {"date": "8/25", "label": "Gamescom 公布", "sub": "資料片當天轉免費", "icon": "megaphone", "status": "done"},
+          {"date": "9/29", "label": "5 平台同日上線", "sub": "Steam 峰值 12.1 萬", "icon": "rocket", "status": "done", "highlight": true},
+          {"date": "9/29", "label": "AMD 驅動 26.9.2", "sub": "上線數小時內", "icon": "download", "status": "done"},
+          {"date": "9/29–10/1", "label": "Steam 首週五折", "sub": "US$24.99", "icon": "tag", "status": "done"},
+          {"date": "10/8", "label": "修正檔 5.01", "sub": "PC・PS5・Xbox", "icon": "bandage", "status": "done"},
+          {"date": "進行中", "label": "Switch 2 修正", "sub": "日期未公布", "icon": "bandage", "status": "doing"},
+          {"date": "2027", "label": "新資料片", "sub": "Songs of the Past", "icon": "package-plus", "status": "plan"},
+          {"date": "2028", "label": "《巫師 4》", "sub": "預計", "icon": "swords", "status": "plan"}
+        ]}
+      ]
+    }
+  ]
+}
