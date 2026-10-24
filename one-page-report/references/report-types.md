@@ -2,19 +2,23 @@
 
 Start by asking the user to describe the situation in their own words. Then propose one type
 below with a one-line reason. The user can accept it, pick another, mix two, or ask for a new
-skeleton. A skeleton is an order of zones; each zone answers one reader question.
+skeleton. A skeleton is an order of zones; each zone answers one reader question. The types,
+questions and picture tables below are starting points, not forms (SKILL.md, "Tools, not
+templates").
 
 ## Universal questions (ask only what the material does not answer)
 
 Ask one at a time, most important first:
 
-1. Who reads it? (boss, senior management, client, cross-team, whole company)
-2. After reading, what should they do? (approve, choose, support, just know)
-3. If they read for ten seconds, what one sentence must they remember?
-4. What must not be touched? (confidential numbers, names, wording, brand rules)
-5. How will you judge it good? (the user's own words; then add the professional checks)
-6. Where will it be shown? (projector, email, phone, print) → affects density and font size
-7. Style and languages (handdrawn / business / company template; zh + en by default)
+1. Who reads it? (boss, senior management, client, cross-team, whole company, family)
+2. How much background does the reader already have? (knows the story / knows nothing / the
+   background is the point) → how much context goes under the title (`references/storyline.md`)
+3. After reading, what should they do? (approve, choose, support, just know)
+4. If they read for ten seconds, what one sentence must they remember?
+5. What must not be touched? (confidential numbers, names, wording, brand rules)
+6. How will you judge it good? (the user's own words; then add the professional checks)
+7. Where will it be shown? (projector, email, phone, print) → affects density and font size
+8. Style and languages (handdrawn / business / company template; zh + en by default)
 
 Stop asking when you know what they want, what must not be touched, and how they judge
 success. Then restate everything and wait for a yes.
@@ -123,6 +127,12 @@ Type questions:
 
 Writing rule: use a table with the same criteria for every option; mark the recommended
 column; state the one trade-off that decides it.
+
+Name each option so the reader can tell which thing is meant (a short label in the column
+header or card title is usually enough). Why the reader is choosing at all (budget, how it will be
+used, limits) is background and goes under the title (`references/storyline.md`). How to show the
+options depends on what decides the choice: a table for several criteria, `compare` for one
+question, a chart for numbers, a drawing for size or layout (`references/diagrams.md`).
 
 ## Mixing and new skeletons
 

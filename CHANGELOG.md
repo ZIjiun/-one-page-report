@@ -1,5 +1,42 @@
 # Changelog
 
+## 1.3.1 — 2026-10-24 (works for any subject: tools, not templates)
+
+**Rules that hold for any subject**
+- SKILL.md opens with a principle: report types, skeletons, diagrams, charts and layouts are tools,
+  not templates. Exceptions are planned in the interview and confirmed before building; the core
+  rules and page rules always hold. Examples show one way, not a form to copy.
+- Background: the interview asks how much the reader already knows. The background (why the report
+  exists) goes under the title, sized to that reader: one line, two sentences, or its own zone when
+  it is the point. New spec field `"background"`; it shows in the editable PPT too.
+  `references/storyline.md` (Step C) replaces "background goes last, or nowhere".
+- Images are placed by their job: evidence (inside the zone), identification (small, next to the
+  name), mood (header or faint background), or a real thing a drawing cannot show. The job and place
+  of each image are proposed in the interview; the user decides. `references/imagery.md`.
+- Layout: zones follow the order of the reader's questions; the results grid is one example, with
+  the usual order for comparison, proposal and post-mortem. Zone tabs take an icon or a number.
+- Home or company decides the footer and the decision words: home = sources and data date, "who
+  decides, by when"; company = also version, author, confidentiality, approver and owner. New
+  `meta.mode`; `review.py` checks only the fields that mode needs.
+
+**Blocks and scripts**
+- New `seatmap` block: a top view of a vehicle drawn to scale, with seats per row, folded rows and
+  where the luggage goes. It is one way to draw size and layout, not a rule for comparisons; it draws
+  vehicles only (other objects: a bar chart of the real dimensions, or a user-provided plan).
+- Neutral Chinese defaults: 之前 / 之後 (was 改善前 / 改善後) and ★ 建議 (was ★ 最推), matching the English.
+  Existing examples set their own labels and are unchanged.
+- `flowsteps` widens (up to 560 px) before wrapping titles, so English pages no longer turn into
+  tall, thin step lists that shrink the whole page.
+- `waterfall` widens with the number of bars so labels do not run together.
+- Card `photo.caption` takes the same list form as the `photo` block.
+- `review.py` ignores layout and drawing settings (image size and opacity, drawing scale, seat
+  counts) when tracing numbers, and no longer reads "長 4.72" as a version number.
+
+**Docs**
+- `report_type` lists `improvement`; it is a label only.
+- The portable instructions carry all of the above, now about 7,600 characters (was 7,983, too close
+  to the 8,000 limit), and include the interview questions for improvement and comparison reports.
+
 ## 1.3.0 — 2026-10-24 (fixes from the v1.2.0 review)
 
 **Numbers you can trust**

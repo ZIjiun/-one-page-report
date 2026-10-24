@@ -26,8 +26,8 @@ Screenshot with numbered marks: [docs/samples/screenshot-marks.png](docs/samples
 2. **Reads your material**: meeting notes, Excel / CSV data (numbers computed in code, every
    worked-out figure recorded), existing decks and documents, a spoken summary, screenshots.
 3. Picks a **skeleton**: results, improvement, progress, proposal, post-mortem, comparison.
-4. **Distils a storyline**: one-sentence conclusion, 2–4 reasons, evidence under each. You confirm
-   it before any design.
+4. **Distils a storyline**: one-sentence conclusion, the background this reader needs (under the
+   title), 2–4 reasons, evidence under each. You confirm it before any design.
 5. Names each zone's **shape of information** and draws it: route, calculation, choice, yes/no,
    before → after, steps — and report charts for results and improvement: KPI tile with sparkline,
    bullet (actual vs target vs before), dumbbell, slope, waterfall, variance, stacked, heatmap.
@@ -39,6 +39,9 @@ Screenshot with numbered marks: [docs/samples/screenshot-marks.png](docs/samples
 8. **Self-reviews**: logic, every number traced to your files (.csv .xlsx .pptx .docx read directly)
    and every calculation recomputed, totals that must add up, zh/en match, overlap and overflow,
    "AI feel", and a stranger test.
+
+Report types, charts and layouts are tools, not templates: the same rules work for a project, a
+purchase, a plan or an incident, and exceptions are agreed in the interview.
 
 ## Good for / not for
 

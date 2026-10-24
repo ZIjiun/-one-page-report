@@ -30,6 +30,8 @@ which remain); **one thing that works** (protect it).
 - [ ] Horizontal reading: tabs + leads + title alone tell the story
 - [ ] Vertical reading: every zone's content proves its lead; nothing off-topic
 - [ ] 30-second test: you can say the whole page in 30 seconds
+- [ ] Background fits the reader: a reader who does not know the story learns why the report
+      exists from the lines under the title; no conclusion numbers in it
 - [ ] No orphan numbers: each says what it means and vs what
 - [ ] Next steps say who, what, by when (or say "date not set")
 
@@ -71,7 +73,8 @@ which remain); **one thing that works** (protect it).
         understand."
       - Elsewhere, or when you cannot start a sub-agent: give the user that prompt to paste into
         a new chat with the PNG, and say in the delivery that the stranger test is still open.
-- [ ] Version info: date, version, author; confidentiality mark if the material is internal
+- [ ] Footer for the mode (`meta.mode`): home = sources and data date; company = also version,
+      author and a confidentiality mark if the material is internal
 
 ## "AI feel" self-check (then the user decides)
 
@@ -96,8 +99,8 @@ Flag and fix these:
 
 - [ ] The title's cost figure is the **total the reader commits to** (one-off + first-year
       recurring), or the recurring part is said in the same line
-- [ ] It is clear **who decides** and **who executes** (two different words: 核准人 / 負責人,
-      approver / owner)
+- [ ] It is clear **who decides** (and by when). At the company, also **who executes**: two
+      different words, 核准人 / 負責人, approver / owner
 - [ ] An estimate states its scope ("pilot tickets only, 46% of volume")
 
 ## Design-quality self-check

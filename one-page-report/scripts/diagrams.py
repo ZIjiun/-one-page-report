@@ -69,8 +69,8 @@ def wrap(s, size, maxw, max_lines=2):
 _HALO = ["#fff"]
 
 LABELS = {
-    "zh": {"before": "改善前", "after": "改善後", "flat": "（持平）", "worse": "較差", "better": "較好", "left": "前", "right": "後",
-           "low": "低", "high": "高", "pick": "★ 最推", "yes": "是", "no": "否", "other": "其他／未分類", "sum": "合計"},
+    "zh": {"before": "之前", "after": "之後", "flat": "（持平）", "worse": "較差", "better": "較好", "left": "前", "right": "後",
+           "low": "低", "high": "高", "pick": "★ 建議", "yes": "是", "no": "否", "other": "其他／未分類", "sum": "合計"},
     "en": {"before": "Before", "after": "After", "flat": " (flat)", "worse": "Worse", "better": "Better", "left": "Before", "right": "After",
            "low": "Low", "high": "High", "pick": "★ Our pick", "yes": "Yes", "no": "No", "other": "Other / unknown", "sum": "Total"},
 }
@@ -372,7 +372,9 @@ def transform(b, st, icons):
 # ---------------------------------------------------------------- flowsteps
 def flowsteps(b, st, icons):
     """{"items":[{"icon":"calendar","title":"到官網預約試駕","sub":"親自坐坐後座、打開後車廂"}, ...]}"""
-    p = Pal(st); W = 420; items = b["items"]; o = []; y = 6; rows = []
+    items = b["items"]
+    need = max([tw(it.get("title", ""), 18) + 96 + (tw(it.get("owner", ""), 14) + 12 if it.get("owner") else 0) for it in items] + [420])
+    p = Pal(st); W = int(b.get("width") or min(560, need)); o = []; y = 6; rows = []   # widen (up to 560) before wrapping titles
     for it in items:
         sub = wrap(it.get("sub", ""), 14, W - 96, 2) if it.get("sub") else []
         ow_ = tw(it.get("owner", ""), 14) + 12 if it.get("owner") else 0
@@ -570,7 +572,7 @@ def slope(b, st, icons):
 def waterfall(b, st, icons):
     """{"start":{"label":"改善前","value":6.5},"steps":[{"label":"AI 草稿","value":-2.4},{"label":"分流","value":-1.0},
         {"label":"旺季量","value":+0.5}],"end":{"label":"改善後"},"unit":"小時","higher_is_better":false}"""
-    p = Pal(st); W = 400; hb = b.get("higher_is_better", True)
+    p = Pal(st); W = int(b.get("width") or max(400, 74 * (len(b.get("steps", [])) + 2))); hb = b.get("higher_is_better", True)
     steps = b.get("steps", []); start = b["start"]; end = b.get("end", {"label": "結果"})
     cum = [_num(start["value"])]
     for s_ in steps: cum.append(cum[-1] + _num(s_["value"]))
@@ -724,7 +726,52 @@ def heatmap(b, st, icons):
             o.append(T(lw, y + 44, esc(ml), 14, mc, "start", 700)); extra = 22
     return svg(W, y + 30 + extra, "".join(o), "", b.get("aria", ""))
 
+def seatmap(b, st, icons):
+    """Top view of a vehicle: seats per row and where the luggage goes, drawn to scale.
+    {"length_mm":4956,"width_mm":2073,"rows":[2,3,2],"folded":[2],"body":"suv",
+     "cargo":{"value":"1,137","unit":"L","label":"5 人坐時"},"front":{"value":"","label":"前車廂"},
+     "dims":"長 4.96 m・寬 2.07 m"}"""
+    p = Pal(st); k = b.get("scale", 0.07)
+    Lp = b.get("length_mm", 4700) * k; Wp = b.get("width_mm", 1900) * k
+    rows = b.get("rows", [2, 3]); folded = set(b.get("folded", [])); n = len(rows)
+    x0, y0 = 4, 4; W = Lp + 8; r = Wp * (0.2 if b.get("body", "suv") == "suv" else 0.34)
+    o = [f'<rect x="{x0}" y="{y0}" width="{Lp:.1f}" height="{Wp:.1f}" rx="{r:.1f}" fill="{p.card}" stroke="{p.soft}" stroke-width="2"/>']
+    ws = x0 + Lp * 0.70   # windscreen line
+    o.append(f'<path d="M{ws:.1f} {y0+Wp*0.12:.1f} Q{ws+Lp*0.05:.1f} {y0+Wp/2:.1f} {ws:.1f} {y0+Wp*0.88:.1f}" fill="none" stroke="{p.mute}" stroke-width="1.5"/>')
+    c0, c1 = x0 + Lp * 0.22, x0 + Lp * 0.68   # cabin, rear to front
+    pitch = (c1 - c0) / n
+    first_fold = min(folded) if folded else n
+    cargo_end = c0 + pitch * (n - first_fold) if folded else c0
+    cx0 = x0 + Lp * 0.05
+    o.append(f'<rect x="{cx0:.1f}" y="{y0+Wp*0.14:.1f}" width="{cargo_end-cx0-4:.1f}" height="{Wp*0.72:.1f}" rx="6" fill="{p.hi_bg}" stroke="{p.hi}" stroke-width="1.5"/>')
+    for i, cnt in enumerate(rows):   # row 0 = front
+        rx = c1 - pitch * (i + 1); sz = min(pitch * 0.66, Wp * 0.72 / max(rows) * 0.9)
+        for j in range(cnt):
+            sy = y0 + Wp * 0.14 + (Wp * 0.72) * (j + .5) / cnt - sz / 2; sx = rx + (pitch - sz) / 2
+            if i in folded:
+                o.append(f'<rect x="{sx:.1f}" y="{sy:.1f}" width="{sz:.1f}" height="{sz:.1f}" rx="4" fill="none" stroke="{p.hi}" stroke-opacity=".45" stroke-width="1.2" stroke-dasharray="3 3"/>')
+            else:
+                o.append(f'<rect x="{sx:.1f}" y="{sy:.1f}" width="{sz:.1f}" height="{sz:.1f}" rx="4" fill="{p.context}"/>')
+    cg = b.get("cargo")
+    if cg:
+        mx = (cx0 + cargo_end - 4) / 2; avail = cargo_end - cx0 - 10
+        v = esc(str(cg.get("value", ""))) + (f'<tspan font-size="14"> {esc(cg.get("unit",""))}</tspan>' if cg.get("unit") else "")
+        o.append(T(mx, y0 + Wp / 2 + 2, v, 18, p.hi_text, "middle", 700))
+        if cg.get("label"):
+            o.append(T(mx, y0 + Wp / 2 + 20, esc(fit(cg["label"], 14, avail)), 14, p.soft, "middle"))
+    fr = b.get("front")
+    if fr:
+        fx0, fx1 = x0 + Lp * 0.78, x0 + Lp * 0.95
+        o.append(f'<rect x="{fx0:.1f}" y="{y0+Wp*0.22:.1f}" width="{fx1-fx0:.1f}" height="{Wp*0.56:.1f}" rx="6" fill="{p.hi_bg}" stroke="{p.hi}" stroke-width="1.2" stroke-dasharray="4 3"/>')
+        if fr.get("label"):
+            o.append(T((fx0 + fx1) / 2, y0 + Wp / 2 + 5, esc(fit(fr["label"], 14, fx1 - fx0 + 20)), 14, p.soft, "middle"))
+    H = y0 + Wp + 6
+    if b.get("dims"):
+        o.append(T(x0 + Lp / 2, H + 14, esc(b["dims"]), 14, p.mute, "middle")); H += 20
+    return svg(W, H, "".join(o), "", b.get("aria", ""))
+
+
 BLOCKS = {"route": route, "formula": formula, "progress": progress, "gauge": gauge, "compare": compare,
           "decision": decision, "transform": transform, "flowsteps": flowsteps,
           "stattile": stattile, "bullet": bullet, "dumbbell": dumbbell, "slope": slope, "waterfall": waterfall,
-          "variance": variance, "stacked": stacked, "heatmap": heatmap}
+          "variance": variance, "stacked": stacked, "heatmap": heatmap, "seatmap": seatmap}

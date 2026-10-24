@@ -13,6 +13,8 @@ body.texture::after{content:"";position:absolute;inset:0;pointer-events:none;bac
 .kicker{font-size:14px;color:var(--soft);text-align:center;letter-spacing:.06em}
 .kicker b{color:var(--c-blue);font-weight:700}
 h1.title{font-size:34px;text-align:center;margin-top:3px;line-height:1.22;font-weight:700;letter-spacing:-0.02em}
+.context{font-size:14px;line-height:1.5;color:var(--ink);text-align:center;max-width:1280px;margin:4px auto 0}
+.context b,.context strong{font-weight:700}
 .good{color:var(--good-text)} .bad{color:var(--bad-text)} .hl{background:linear-gradient(transparent 68%,var(--marker) 68%)}
 b,strong{font-weight:700}
 
@@ -165,12 +167,13 @@ svg.diagram .big{letter-spacing:-0.02em}
 .backdrop{position:absolute;inset:0;pointer-events:none;background-size:cover;background-position:center;opacity:var(--backdrop-opacity,.25)}
 body.dark .backdrop{filter:brightness(.4) saturate(.8)}
 body.dark .hero:not(.own-dark){filter:brightness(.55) saturate(.85)}
-body.dark.has-hero h1.title,body.dark.has-hero .kicker{text-shadow:0 2px 12px rgba(0,0,0,.85)}
+body.dark.has-hero h1.title,body.dark.has-hero .kicker,body.dark.has-hero .context{text-shadow:0 2px 12px rgba(0,0,0,.85)}
 .page-logo{position:absolute;left:34px;top:14px;height:var(--logo-h,104px);z-index:3;opacity:.85}
 body.has-hero .wrap,body.has-logo .wrap,body.has-backdrop .wrap{position:relative;z-index:1}
-body.title-left .kicker,body.title-left h1.title{text-align:left;padding-right:var(--title-pad,480px)}
-body.has-logo .kicker,body.has-logo h1.title{padding-left:var(--logo-pad,0px)}
-body.has-logo:not(.title-left) .kicker,body.has-logo:not(.title-left) h1.title{padding-right:var(--logo-pad,0px)}
+body.title-left .context{max-width:none}
+body.title-left .kicker,body.title-left h1.title,body.title-left .context{text-align:left;padding-right:var(--title-pad,480px)}
+body.has-logo .kicker,body.has-logo h1.title,body.has-logo .context{padding-left:var(--logo-pad,0px)}
+body.has-logo:not(.title-left) .kicker,body.has-logo:not(.title-left) h1.title,body.has-logo:not(.title-left) .context{padding-right:var(--logo-pad,0px)}
 
 /* ---- screenshot with numbered marks (photo block with "marks") */
 .shot{margin:0;display:flex;flex-direction:column;gap:6px;min-height:0}
