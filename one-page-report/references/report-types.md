@@ -124,6 +124,12 @@ Type questions:
 Writing rule: use a table with the same criteria for every option; mark the recommended
 column; state the one trade-off that decides it.
 
+**Say exactly what each option is.** The reader has no idea what "Discovery" means here until the
+page says: new or used, model year, version, price, and the facts that make it comparable
+(mileage and age for used items, warranty, contract length…). Put these in the first zone as
+`speclines`, the same rows for every option, before any score or cost. When options differ in
+size or layout (cars, rooms, devices), draw them to scale with `seatmap` instead of a photo.
+
 ## Mixing and new skeletons
 
 - Mixing is fine: e.g. a progress report with one proposal zone at the end ("we need X").

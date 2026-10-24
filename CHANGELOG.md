@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.3.1 — 2026-10-24 (lessons from a car comparison)
+
+- New `seatmap` block: a top view drawn to scale with seats per row, folded rows and where the
+  luggage goes; for comparing cars, rooms or anything whose layout and size matter.
+- Comparison reports: the first zone says exactly what each option is (new or used, year, version,
+  price, mileage, warranty) with the same rows for every option.
+- Images must show what their zone says; otherwise draw it, or keep the photo as header mood
+  (two options can share one header band). `references/imagery.md`.
+- `flowsteps` widens (up to 560 px) before wrapping titles, so English pages no longer turn into
+  tall, thin step lists that shrink the whole page.
+- `waterfall` widens with the number of bars so labels do not run together.
+- Card `photo.caption` takes the same list form as the `photo` block.
+- `review.py` ignores layout and drawing settings (image size and opacity, drawing scale, seat
+  counts) when tracing numbers, and no longer reads "長 4.72" as a version number.
+
 ## 1.3.0 — 2026-10-24 (fixes from the v1.2.0 review)
 
 **Numbers you can trust**

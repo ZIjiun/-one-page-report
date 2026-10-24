@@ -28,6 +28,7 @@ draw it instead of writing it.
 | "+14 / +10 / −8 pt against target" | gap to target / plan / last year | `variance` | a table with ± numbers |
 | "46% AI-drafted, 54% manual" | parts of a whole | `stacked` (100% or absolute) | a pie with many slices |
 | "Monday morning is the peak" | two dimensions crossed | `heatmap` | a long table of numbers |
+| "7 seats vs 5, where the luggage goes, which is bigger" | layout and size of an object | `seatmap` (top view to scale) | a photo that shows none of it |
 | 2–4 parallel claims, each with evidence | parallel points | `cards` with `chart` / `diagram` / `photo` inside | identical text cards |
 
 ## Reports about improvement (the common case)
@@ -88,6 +89,7 @@ One zone, one main picture. A second element is fine when it is a different shap
 | `waterfall` | **`start`** `{label, value}`, **`steps`** `[{label, value}]`, `end` `{label, value}`, `unit`, `higher_is_better` |
 | `variance` | **`rows`** `[{label, delta, display}]`, `higher_is_better`, `worse`, `better`, `baseline` |
 | `stacked` | **`rows`** `[{label, values:[…]}]`, **`series`**, `highlight` (index, default 0), `percent` (true) |
+| `seatmap` | **`length_mm`**, **`width_mm`**, **`rows`** (seats per row, front first, e.g. `[2,3,2]`), `folded` (row indexes folded flat, drawn dashed inside the luggage area), `body` (suv / sedan), `cargo` `{value, unit, label}`, `front` `{label}` (front trunk), `dims` (one line under the drawing), `scale` (px per mm, default 0.07) — draw both options at the same scale |
 | `heatmap` | **`cols`**, **`rows`** `[{label, values:[…]}]`, `unit`, `higher_is_worse` (true), `mark` (max / min / none), `mark_label`, `legend`, `show_values` (true) — keep to ≤ 6 rows × 9 columns |
 
 Inside `cards` items: `diagram` (any block above), `chart`, `photo` `{src, position, caption}`.
