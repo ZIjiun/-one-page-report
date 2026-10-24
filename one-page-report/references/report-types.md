@@ -34,6 +34,36 @@ Writing rule: push every activity up two levels — activity → output → **ou
 "Ran 3 trainings" → "120 people trained" → "error rate 8% → 2%". Use the highest level the
 evidence supports.
 
+Suggested pictures per zone (`references/diagrams.md`):
+
+| Zone | First choice | Also good |
+|---|---|---|
+| Results | `bullet` (each KPI vs target and before) | `stattile` with sparkline, `gauge`, `cards` with a chart |
+| Issues | `issues` | `heatmap` (where / when it hurts), `variance` (who is short of target) |
+| What we did | `chips` / `speclines`, or `waterfall` when actions have measured effects | `photo` with marks for a new screen |
+| Next | `flowsteps` with owners and dates | `steps` |
+| Timeline | `timeline` | — |
+
+### 1b. Improvement report (a variant of Results) — reader asks "how much better, and why?"
+
+Use when the point is a measured improvement against a baseline (time, cost, quality, errors).
+
+Zones: **Results vs target → What improved → What drove it → What to watch → Next**
+
+| Zone | Picture |
+|---|---|
+| Results vs target | `bullet` per KPI (actual, target, before); one `stattile` for the headline number |
+| What improved | `dumbbell` (each metric before → after), or `slope` when one item rises above the rest |
+| What drove it | `waterfall` (baseline → each action's effect → result) — only with measured effects; otherwise a list |
+| What to watch | `heatmap` / `variance` / `issues` |
+| How work shifted (optional) | `stacked` 100% bars before / during / after |
+| Next | `flowsteps` |
+
+Extra questions: the baseline period and its numbers; the target and who set it; whether the
+improvement was measured the same way before and after (same definition, same sample); how much of
+it each action explains, and whether that split is measured or estimated (label estimates).
+Mark lower-is-better metrics (`higher_is_better: false`). Example: `examples/improvement-demo.*.json`.
+
 ## 2. Progress report (project running) — reader asks "will it slip? do you need me?"
 
 Zones: **Status → Blockers & risks → Support needed → Timeline → Done so far**

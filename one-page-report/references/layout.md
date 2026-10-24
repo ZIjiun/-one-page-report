@@ -38,8 +38,19 @@ of the reader's questions.
 
 - The most important zone gets the most area, the biggest numbers and the strongest colour.
 - Detail zones use small text and grey tones.
-- At most 4 font sizes on the page. Squint test: the thing that stands out must be the thing
-  that matters.
+- Exactly 4 font sizes on the page: **46** big numbers, **34** page title, **18** headings and key
+  values, **14** everything else (body, notes, labels, footer). Emphasis inside a size comes from
+  weight and colour. Diagrams follow the same scale.
+- Type details: large text tracked tight (-0.02em), small labels slightly open; headings line
+  height ~1.2, body ~1.5.
+- Cards float on a soft shadow instead of a hard outline; lists of problems and steps are quiet
+  rows with thin dividers, not a box per item. Fewer frames, more space.
+- Squint test: the thing that stands out must be the thing that matters.
+
+## Title position
+
+Centred by default. With a header image on the right (`hero`), the title moves left and leaves the
+right side to the image; with a logo, the title starts after it. Neither may overlap the title.
 
 ## Each number appears once, next to what it proves
 

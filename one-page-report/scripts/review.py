@@ -2,11 +2,16 @@
 """Automatic part of the self-review (references/review-checklist.md).
 
 Usage:
-  python3 review.py SPEC.zh.json [SPEC.en.json] [--html A.html [B.html]] [--source notes.txt ...] [--out review.json]
+  python3 review.py SPEC.zh.json [SPEC.en.json] [--html A.html [B.html]] [--source notes.txt data.xlsx deck.pptx ...] [--out review.json]
 
 Checks:
   numbers   every number in the spec, with where it appears (for tracing to the material);
-            with --source, numbers not found in the source files are flagged
+            with --source, numbers not found in the source files are flagged. Sources may be
+            .txt .md .csv .tsv .json .html, or .xlsx .pptx .docx (text read with the standard
+            library). For .pdf, export the text first (pdftotext is used when it exists).
+  derived   spec "derived": [{"value": "−60%", "formula": "(6.5-2.6)/6.5*100", "from": ["6.5","2.6"]}]
+            numbers worked out from the material: the formula is recomputed and must match
+            the value (to its shown precision); its inputs must be in the sources
   bilingual numbers/dates in the zh and en specs must match (as multisets)
   meta      data date, version, author, sources present
   logic     title is not a bare topic; zones have leads; next steps have owners/dates or say so
@@ -49,11 +54,81 @@ def norm_num(s):
     return m.group(0) if m else s
 
 
+def source_text(path):
+    """Plain text of one source file. Office files are zip archives of XML: read with the standard library."""
+    import zipfile, html as _h, subprocess, shutil
+    ext = os.path.splitext(path)[1].lower()
+    if ext in (".xlsx", ".pptx", ".docx"):
+        out = []
+        try:
+            with zipfile.ZipFile(path) as z:
+                for n in z.namelist():
+                    if (ext == ".xlsx" and (n == "xl/sharedStrings.xml" or n.startswith("xl/worksheets/sheet"))) or \
+                       (ext == ".pptx" and n.startswith("ppt/slides/slide") and n.endswith(".xml")) or \
+                       (ext == ".docx" and n in ("word/document.xml",)):
+                        x = z.read(n).decode("utf-8", "replace")
+                        out.append(_h.unescape(re.sub(r"<[^>]+>", " ", x)))
+        except zipfile.BadZipFile:
+            print(f"! cannot read {path} (not a valid {ext} file)", file=sys.stderr)
+        return " ".join(out)
+    if ext == ".pdf":
+        if shutil.which("pdftotext"):
+            return subprocess.run(["pdftotext", "-layout", path, "-"], capture_output=True, text=True).stdout
+        print(f"! {path}: PDF text not readable here; export it to .txt and pass that file", file=sys.stderr)
+        return ""
+    if ext in (".csv", ".tsv"):
+        import csv as _csv
+        with open(path, encoding="utf-8-sig", errors="replace", newline="") as f:
+            return " ".join(" ".join(row) for row in _csv.reader(f, delimiter="\t" if ext == ".tsv" else ","))
+    return open(path, encoding="utf-8", errors="replace").read()
+
+
+def check_derived(spec, src_nums):
+    """Recompute each derived number; report wrong results and inputs missing from the sources."""
+    import ast, operator as op
+    ops = {ast.Add: op.add, ast.Sub: op.sub, ast.Mult: op.mul, ast.Div: op.truediv, ast.USub: op.neg, ast.UAdd: op.pos}
+    def ev(n):
+        if isinstance(n, ast.Expression): return ev(n.body)
+        if isinstance(n, ast.Constant) and isinstance(n.value, (int, float)): return n.value
+        if isinstance(n, ast.BinOp) and type(n.op) in ops: return ops[type(n.op)](ev(n.left), ev(n.right))
+        if isinstance(n, ast.UnaryOp) and type(n.op) in ops: return ops[type(n.op)](ev(n.operand))
+        raise ValueError("only numbers and + - * / ( ) are allowed")
+    bad, missing = [], []
+    for d in spec.get("derived", []):
+        shown = str(d.get("value", "")).replace("−", "-").replace(",", "")
+        m = re.search(r"-?\d+(?:\.\d+)?", shown)
+        try:
+            got = ev(ast.parse(str(d.get("formula", "")).replace("−", "-").replace("×", "*").replace("÷", "/"), mode="eval"))
+        except Exception as e:
+            bad.append({"value": d.get("value"), "problem": f"formula not readable: {e}"}); continue
+        if not m:
+            bad.append({"value": d.get("value"), "problem": "no number in value"}); continue
+        want = float(m.group(0)); dec = len(m.group(0).split(".")[1]) if "." in m.group(0) else 0
+        if abs(round(got, dec) - want) > 10 ** -dec / 2 + 1e-9 and abs(round(abs(got), dec) - abs(want)) > 10 ** -dec / 2 + 1e-9:
+            bad.append({"value": d.get("value"), "formula": d.get("formula"), "computes": round(got, max(dec, 2))})
+        if src_nums is not None:
+            for x in d.get("from", []):
+                k = norm_num(str(x))
+                if k is not None and f"{float(k):g}" not in src_nums:
+                    missing.append({"value": d.get("value"), "input": x})
+    return bad, missing
+
+
+def derived_values(spec):
+    vals = set()
+    for d in spec.get("derived", []):
+        m = re.search(r"\d[\d,]*(?:\.\d+)?", str(d.get("value", "")))
+        if m:
+            vals.add(f"{float(m.group(0).replace(',', '')):g}")
+    return vals
+
+
 def facts(spec):
-    """Comparable facts: numbers in base units, dates, versions. Small counts (< 10) are skipped."""
+    """Comparable facts: numbers in base units, dates, versions. Whole numbers below 10 (counts such as
+    "3 steps") are skipped; decimals are always kept, because scores and times (4.3, 2.6 h) matter most."""
     nums, dates, vers = collections.Counter(), collections.Counter(), collections.Counter()
     for p, t in walk(spec):
-        if p.endswith((".icon", ".color", ".id", ".kind", ".status", ".state", ".lang", ".style", ".report_type")) or ".areas" in p or ".cols" in p or "layout" in p:
+        if p.endswith((".icon", ".color", ".id", ".kind", ".status", ".state", ".lang", ".style", ".report_type", ".formula", ".theme", ".position", ".src", ".src_dark")) or ".areas" in p or ".cols" in p or "layout" in p or p.startswith("derived") or ".from[" in p:
             continue
         if p.endswith((".value", "y_min", "y_max")) or p.startswith("meta.sources") or p.endswith(("doc_title", "kicker", "as_of", "version", "author")):
             continue
@@ -69,7 +144,7 @@ def facts(spec):
         t = re.sub(r"(?<!\d)(19|20)\d{2}(?!\d)", " ", t)        # years appear in both anyway
         for m in re.finditer(r"(\d[\d,]*(?:\.\d+)?)\s*(萬|万|億|K|k|M|B)?(?![A-Za-z])", t):
             v = float(m.group(1).replace(",", "")) * UNIT.get(m.group(2) or "", 1)
-            if v < 10 and not m.group(2):
+            if v < 10 and not m.group(2) and "." not in m.group(1):
                 continue
             nums[f"{v:g}"] += 1
     return nums, dates, vers
@@ -187,12 +262,16 @@ def review(spec, other=None, html=None, sources=None):
     rep["icon_reuse"] = {k: sorted(v) for k, v in icons.items() if len(v) > 1 and not same_topic(sorted(v))}
     nums = numbers(spec)
     rep["numbers"] = [{"value": raw, "where": p} for _, raw, p in nums]
+    sn = None
     if sources:
-        src_spec = {"text": " ".join(open(f, encoding="utf-8", errors="replace").read() for f in sources)}
+        src_spec = {"text": " ".join(source_text(f) for f in sources)}
         sn, sd, sv = facts(src_spec)
         n, d, v = facts(spec)
-        rep["numbers_not_in_source"] = sorted([k for k in n if k not in sn and not any(abs(float(k) - float(x)) <= 1e-9 * max(1, float(x)) for x in sn)] +
+        dv = derived_values(spec)
+        rep["numbers_not_in_source"] = sorted([k for k in n if k not in sn and k not in dv and not any(abs(float(k) - float(x)) <= 1e-9 * max(1, float(x)) for x in sn)] +
                                               [k for k in d if k not in sd] + [k for k in v if k not in sv])
+    if spec.get("derived"):
+        rep["derived_wrong"], rep["derived_inputs_missing"] = check_derived(spec, sn)
     if other:
         rep["bilingual_mismatch"] = bilingual(spec, other)
     if html:
@@ -229,7 +308,9 @@ def main():
         if r["vague_words"]: flags.append(f"vague words {r['vague_words']}")
         if r["icon_reuse"]: flags.append(f"icon reused for different things {r['icon_reuse']}")
         if r.get("bilingual_mismatch"): flags.append(f"zh/en number mismatch {r['bilingual_mismatch']}")
-        if r.get("numbers_not_in_source"): flags.append(f"numbers not found in source {r['numbers_not_in_source']}")
+        if r.get("numbers_not_in_source"): flags.append(f"numbers not found in source {r['numbers_not_in_source']} (if worked out, record them under \"derived\")")
+        if r.get("derived_wrong"): flags.append(f"derived numbers that do not recompute {r['derived_wrong']}")
+        if r.get("derived_inputs_missing"): flags.append(f"derived-number inputs not in source {r['derived_inputs_missing']}")
         lay = r.get("layout") or {}
         if lay.get("overlaps"): flags.append(f"{len(lay['overlaps'])} text overlaps")
         if lay.get("zones_overflowing"): flags.append(f"zones overflowing {lay['zones_overflowing']}")

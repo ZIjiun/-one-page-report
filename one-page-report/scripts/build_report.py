@@ -2,13 +2,15 @@
 """Build a one-page report (HTML) from a report spec (JSON).
 
 Usage:
-  python3 build_report.py SPEC.json --out report.html [--style handdrawn|business|path/to/style.json]
+  python3 build_report.py SPEC.json --out report.html [--style handdrawn|business|path/to/style.json] [--theme light|dark]
 
 Standard library only. The HTML is self-contained: CSS, icons and only the font
 pieces that the text needs are embedded, so the file opens anywhere offline.
 See references/spec-format.md for the spec format.
 """
 import argparse, base64, html, json, os, re, sys, zipfile
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import diagrams
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -19,12 +21,72 @@ def esc(s):
     return html.escape(str(s), quote=True)
 
 
-def load_style(name):
+def load_style(name, theme="light"):
+    """Load a style file. theme="dark" applies the style's "dark" block (tokens/chart/status overrides);
+    a style without one borrows the business dark block and keeps its own fonts."""
     path = name if os.path.isfile(name) else os.path.join(ASSETS, "styles", f"{name}.json")
     if not os.path.isfile(path):
         sys.exit(f"style not found: {name}")
     with open(path, encoding="utf-8") as f:
-        return json.load(f)
+        st = json.load(f)
+    st.setdefault("tokens", {}).setdefault("on-accent", "#ffffff")
+    st["theme"] = "light"
+    if theme == "dark":
+        dark = st.get("dark")
+        if not dark:
+            with open(os.path.join(ASSETS, "styles", "business.json"), encoding="utf-8") as f:
+                dark = json.load(f)["dark"]
+            print(f"note: style '{st.get('name')}' has no dark block; using the default dark colours", file=sys.stderr)
+        for k in ("tokens", "chart", "status"):
+            st[k] = {**st.get(k, {}), **dark.get(k, {})}
+        st["theme"] = "dark"
+    return st
+
+
+def image_uri(src, spec_dir="."):
+    """Embed a user-provided local image (PNG/JPG/WebP/SVG). Remote URLs are refused: the page must open offline,
+    and images come only from the user (or official sources the user approved), never generated."""
+    if not src:
+        return None
+    if re.match(r"^https?://", str(src)):
+        print(f"! image skipped (download it first and pass a local path): {src}", file=sys.stderr)
+        return None
+    path = src if os.path.isabs(src) else os.path.join(spec_dir, src)
+    if not os.path.isfile(path):
+        print(f"! image not found: {src}", file=sys.stderr)
+        return None
+    ext = os.path.splitext(path)[1].lower().lstrip(".")
+    mime = {"jpg": "image/jpeg", "jpeg": "image/jpeg", "png": "image/png", "webp": "image/webp", "svg": "image/svg+xml"}.get(ext, "image/png")
+    with open(path, "rb") as f:
+        return f"data:{mime};base64," + base64.b64encode(f.read()).decode()
+
+
+SPEC_DIR = "."
+
+
+def image_size(src, spec_dir="."):
+    """(width, height) of a local PNG or JPEG, standard library only; None if unknown."""
+    import struct
+    path = src if os.path.isabs(src) else os.path.join(spec_dir, src)
+    try:
+        with open(path, "rb") as f:
+            head = f.read(26)
+            if head[:8] == b"\x89PNG\r\n\x1a\n":
+                return struct.unpack(">II", head[16:24])
+            if head[:2] == b"\xff\xd8":
+                f.seek(2)
+                while True:
+                    mk = f.read(2)
+                    if len(mk) < 2 or mk[0] != 0xFF:
+                        return None
+                    ln = struct.unpack(">H", f.read(2))[0]
+                    if 0xC0 <= mk[1] <= 0xCF and mk[1] not in (0xC4, 0xC8, 0xCC):
+                        h, w = struct.unpack(">xHH", f.read(5))
+                        return (w, h)
+                    f.seek(ln - 2, 1)
+    except OSError:
+        return None
+    return None
 
 
 _icon_cache = {}
@@ -92,12 +154,12 @@ def chart_svg(b, st):
     F = 'font-family="inherit"'
     if kind == "bar":  # horizontal bars, one highlighted
         W, rowh, gap = 380, 22, 9
-        label_w = max([text_width(d["label"], 13.5) for d in data] + [40]) + 8
+        label_w = max([text_width(d["label"], 14) for d in data] + [40]) + 8
         vmax = max(d["value"] for d in data) or 1
-        val_w = max(text_width(d.get("display", d["value"]), 15) for d in data) + 10
+        val_w = max(text_width(d.get("display", d["value"]), 18) for d in data) + 10
         bar_w = W - label_w - val_w - 6
         H = len(data) * (rowh + gap)
-        out = [f'<svg class="chart" viewBox="0 0 {W} {H}" style="width:100%;height:auto;max-height:{len(data)*44}px" data-chart="{esc(json.dumps(b, ensure_ascii=False))}">']
+        out = [f'<svg class="chart" viewBox="0 0 {W} {H}" style="width:100%;max-width:{W}px;height:auto" data-chart="{esc(json.dumps(b, ensure_ascii=False))}">']
         for i, d in enumerate(data):
             y = i * (rowh + gap) + 3
             hl = d.get("highlight")
@@ -105,25 +167,30 @@ def chart_svg(b, st):
             col = c["highlight"] if hl else c["context"]
             tc = c["strong"] if hl else c["text"]
             fw = ' font-weight="700"' if hl else ""
-            out.append(f'<text x="{label_w-8:.0f}" y="{y+rowh*0.72:.0f}" text-anchor="end" font-size="13.5" fill="{tc}"{fw} {F}>{esc(d["label"])}</text>')
+            out.append(f'<text x="{label_w-8:.0f}" y="{y+rowh*0.72:.0f}" text-anchor="end" font-size="14" fill="{tc}"{fw} {F}>{esc(d["label"])}</text>')
             out.append(f'<rect x="{label_w:.0f}" y="{y}" width="{w:.0f}" height="{rowh}" rx="4" fill="{col}"/>')
-            out.append(f'<text x="{label_w+w+6:.0f}" y="{y+rowh*0.75:.0f}" font-size="{16 if hl else 13.5}" fill="{tc}" font-weight="700" {F}>{esc(d.get("display", d["value"]))}</text>')
+            out.append(f'<text x="{label_w+w+6:.0f}" y="{y+rowh*0.75:.0f}" font-size="{18 if hl else 14}" fill="{tc}" font-weight="700" {F}>{esc(d.get("display", d["value"]))}</text>')
         out.append(f'<path d="M{label_w:.0f} 0 v{H}" stroke="{c["axis"]}" stroke-width="1.5"/></svg>')
         return "".join(out)
     if kind == "column":
-        W, H, top, bottom = 380, 170, 24, 36
+        has_ic = any(d.get("icon") for d in data)
+        W, H, top, bottom = 380, (196 if has_ic else 170), 24, (62 if has_ic else 36)
         vmax = max(d["value"] for d in data) or 1
         n = len(data); slot = (W - 20) / n; bw = min(56, slot * 0.6)
-        out = [f'<svg class="chart" viewBox="0 0 {W} {H}" style="width:100%;height:auto;max-height:240px" data-chart="{esc(json.dumps(b, ensure_ascii=False))}">']
+        out = [f'<svg class="chart" viewBox="0 0 {W} {H}" style="width:100%;max-width:{W}px;height:auto" data-chart="{esc(json.dumps(b, ensure_ascii=False))}">']
         base = H - bottom
         for i, d in enumerate(data):
             cx = 10 + slot * (i + 0.5); h = (base - top) * d["value"] / vmax
             hl = d.get("highlight"); col = c["highlight"] if hl else c["context"]; tc = c["strong"] if hl else c["text"]
             out.append(f'<rect x="{cx-bw/2:.0f}" y="{base-h:.0f}" width="{bw:.0f}" height="{h:.0f}" rx="4" fill="{col}"/>')
-            out.append(f'<text x="{cx:.0f}" y="{base-h-6:.0f}" text-anchor="middle" font-size="{15 if hl else 13.5}" font-weight="700" fill="{tc}" {F}>{esc(d.get("display", d["value"]))}</text>')
-            out.append(f'<text x="{cx:.0f}" y="{base+17:.0f}" text-anchor="middle" font-size="12.5" fill="{tc}" {F}>{esc(d["label"])}</text>')
+            out.append(f'<text x="{cx:.0f}" y="{base-h-6:.0f}" text-anchor="middle" font-size="{18 if hl else 14}" font-weight="700" fill="{tc}" {F}>{esc(d.get("display", d["value"]))}</text>')
+            if d.get("icon"):
+                out.append(icon_nested(d["icon"], cx - 11, base + 8, 22, c["highlight"] if hl else c["text"]))
+            out.append(f'<text x="{cx:.0f}" y="{base+(52 if has_ic else 19):.0f}" text-anchor="middle" font-size="14" fill="{tc}"{" font-weight=\"700\"" if hl else ""} {F}>{esc(d["label"])}</text>')
+
         out.append(f'<path d="M6 {base} H{W-6}" stroke="{c["axis"]}" stroke-width="1.5"/></svg>')
-        return "".join(out)
+        note = f'<div class="chart-note">{rich(b["top_note"])}</div>' if b.get("top_note") else ""
+        return note + "".join(out)
     if kind == "line":
         W, H = 560, 108
         L, R, T, B = 60, 80, 22, 22
@@ -138,20 +205,20 @@ def chart_svg(b, st):
         if ref:
             ry = Y(ref["value"])
             out.append(f'<path d="M{L-10} {ry:.0f} h{W-L-R+20}" stroke="{c["reference"]}" stroke-width="1.2" stroke-dasharray="4 4"/>')
-            out.append(f'<text x="{L-6}" y="{ry-5:.0f}" font-size="12.5" fill="{c["text"]}" {F}>{esc(ref.get("label",""))}</text>')
+            out.append(f'<text x="{L-6}" y="{ry-5:.0f}" font-size="14" fill="{c["text"]}" {F}>{esc(ref.get("label",""))}</text>')
         pts = " ".join(f"{'M' if i==0 else 'L'}{X(i):.0f} {Y(v):.0f}" for i, v in enumerate(vals))
         out.append(f'<path d="{pts}" fill="none" stroke="{c["highlight"]}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>')
         for i, d in enumerate(data):
             last = i == len(data) - 1 or d.get("highlight")
             x, y = X(i), Y(d["value"])
-            out.append(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{6.5 if last else 5}" fill="{c["highlight"]}" stroke="#fff" stroke-width="2"/>')
+            out.append(f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{6.5 if last else 5}" fill="{c["highlight"]}" stroke="{st["tokens"]["card"]}" stroke-width="2"/>')
             lab = esc(d.get("display", d["value"]))
             if last:
-                out.append(f'<text x="{x+12:.0f}" y="{y+18:.0f}" font-size="17" font-weight="700" fill="{c["strong"]}" {F}>{lab}</text>')
+                out.append(f'<text x="{x+12:.0f}" y="{y+18:.0f}" font-size="18" font-weight="700" fill="{c["strong"]}" {F}>{lab}</text>')
             else:
-                out.append(f'<text x="{x:.0f}" y="{y-10:.0f}" text-anchor="middle" font-size="14.5" fill="{c["text"]}" {F}>{lab}</text>')
+                out.append(f'<text x="{x:.0f}" y="{y-10:.0f}" text-anchor="middle" font-size="14" fill="{c["text"]}" {F}>{lab}</text>')
             anchor = "middle"
-            out.append(f'<text x="{x:.0f}" y="{H+4}" text-anchor="{anchor}" font-size="13" fill="{c["strong"] if last else c["text"]}" {F}>{esc(d["label"])}</text>')
+            out.append(f'<text x="{x:.0f}" y="{H+4}" text-anchor="{anchor}" font-size="14" fill="{c["strong"] if last else c["text"]}" {F}>{esc(d["label"])}</text>')
         out.append("</svg>")
         return "".join(out)
     raise ValueError(f"unknown chart kind {kind}")
@@ -159,10 +226,10 @@ def chart_svg(b, st):
 
 def timeline_svg(b, st):
     ev = b["events"]; c = st["chart"]; s = st["status"]
-    W, H, L, R = 1820, 82, 70, 70
+    W, H, L, R = 1820, 86, 70, 70
     n = len(ev)
     xs = [L + (W - L - R) * (i / max(1, n - 1)) for i in range(n)]
-    out = [f'<svg class="timeline" viewBox="0 0 {W} {H}" style="width:100%;height:auto"><g font-family="inherit" text-anchor="middle" font-size="14.5">']
+    out = [f'<svg class="timeline" viewBox="0 0 {W} {H}" style="width:100%;height:auto"><g font-family="inherit" text-anchor="middle" font-size="14">']
     y = 32
     # solid up to the last "done" event, dashed after it (planned and in-progress lie ahead)
     last_done = max((i for i, e in enumerate(ev) if e.get("status", "done") == "done"), default=None)
@@ -174,19 +241,19 @@ def timeline_svg(b, st):
     for x, e in zip(xs, ev):
         stt = e.get("status", "done")
         if stt == "done":
-            out.append(f'<circle cx="{x:.0f}" cy="{y}" r="11" fill="{s["good"]}"/><text x="{x:.0f}" y="{y+5}" font-size="12" fill="#fff">✓</text>')
+            out.append(f'<circle cx="{x:.0f}" cy="{y}" r="11" fill="{s["good"]}"/><text x="{x:.0f}" y="{y+5}" font-size="14" fill="{st["tokens"].get("on-accent", "#fff")}">✓</text>')
             dc = c["strong"]
         elif stt == "doing":
-            out.append(f'<circle cx="{x:.0f}" cy="{y}" r="12" fill="#fff" stroke="{s["warning"]}" stroke-width="4"/><text x="{x:.0f}" y="{y+5}" font-size="12" font-weight="700" fill="{c["strong"]}">…</text>')
+            out.append(f'<circle cx="{x:.0f}" cy="{y}" r="12" fill="{st["tokens"]["card"]}" stroke="{s["warning"]}" stroke-width="4"/><text x="{x:.0f}" y="{y+5}" font-size="14" font-weight="700" fill="{c["strong"]}">…</text>')
             dc = c["strong"]
         else:
-            out.append(f'<circle cx="{x:.0f}" cy="{y}" r="9" fill="#fff" stroke="{c["reference"]}" stroke-width="3"/>')
+            out.append(f'<circle cx="{x:.0f}" cy="{y}" r="9" fill="{st["tokens"]["card"]}" stroke="{c["reference"]}" stroke-width="3"/>')
             dc = c["reference"]
         out.append(f'<text x="{x:.0f}" y="{y-20}" font-weight="700" fill="{dc}">{esc(e.get("date",""))}</text>')
         lab = e.get("label", ""); size = 17; gap = 6
-        w = text_width(lab, 14.5)
+        w = text_width(lab, 14)
         total = (size + gap + w) if e.get("icon") else w
-        sub_w = text_width(e.get("sub", ""), 12.5)
+        sub_w = text_width(e.get("sub", ""), 14)
         half = max(total, sub_w) / 2
         cx = min(max(x, half + 6), W - half - 6)   # keep text inside the frame
         if e.get("icon"):
@@ -199,7 +266,7 @@ def timeline_svg(b, st):
         out.append(f'<text class="tl-lab" data-cx="{cx:.0f}" data-icon-size="{size if e.get("icon") else 0}" x="{tx:.0f}" y="{y+28}" fill="{lc}">{esc(lab)}</text>')
         if e.get("sub"):
             sc = st["tokens"]["bad-text"] if e.get("highlight") else c["text"]
-            out.append(f'<text x="{cx:.0f}" y="{y+46}" font-size="12.5" fill="{sc}">{esc(e["sub"])}</text>')
+            out.append(f'<text x="{cx:.0f}" y="{y+47}" font-size="14" fill="{sc}">{esc(e["sub"])}</text>')
     out.append("</g></svg>")
     return "".join(out)
 
@@ -221,8 +288,17 @@ def block(b, st, lang):
                 h.append(f'<div class="big">{rich(it["big"])}<small>{rich(it.get("big_note",""))}</small></div>')
             if it.get("chart"):
                 h.append(chart_svg(it["chart"], st))
+            if it.get("diagram"):
+                h.append(block(it["diagram"], st, lang))
             if it.get("sub"):
                 h.append(f'<div class="sub">{rich(it["sub"])}</div>')
+            if it.get("photo"):
+                ph = it["photo"]; uri = image_uri(ph.get("src"), SPEC_DIR)
+                if uri:
+                    h.append(f'<div class="cardphoto" style="background-image:url({uri});background-position:{esc(ph.get("position", "center"))}">'
+                             f'{"<span>"+rich(ph["caption"])+"</span>" if ph.get("caption") else ""}</div>')
+                elif it.get("foot") is None and ph.get("caption"):
+                    h.append(f'<div class="foot">{rich(ph["caption"])}</div>')
             if it.get("foot"):
                 h.append(f'<div class="foot">{rich(it["foot"])}</div>')
             h.append("</div>")
@@ -312,6 +388,40 @@ def block(b, st, lang):
         if inlist:
             out.append("</ul>")
         return '<div class="text">' + "".join(out) + "</div>"
+    if t in diagrams.BLOCKS:
+        head = f'<div class="btitle">{rich(b["title"])}</div>' if b.get("title") else ""
+        return head + diagrams.BLOCKS[t](b, st, icon_names())
+    if t == "photo":
+        uri = image_uri(b.get("src"), SPEC_DIR)
+        head = f'<div class="btitle">{rich(b["title"])}</div>' if b.get("title") else ""
+        if not uri:
+            return head
+        cap = ""
+        if b.get("caption"):
+            cap = '<div class="cap">' + "".join(
+                f'<span><b>{esc(c.get("value",""))}</b>{esc(c.get("unit",""))}<i>{esc(c.get("label",""))}</i></span>' if isinstance(c, dict)
+                else f'<span>{rich(c)}</span>' for c in b["caption"]) + "</div>"
+        hgt = f"height:{int(b['height'])}px;" if b.get("height") else ""
+        if b.get("marks"):
+            # screenshot with numbered marks: the whole image is shown (no crop), so x/y (% of width/height) land exactly
+            pins, notes = [], []
+            for i, mk in enumerate(b["marks"], 1):
+                x, y = float(mk.get("x", 50)), float(mk.get("y", 50))
+                if mk.get("w") and mk.get("h"):
+                    pins.append(f'<span class="mbox" style="left:{x}%;top:{y}%;width:{float(mk["w"])}%;height:{float(mk["h"])}%"></span>')
+                    px, py = x, y
+                else:
+                    px, py = x, y
+                pins.append(f'<span class="mpin" style="left:{px}%;top:{py}%">{i}</span>')
+                notes.append(f'<li><span class="mnum">{i}</span><span>{rich(mk.get("label", ""))}</span></li>')
+            mh = f"max-height:{int(b['height'])}px;" if b.get("height") else ""
+            return (f'{head}<figure class="shot"><div class="shotimg"><img src="{uri}" alt="{esc(b.get("alt", ""))}" style="{mh}">{"".join(pins)}</div>'
+                    f'<ol class="marks">{"".join(notes)}</ol></figure>')
+        return f'{head}<div class="photo" role="img" aria-label="{esc(b.get("alt", ""))}" style="{hgt}background-image:url({uri});background-position:{esc(b.get("position", "center"))}">{cap}</div>'
+    if t == "speclines":
+        rows = "".join(f'<div><span class="k">{rich(r.get("label",""))}</span><span class="v">{rich(r.get("text",""))}</span></div>' for r in b["rows"])
+        head = f'<div class="btitle">{rich(b["title"])}</div>' if b.get("title") else ""
+        return f'{head}<div class="speclines">{rows}</div>'
     if t == "columns":
         cols = b.get("cols", " ".join(["1fr"] * len(b["children"])))
         inner = "".join('<div class="col">' + "".join(block(x, st, lang) for x in ch) + "</div>" for ch in b["children"])
@@ -433,6 +543,7 @@ TIMELINE_JS = """<script>
 # ---------------------------------------------------------------- page
 def build(spec, style):
     lang = "zh" if spec.get("lang", "zh").lower().startswith("zh") else "en"
+    style["lang"] = lang
     font = style["fonts"][lang]
     tokens = "".join(f"--{k}:{v};" for k, v in style["tokens"].items())
     base = open(os.path.join(ASSETS, "styles", "base.css"), encoding="utf-8").read()
@@ -455,8 +566,65 @@ def build(spec, style):
     if m.get("sources"):
         left.append(rich(m["sources"]))
     right = " · ".join(rich(x) for x in [m.get("as_of"), m.get("version"), m.get("author")] if x)
+    # ---- imagery (user-provided only): hero, product logo, backdrop. Credits go to the footer automatically.
+    img = []; extra_css = []; cls_extra = []
+    def themed(key):
+        """Image settings for the current theme. In dark, a "dark" sub-object replaces fields
+        (another image, another mode); "dark": null drops the image. src_dark is a shorthand."""
+        v = spec.get(key)
+        if not v or style.get("theme") != "dark" or "dark" not in v:
+            return v
+        if v["dark"] is None:
+            return None
+        return {**{k: x for k, x in v.items() if k != "dark"}, **v["dark"], "_dark": True}
+    hero = themed("hero")
+    if hero and style.get("theme") == "dark" and not hero.get("_dark"):
+        if hero.get("src_dark"):
+            hero = {**hero, "src": hero["src_dark"]}
+        elif hero.get("mode") == "cutout":
+            print("note: dark theme with a cut-out photo on a light background; edges faded as a stopgap. "
+                  "Find an image that suits the dark page (night/dusk shot, dark key art) and pass it as hero.src_dark, or drop the hero", file=sys.stderr)
+            hero = {**hero, "mode": "cutout faded"}
+    if hero:
+        uri = image_uri(hero.get("src"), SPEC_DIR)
+        if uri:
+            mode = hero.get("mode", "side")   # side (fades in from the right) | cutout (studio shot on a matching background) | band (full-width, behind the title)
+            vars_ = "".join(f"--hero-{k}:{hero[k]}{'px' if isinstance(hero[k], (int, float)) and k != 'opacity' else ''};" for k in ("w", "h", "opacity") if k in hero)
+            img.append(f'<div class="hero {esc(mode)}{" own-dark" if hero.get("_dark") else ""}" style="background-image:url({uri});{vars_}{"background-position:"+esc(hero["position"])+";" if hero.get("position") else ""}"></div>')
+            if mode == "band":
+                img.append('<div class="hero-shade"></div>')
+            else:
+                cls_extra.append("title-left")
+                extra_css.append(f":root{{--title-pad:{int(hero.get('title_pad', (hero.get('w', 380) + 80) if mode == 'cutout' else 560))}px}}")
+            cls_extra.append("has-hero")
+    plogo = themed("logo")
+    if plogo and style.get("theme") == "dark" and not plogo.get("_dark"):
+        if plogo.get("src_dark"):
+            plogo = {**plogo, "src": plogo["src_dark"]}
+        else:
+            print("note: dark theme with a logo made for light pages; pass logo.src_dark (the brand's version for dark backgrounds) or drop the logo", file=sys.stderr)
+    if plogo:
+        uri = image_uri(plogo.get("src"), SPEC_DIR)
+        if uri:
+            h_ = int(plogo.get("h", 104)); sz = image_size(plogo["src"], SPEC_DIR)
+            lw = int(h_ * sz[0] / sz[1]) if sz else int(h_ * 1.8)
+            img.append(f'<img class="page-logo" src="{uri}" alt="{esc(plogo.get("alt", "logo"))}" style="--logo-h:{h_}px">')
+            cls_extra.append("has-logo")
+            if "title-left" in cls_extra or hero is None or hero.get("mode") != "band":
+                extra_css.append(f":root{{--logo-pad:{lw + 40}px}}")
+    bd = themed("backdrop")
+    if bd:
+        uri = image_uri(bd.get("src"), SPEC_DIR)
+        if uri:
+            img.insert(0, f'<div class="backdrop" style="background-image:url({uri});--backdrop-opacity:{bd.get("opacity", .25)}"></div>')
+            cls_extra.append("has-backdrop")
+    if img and m.get("image_credit"):
+        left.append(rich(m["image_credit"]))
+    elif img:
+        print("! images used but meta.image_credit is empty: add the source and rights holder", file=sys.stderr)
     body_cls = " ".join(x for x in ["rough" if style.get("rough") else "", "texture" if style.get("texture") else "",
-                                    "faux-bold" if font.get("bundled") == "patrick-hand" else ""] if x)
+                                    "faux-bold" if font.get("bundled") == "patrick-hand" else "",
+                                    "dark" if style.get("theme") == "dark" else ""] + cls_extra if x)
     logo = ""
     if style.get("logo") and os.path.isfile(style["logo"]):
         ext = os.path.splitext(style["logo"])[1].lstrip(".").replace("jpg", "jpeg")
@@ -468,10 +636,10 @@ def build(spec, style):
 <title>{esc(re.sub(r'[*=!^]', '', spec.get('doc_title') or spec['title'])[:80])}</title>
 <style>{fonts}
 :root{{{tokens}--font:{font['family']}}}
-{base}</style></head>
+{base}{"".join(extra_css)}</style></head>
 <body class="{body_cls}" data-style="{esc(style.get('name',''))}">
 <svg width="0" height="0" style="position:absolute"><filter id="wobble"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter></svg>
-{logo}<div class="wrap">
+{logo}{"".join(img)}<div class="wrap">
 <div class="kicker">{rich(m.get('kicker',''))}</div>
 <h1 class="title">{rich(spec['title'])}</h1>
 <div class="grid" style="grid-template-columns:{lay['columns']};grid-template-areas:{areas}">
@@ -483,17 +651,23 @@ def build(spec, style):
 
 
 def main():
+    global SPEC_DIR
     ap = argparse.ArgumentParser()
     ap.add_argument("spec")
     ap.add_argument("--out", required=True)
     ap.add_argument("--style", default=None, help="handdrawn | business | path to a style .json")
+    ap.add_argument("--theme", default=None, choices=["light", "dark"], help="light (default) or dark; overrides the spec's \"theme\"")
     a = ap.parse_args()
     spec = json.load(open(a.spec, encoding="utf-8"))
-    style = load_style(a.style or spec.get("style", "handdrawn"))
-    html_out = build(spec, style)
+    SPEC_DIR = os.path.dirname(os.path.abspath(a.spec))
+    style = load_style(a.style or spec.get("style", "handdrawn"), a.theme or spec.get("theme", "light"))
+    try:
+        html_out = build(spec, style)
+    except ValueError as e:
+        sys.exit(f"✗ {e}")
     os.makedirs(os.path.dirname(os.path.abspath(a.out)), exist_ok=True)
     open(a.out, "w", encoding="utf-8").write(html_out)
-    print(f"✓ {a.out}  ({len(html_out)//1024} KB, style={style.get('name')}, lang={spec.get('lang','zh')})")
+    print(f"✓ {a.out}  ({len(html_out)//1024} KB, style={style.get('name')}, theme={style.get('theme')}, lang={spec.get('lang','zh')})")
 
 
 if __name__ == "__main__":

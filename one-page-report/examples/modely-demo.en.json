@@ -1,0 +1,412 @@
+{
+ "lang": "en",
+ "report_type": "custom",
+ "style": "business",
+ "theme": "light",
+ "doc_title": "Model Y product explainer (demo)",
+ "meta": {
+  "kicker": "Product explainer | Tesla Model Y (2026, Taiwan) | for buyers considering an electric SUV",
+  "as_of": "Data as of 2026/10/23",
+  "version": "demo",
+  "sources": "Demo, not a Tesla document · Sources: U-CAR (test drive, prices, specs), UDN (prices, Supercharger rates, sales), Carture (registrations), TechNews (stations, FSD), Euro NCAP, TVBS (tax) · Prices as reported 2026/5; NT$530 is an estimate · Amounts in NT$",
+  "image_credit": "",
+  "author": "Demo"
+ },
+ "title": "Model Y: from ^^NT$1.9M^^, ==No. 3 in Taiwan== in June — long range, easy charging, cheap to run;\nof the three, we recommend **Long Range**: longest range, mid price",
+ "layout": {
+  "columns": "2fr 1fr 1fr",
+  "areas": [
+   "a a b",
+   "c d e"
+  ]
+ },
+ "zones": [
+  {
+   "id": "a",
+   "color": "blue",
+   "icon": "star",
+   "label": "Four reasons to buy",
+   "question": "Why would I want it?",
+   "lead": "Range, running cost, charging, safety",
+   "blocks": [
+    {
+     "type": "cards",
+     "items": [
+      {
+       "icon": "map",
+       "tag": "RANGE",
+       "title": "Taipei–Chiayi and back with 10% left",
+       "diagram": {
+        "type": "route",
+        "from": "Taipei",
+        "to": "Chiayi",
+        "value": "465.6",
+        "unit": "km",
+        "icon": "car",
+        "start": {
+         "pct": 100,
+         "label": "Start 100%"
+        },
+        "end": {
+         "pct": 10,
+         "label": "Back with 10%"
+        },
+        "bars": [
+         {
+          "label": "WLTP",
+          "value": 603,
+          "display": "603"
+         },
+         {
+          "label": "Highway test",
+          "value": 517,
+          "display": "517 (85%)",
+          "highlight": true
+         }
+        ]
+       },
+       "foot": "U-CAR test: 31.7–33.6°C, A/C on all the way"
+      },
+      {
+       "icon": "wallet",
+       "tag": "RUNNING COST",
+       "title": "That round trip costs about a dinner",
+       "diagram": {
+        "type": "formula",
+        "terms": [
+         {
+          "icon": "battery-charging",
+          "value": "75.5",
+          "label": "kWh / charge"
+         },
+         {
+          "icon": "tag",
+          "value": "NT$7",
+          "label": "per kWh"
+         }
+        ],
+        "result": {
+         "icon": "receipt",
+         "value": "≈530",
+         "label": "NT$ / trip"
+        },
+        "aside": {
+         "icon": "utensils",
+         "text": "≈ one dinner"
+        },
+        "scale": {
+         "title": "Price per kWh by time",
+         "min": 5,
+         "max": 14,
+         "points": [
+          {
+           "value": 6,
+           "label": "Off-peak 6",
+           "kind": "good"
+          },
+          {
+           "value": 7,
+           "label": "Weekday 7",
+           "kind": "hi"
+          },
+          {
+           "value": 13,
+           "label": "Peak 13",
+           "kind": "bad"
+          }
+         ]
+        }
+       },
+       "foot": "Also: EVs pay no license tax until end-2030"
+      },
+      {
+       "icon": "plug",
+       "tag": "CHARGING",
+       "title": "More Supercharger sites every month",
+       "diagram": {
+        "type": "progress",
+        "current": 115,
+        "target": 125,
+        "current_label": "Now",
+        "unit": "sites",
+        "target_label": "Target end-2026: 125 sites",
+        "sub": "700 Supercharger stalls",
+        "then": {
+         "from_icon": "timer",
+         "from_label": "5 min charge",
+         "to_icon": "route",
+         "prefix": "+",
+         "value": "120",
+         "unit": "km",
+         "sub": "Quick top-ups on the highway"
+        }
+       },
+       "foot": "Plus 1,200+ destination chargers"
+      },
+      {
+       "icon": "shield-check",
+       "tag": "SAFETY",
+       "title": "Five stars in Europe's toughest crash test",
+       "chart": {
+        "kind": "bar",
+        "data": [
+         {
+          "label": "Adult",
+          "value": 91,
+          "display": "91%"
+         },
+         {
+          "label": "Child",
+          "value": 93,
+          "display": "93%",
+          "highlight": true
+         },
+         {
+          "label": "Pedestrian",
+          "value": 86,
+          "display": "86%"
+         },
+         {
+          "label": "Safety assist",
+          "value": 92,
+          "display": "92%"
+         }
+        ]
+       },
+       "sub": "★★★★★ Euro NCAP (2025/11)",
+       "foot": "**For families**: child protection is the highest of the four"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "b",
+   "color": "gray",
+   "icon": "users",
+   "label": "Popularity",
+   "lead": "Taiwan's best-selling EV",
+   "blocks": [
+    {
+     "type": "stat",
+     "value": "8,524",
+     "unit": "cars",
+     "label": "Registered in Taiwan, H1 2026",
+     "compare": "Approximate, Carture"
+    },
+    {
+     "type": "chart",
+     "kind": "bar",
+     "title": "June 2026 registrations (EVs)",
+     "data": [
+      {
+       "label": "Model Y",
+       "value": 2201,
+       "display": "2,201 · No. 1",
+       "highlight": true
+      },
+      {
+       "label": "Toyota bZ4X",
+       "value": 310,
+       "display": "310 · No. 4"
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "icon": "trophy",
+     "text": "Including petrol cars, No. 3 of all models in June; Tesla had 75% of EV sales that month."
+    }
+   ]
+  },
+  {
+   "id": "c",
+   "color": "gray",
+   "icon": "scale",
+   "label": "Which of the three",
+   "lead": "Most families: Long Range",
+   "blocks": [
+    {
+     "type": "columns",
+     "cols": "1.7fr 1fr",
+     "children": [
+      [
+       {
+        "type": "compare",
+        "title": "Pick by how you drive",
+        "question": "How do you mostly drive?",
+        "badge": "★ Our pick",
+        "options": [
+         {
+          "name": "RWD",
+          "price": "NT$1,899,900",
+          "why": "City, budget first",
+          "specs": [
+           {
+            "icon": "milestone",
+            "text": "534 km"
+           },
+           {
+            "icon": "zap",
+            "text": "0–100 5.9 s"
+           }
+          ]
+         },
+         {
+          "name": "Long Range",
+          "price": "NT$2,299,900",
+          "why": "Long trips, family",
+          "recommended": true,
+          "specs": [
+           {
+            "icon": "milestone",
+            "text": "641 km"
+           },
+           {
+            "icon": "zap",
+            "text": "0–100 4.8 s"
+           }
+          ]
+         },
+         {
+          "name": "Performance",
+          "price": "NT$2,499,900",
+          "why": "Speed, adaptive suspension",
+          "specs": [
+           {
+            "icon": "milestone",
+            "text": "598 km"
+           },
+           {
+            "icon": "zap",
+            "text": "0–100 3.5 s"
+           }
+          ]
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "chart",
+        "kind": "bar",
+        "title": "Where luggage goes (litres)",
+        "data": [
+         {
+          "label": "Front trunk",
+          "value": 117,
+          "display": "117"
+         },
+         {
+          "label": "Rear trunk",
+          "value": 854,
+          "display": "854"
+         },
+         {
+          "label": "Seats folded",
+          "value": 2041,
+          "display": "2,041",
+          "highlight": true
+         }
+        ]
+       }
+      ]
+     ]
+    },
+    {
+     "type": "speclines",
+     "rows": [
+      {
+       "label": "Comfort",
+       "text": "**Ventilated front seats** · **8\" rear screen** · 15.4\" centre screen · 256-colour ambient light · 15+1 speakers (Long Range up)"
+      },
+      {
+       "label": "Perf.",
+       "text": "Adaptive suspension · 21\" wheels"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d",
+   "color": "red",
+   "icon": "triangle-alert",
+   "label": "Before you buy",
+   "lead": "Home charging first",
+   "blocks": [
+    {
+     "type": "decision",
+     "icon": "house",
+     "question": [
+      "Can you install a",
+      "charger at home or work?"
+     ],
+     "yes": {
+      "label": "Yes",
+      "text": "✓ Buy; RWD is enough"
+     },
+     "no": {
+      "label": "No",
+      "text": "Ask your building first; if not, check nearby Superchargers"
+     }
+    },
+    {
+     "type": "issues",
+     "items": [
+      {
+       "icon": "gauge",
+       "problem": "Highway range is about 85% of WLTP",
+       "fix": "Plan long trips at 85% of the official figure"
+      },
+      {
+       "icon": "cpu",
+       "problem": "FSD is not available in Taiwan yet",
+       "detail": "(submitted 2026/6)",
+       "fix": "Do not count on it today"
+      },
+      {
+       "icon": "sun",
+       "problem": "The glass roof runs warm in summer",
+       "fix": "Consider a heat-rejecting film"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "e",
+   "color": "green",
+   "icon": "flag",
+   "label": "Next steps",
+   "lead": "Four things, all for you to do",
+   "blocks": [
+    {
+     "type": "flowsteps",
+     "items": [
+      {
+       "icon": "calendar",
+       "title": "Book a test drive",
+       "sub": "Sit in the back, open the trunk"
+      },
+      {
+       "icon": "house",
+       "title": "Check home charging",
+       "sub": "If you can charge at home, RWD is plenty"
+      },
+      {
+       "icon": "map-pin",
+       "title": "Find nearby Superchargers",
+       "sub": "Weekend charging is cheapest"
+      },
+      {
+       "icon": "circle-dollar-sign",
+       "title": "Confirm price and delivery",
+       "sub": "Prices here are from 2026/5 reports"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

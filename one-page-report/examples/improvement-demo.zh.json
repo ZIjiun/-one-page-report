@@ -1,0 +1,416 @@
+{
+ "lang": "zh-Hant",
+ "report_type": "results",
+ "style": "business",
+ "theme": "light",
+ "doc_title": "客服 AI 回覆輔助試點成效（示範）",
+ "meta": {
+  "kicker": "改善成效報告｜客服部 AI 回覆輔助試點（退貨＋物流工單）｜給：營運副總",
+  "as_of": "資料統計至 2026/10/20",
+  "version": "v1",
+  "author": "客服部",
+  "confidential": "內部使用",
+  "sources": "來源：客服系統工單紀錄（2026/7–10）、滿意度問卷（每週抽樣 300 份）、人力排班表 · 虛構示範資料 · 金額單位：新台幣"
+ },
+ "title": "AI 輔助試點 8 週：首次回覆從 6.5 小時降到 ^^2.6 小時^^、滿意度 ==3.6 → 4.3==，三項指標都達標；\n建議 11 月擴大到 **全部工單類型**，旺季前完成",
+ "layout": {
+  "columns": "1.25fr 1fr 1fr",
+  "areas": [
+   "a b c",
+   "d e f"
+  ]
+ },
+ "zones": [
+  {
+   "id": "a",
+   "color": "blue",
+   "icon": "trophy",
+   "label": "成果",
+   "question": "有沒有達標？",
+   "lead": "三項指標都超過目標",
+   "blocks": [
+    {
+     "type": "bullet",
+     "higher_is_better": false,
+     "legend": [
+      "實際",
+      "目標",
+      "改善前"
+     ],
+     "rows": [
+      {
+       "label": "首次回覆",
+       "actual": 2.6,
+       "target": 3,
+       "compare": 6.5,
+       "max": 8,
+       "ranges": [
+        3,
+        5,
+        8
+       ],
+       "display": "2.6 小時"
+      },
+      {
+       "label": "平均結案",
+       "actual": 1.4,
+       "target": 1.5,
+       "compare": 2.3,
+       "max": 3,
+       "ranges": [
+        1.5,
+        2.2,
+        3
+       ],
+       "display": "1.4 天"
+      }
+     ]
+    },
+    {
+     "type": "bullet",
+     "legend": [],
+     "rows": [
+      {
+       "label": "滿意度",
+       "actual": 4.3,
+       "target": 4.0,
+       "compare": 3.6,
+       "max": 5,
+       "ranges": [
+        3.5,
+        4.0,
+        5
+       ],
+       "display": "4.3 / 5"
+      }
+     ]
+    },
+    {
+     "type": "stattile",
+     "value": "−18%",
+     "label": "加班時數（相對去年同期）",
+     "delta": "每月少 210 小時",
+     "vs": "",
+     "good": true,
+     "arrow": "▼",
+     "spark": [
+      1180,
+      1150,
+      1120,
+      1050,
+      1010,
+      990,
+      970
+     ],
+     "spark_label": [
+      "7 月",
+      "10 月"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "b",
+   "color": "blue",
+   "icon": "trending-up",
+   "label": "改善了什麼",
+   "lead": "每項指標前後對照",
+   "blocks": [
+    {
+     "type": "dumbbell",
+     "higher_is_better": false,
+     "legend": [
+      "改善前（7 月）",
+      "改善後（10 月）"
+     ],
+     "rows": [
+      {
+       "label": "首次回覆（時）",
+       "before": 6.5,
+       "after": 2.6
+      },
+      {
+       "label": "平均結案（天）",
+       "before": 2.3,
+       "after": 1.4
+      },
+      {
+       "label": "重開率（%）",
+       "before": 12,
+       "after": 7
+      },
+      {
+       "label": "轉主管（%）",
+       "before": 9,
+       "after": 6
+      }
+     ]
+    },
+    {
+     "type": "slope",
+     "title": "各管道滿意度（滿分 5）",
+     "left": "改善前",
+     "right": "改善後",
+     "higher_is_better": true,
+     "items": [
+      {
+       "label": "Email",
+       "before": 3.4,
+       "after": 4.4,
+       "highlight": true
+      },
+      {
+       "label": "線上客服",
+       "before": 3.5,
+       "after": 4.3
+      },
+      {
+       "label": "電話",
+       "before": 3.8,
+       "after": 4.2
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c",
+   "color": "red",
+   "icon": "triangle-alert",
+   "label": "還要注意",
+   "lead": "週一上午仍是尖峰",
+   "blocks": [
+    {
+     "type": "heatmap",
+     "cols": [
+      "一",
+      "二",
+      "三",
+      "四",
+      "五",
+      "六",
+      "日"
+     ],
+     "unit": "件／時",
+     "higher_is_worse": true,
+     "mark": "max",
+     "legend": [
+      "少",
+      "多"
+     ],
+     "mark_label": "週一上午最塞",
+     "rows": [
+      {
+       "label": "上午",
+       "values": [
+        58,
+        41,
+        38,
+        36,
+        40,
+        22,
+        18
+       ]
+      },
+      {
+       "label": "下午",
+       "values": [
+        44,
+        39,
+        35,
+        34,
+        37,
+        25,
+        20
+       ]
+      },
+      {
+       "label": "晚上",
+       "values": [
+        21,
+        18,
+        17,
+        16,
+        19,
+        14,
+        12
+       ]
+      }
+     ]
+    },
+    {
+     "type": "issues",
+     "items": [
+      {
+       "icon": "circle-dollar-sign",
+       "problem": "AI 草稿在退款金額上仍會出錯",
+       "detail": "（每週約 4 件）",
+       "fix": "金額一律由專員確認後才送出"
+      },
+      {
+       "icon": "user-cog",
+       "problem": "資深專員採用率只有 52%",
+       "fix": "11 月起改由資深專員審核 AI 範本"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d",
+   "color": "gray",
+   "icon": "wrench",
+   "label": "做了什麼",
+   "lead": "三件事拉下回覆時間",
+   "blocks": [
+    {
+     "type": "waterfall",
+     "higher_is_better": false,
+     "unit": " 小時",
+     "start": {
+      "label": "改善前",
+      "value": 6.5
+     },
+     "steps": [
+      {
+       "label": "AI 先寫草稿",
+       "value": -2.4
+      },
+      {
+       "label": "自動分流",
+       "value": -1.0
+      },
+      {
+       "label": "常見問題範本",
+       "value": -0.8
+      },
+      {
+       "label": "旺季量增加",
+       "value": 0.3
+      }
+     ],
+     "end": {
+      "label": "改善後",
+      "value": 2.6
+     }
+    }
+   ]
+  },
+  {
+   "id": "e",
+   "color": "gray",
+   "icon": "chart-pie",
+   "label": "工作量怎麼分",
+   "lead": "近一半工單由 AI 起稿",
+   "blocks": [
+    {
+     "type": "stacked",
+     "percent": true,
+     "highlight": 0,
+     "series": [
+      "AI 起稿、專員確認",
+      "專員全手寫"
+     ],
+     "rows": [
+      {
+       "label": "試點前",
+       "values": [
+        0,
+        100
+       ]
+      },
+      {
+       "label": "第 4 週",
+       "values": [
+        31,
+        69
+       ]
+      },
+      {
+       "label": "第 8 週",
+       "values": [
+        46,
+        54
+       ]
+      }
+     ]
+    },
+    {
+     "type": "variance",
+     "title": "AI 草稿採用率 vs 目標 60%",
+     "higher_is_better": true,
+     "worse": "低於目標",
+     "better": "高於目標",
+     "baseline": "0 = 目標 60%",
+     "rows": [
+      {
+       "label": "新進專員",
+       "delta": 14,
+       "display": "+14 pt"
+      },
+      {
+       "label": "一般專員",
+       "delta": 10,
+       "display": "+10 pt"
+      },
+      {
+       "label": "資深專員",
+       "delta": -8,
+       "display": "−8 pt"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "f",
+   "color": "green",
+   "icon": "flag",
+   "label": "下一步",
+   "lead": "請核准 11 月擴大",
+   "blocks": [
+    {
+     "type": "flowsteps",
+     "items": [
+      {
+       "icon": "circle-check",
+       "title": "核准擴大到全部工單類型",
+       "sub": "營運副總・10/28 主管會議",
+       "owner": "副總"
+      },
+      {
+       "icon": "users",
+       "title": "資深專員審核 AI 範本",
+       "sub": "提升資深採用率到 60%",
+       "owner": "客服主管"
+      },
+      {
+       "icon": "calendar-check",
+       "title": "11/30 前全面上線",
+       "sub": "趕在 12 月旺季前",
+       "owner": "客服部"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "derived": [
+  {
+   "value": "−18%",
+   "formula": "(970-1180)/1180*100",
+   "from": [
+    "1180",
+    "970"
+   ]
+  },
+  {
+   "value": "210",
+   "formula": "1180-970",
+   "from": [
+    "1180",
+    "970"
+   ]
+  }
+ ]
+}

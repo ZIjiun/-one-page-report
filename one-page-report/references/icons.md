@@ -12,14 +12,16 @@ make the page look machine-made.
 - Borkin, Bylinskii et al., "Beyond Memorability: Visualization Recognition and Recall"
   (IEEE InfoVis 2015): pictograms used well do not hurt memorability and can improve recall;
   titles that state the takeaway matter most.
-- No emoji (they render differently on each system) and no brand logos (trademarks): these two
-  are house rules, not research findings.
+- No emoji (they render differently on each system) and no brand logos **as icons** (trademarks):
+  these two are house rules, not research findings. A product's own logo in the header, supplied
+  by the user, is imagery, not an icon (`references/imagery.md`).
 
 ## Decision steps
 
-1. **Is this a place where the reader sorts categories quickly?** Zone tabs, card tags,
-   category labels, list items, platform or role rows, timeline events. If it is a title, a big
-   number or body text: **no icon**.
+1. **Is this a place where the reader sorts categories quickly, or a node in a diagram?** Zone
+   tabs, card tags, category labels, list items, platform or role rows, timeline events, and the
+   nodes of a diagram (the house in "can you charge at home?", the car on a route, the battery in
+   a calculation). If it is a title, a big number or body text: **no icon**.
 2. **5-second rule.** No obvious icon within about five seconds → no icon.
 3. **Pick from the table below** (Lucide names; all bundled in `assets/icons.json`). Add new pairs to the
    table in your reply if you use one not listed.

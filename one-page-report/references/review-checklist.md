@@ -37,7 +37,11 @@ which remain); **one thing that works** (protect it).
 
 - [ ] Data date shown ("as of …")
 - [ ] Units on every number; tricky metrics defined ("Steam only")
-- [ ] Every number traces to the user's material or a named source (`review.py` lists each one)
+- [ ] Every number traces to the user's material or a named source (`review.py --source <files>`;
+      .xlsx .pptx .docx are read directly, export PDFs to text)
+- [ ] Every worked-out number is under `"derived"` with its formula and inputs, and recomputes
+- [ ] Totals add up (waterfall steps reach the end value; 100% rows add to 100)
+- [ ] Home or company mode respected: no blocked site worked around; missing items named
 - [ ] Estimates are labelled
 - [ ] One name per thing across the page
 - [ ] **zh and en versions: identical numbers, dates and names** (`review.py` compares them)
@@ -46,7 +50,12 @@ which remain); **one thing that works** (protect it).
 
 - [ ] Squint test: the most visible thing is the most important thing
 - [ ] Zones align to one grid; even gaps
-- [ ] ≤ 4 font sizes
+- [ ] Exactly 4 font sizes (46 / 34 / 18 / 14), diagrams included
+- [ ] Every zone: is its main element a picture of the relationship (diagram, chart, photo) where the
+      content has a shape? Text describing a flow, choice, route or calculation → draw it
+- [ ] Light / dark: built in the theme the user chose; dark-theme logo and photos checked
+- [ ] Imagery (if any): matches the content, never behind data, no sticker edges, credit in footer
+      (`references/imagery.md` self-check)
 - [ ] Readable in black-and-white print, at phone width, and projected
 - [ ] Text contrast ≥ 4.5:1 for body text; meaning never by colour alone
 - [ ] No text overlaps or overflows (`render.py` warns; also look at the PNG)
@@ -70,7 +79,10 @@ Flag and fix these:
 - Generic phrases with no number: "significantly improved", "robust", "seamless", "leverage",
   「大幅提升」「全面優化」「賦能」「打造」
 - Every item in threes with the same rhythm; every card the same length
-- Decorative icons or emoji; gradients and glow for no reason
+- Decorative icons or emoji; gradients and glow for no reason (theme imagery is allowed only under
+  `references/imagery.md`: it matches the content and stays out of the data)
+- Every zone the same shape (title + big number + small text) when the content has different shapes
+- A box around every item; many zone colours where three roles would do
 - Titles that are topics, not conclusions
 - Perfect symmetry where the content is not symmetric
 - Missing the specific: names, dates, units, the one awkward true detail
@@ -95,3 +107,4 @@ Flag and fix these:
 - Numbers set large and quiet; labels small and grey
 - Colours limited to the roles in `charts-and-color.md`
 - Consistent corner radius, line weight and icon size
+- Pictures carry the logic; text explains them; a photo is either edge to edge or not there
