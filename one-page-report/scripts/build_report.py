@@ -692,10 +692,14 @@ def build(spec, style):
     ctx = f'<div class="context">{rich(spec["background"])}</div>\n' if spec.get("background") else ""
     # zone headings: "tab" (default, a label on the frame line) or "label" (an underlined heading above the content)
     heading = spec.get("zone_heading", "tab")
-    if heading not in ("tab", "label"):
-        raise ValueError(f'zone_heading must be tab or label (got {heading!r})')
-    if heading == "label":
-        body_cls = (body_cls + " h-label").strip()
+    if heading not in ("tab", "label", "ribbon"):
+        raise ValueError(f'zone_heading must be tab, label or ribbon (got {heading!r})')
+    if heading != "tab":
+        body_cls = (body_cls + " h-" + heading).strip()
+    # an aside: one short remark to the reader (a tip or an opinion, not evidence), in a speech bubble
+    # beside the title. No frame of its own beyond the bubble, never over data. {"text", "icon"}
+    aside = spec.get("aside")
+    aside_html = (f'<div class="aside">{icon(aside.get("icon"))}<span>{rich(aside["text"])}</span></div>' if aside else "")
     # arrows between zones: [{"from": id, "to": id, "label": "..."}]; drawn after layout (LINKS_JS)
     ids = {z["id"] for z in spec["zones"]}
     links = []
@@ -725,7 +729,7 @@ def build(spec, style):
 <svg width="0" height="0" style="position:absolute"><filter id="wobble"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter></svg>
 {logo}{"".join(img)}<div class="wrap">
 <div class="kicker">{rich(m.get('kicker',''))}</div>
-<h1 class="title">{rich(spec['title'])}</h1>
+<div class="titlebox"><h1 class="title">{rich(spec['title'])}</h1>{aside_html}</div>
 {ctx}<div class="grid" style="grid-template-columns:{lay['columns']};grid-template-areas:{areas}">
 {''.join(zones)}
 </div>

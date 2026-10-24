@@ -47,6 +47,17 @@ b,strong{font-weight:700}
 .h-label .zone.f-open{padding-left:2px;padding-right:2px}
 /* arrows between zones (LINKS_JS) and the summary strip */
 .has-links .grid{column-gap:64px}
+/* zone headings as a ribbon: outlined banner with notched ends */
+.h-ribbon .tab{background:var(--paper);color:var(--zc);border:2px solid var(--zc);border-radius:2px;padding:2px 18px 3px;margin-left:10px}
+.h-ribbon .tab::before,.h-ribbon .tab::after{content:"";position:absolute;top:6px;width:12px;height:100%;background:var(--zc);opacity:.35;z-index:-1;clip-path:polygon(0 0,100% 0,100% 100%,0 100%,40% 50%)}
+.h-ribbon .tab::before{left:-12px}
+.h-ribbon .tab::after{right:-12px;transform:scaleX(-1)}
+.h-ribbon .tab i{color:var(--soft)}
+/* aside: a speech bubble beside the title */
+.titlebox{position:relative}
+.aside{position:absolute;right:8px;top:2px;max-width:330px;font-size:14px;line-height:1.5;color:var(--ink);background:var(--paper);border:2px dashed var(--c-green);border-radius:22px;padding:9px 16px;display:flex;gap:8px;align-items:flex-start;z-index:3}
+.aside::after{content:"";position:absolute;left:28px;bottom:-11px;width:16px;height:16px;background:var(--paper);border-right:2px dashed var(--c-green);border-bottom:2px dashed var(--c-green);transform:rotate(45deg)}
+.aside .ic{color:var(--c-green);margin-top:3px}
 .link-label{position:absolute;z-index:4;font-size:14px;line-height:1.3;font-weight:700;text-align:center;max-width:60px;padding:0}
 .summary{display:flex;align-items:center;flex-wrap:wrap;gap:8px 18px;margin-top:var(--zone-gap-y);padding:9px 18px;font-size:18px;color:var(--ink);border:var(--border-w) dashed var(--zc);border-radius:var(--radius);background:var(--zbg)}
 .summary.c-blue{--zc:var(--c-blue);--zbg:var(--bg-blue)} .summary.c-green{--zc:var(--c-green);--zbg:var(--bg-green)} .summary.c-gray{--zc:var(--c-gray);--zbg:var(--bg-gray)} .summary.c-purple{--zc:var(--c-purple);--zbg:var(--bg-purple)} .summary.c-orange{--zc:var(--c-orange);--zbg:var(--bg-orange)} .summary.c-teal{--zc:var(--c-teal);--zbg:var(--bg-teal)} .summary.c-red{--zc:var(--c-red);--zbg:var(--bg-red)}
