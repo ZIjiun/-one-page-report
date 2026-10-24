@@ -32,6 +32,27 @@ b,strong{font-weight:700}
 .tab i{font-style:normal;font-weight:400;opacity:.92;font-size:14px;letter-spacing:.03em}
 .lead{margin-top:3px;min-width:0;font-size:14px;color:var(--zc);background:var(--paper);padding:0 8px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .zone>.blocks{display:flex;flex-direction:column;gap:9px;height:100%}
+/* optional zone frames: dashed = look here; open = no frame, content sits on the page */
+.grid{position:relative}
+.zone.f-dashed::before{border-style:dashed;border-width:calc(var(--border-w) + 0.5px)}
+.zone.f-open{background:transparent}
+.zone.f-open::before{border-color:transparent}
+.zone.f-open .lead{background:transparent}
+/* optional zone headings: an underlined label above the content instead of a tab on the frame line */
+.h-label .zone{padding-top:12px}
+.h-label .zhead{position:static;margin:0 0 10px;padding:0;align-items:flex-end}
+.h-label .tab{background:transparent;color:var(--zc);border-radius:0;padding:0 2px 4px;border-bottom:3px solid var(--zc)}
+.h-label .tab i{color:var(--soft)}
+.h-label .lead{background:transparent;padding:0;margin:0 0 5px}
+.h-label .zone.f-open{padding-left:2px;padding-right:2px}
+/* arrows between zones (LINKS_JS) and the summary strip */
+.link-label{position:absolute;z-index:4;font-size:14px;font-weight:700;background:var(--paper);padding:0 6px;border-radius:6px;white-space:nowrap}
+.summary{display:flex;align-items:center;flex-wrap:wrap;gap:8px 18px;margin-top:var(--zone-gap-y);padding:9px 18px;font-size:18px;color:var(--ink);border:var(--border-w) dashed var(--zc);border-radius:var(--radius);background:var(--zbg)}
+.summary.c-blue{--zc:var(--c-blue);--zbg:var(--bg-blue)} .summary.c-green{--zc:var(--c-green);--zbg:var(--bg-green)} .summary.c-gray{--zc:var(--c-gray);--zbg:var(--bg-gray)} .summary.c-purple{--zc:var(--c-purple);--zbg:var(--bg-purple)} .summary.c-orange{--zc:var(--c-orange);--zbg:var(--bg-orange)} .summary.c-teal{--zc:var(--c-teal);--zbg:var(--bg-teal)} .summary.c-red{--zc:var(--c-red);--zbg:var(--bg-red)}
+.summary>.ic{color:var(--zc);width:1.3em;height:1.3em}
+.summary .s-ok{color:var(--good-text);margin-right:5px}
+.summary .s-eq{color:var(--soft)}
+.summary .s-res{font-weight:700;color:var(--zc)}
 
 /* icons */
 .ic{width:1.1em;height:1.1em;vertical-align:-0.18em;flex:none;display:inline-block}
@@ -150,9 +171,9 @@ svg.diagram .big{letter-spacing:-0.02em}
 .cards .cardphoto span{position:absolute;left:0;right:0;bottom:0;padding:22px 13px 8px;color:#fff;font-size:14px;font-weight:700;background:linear-gradient(to top,rgba(8,11,15,.75),rgba(8,11,15,0))}
 
 /* ---- spec lines: a quiet alternative to chip rows */
-.speclines{display:flex;flex-direction:column}
-.speclines div{display:flex;gap:14px;font-size:14px;line-height:1.5;color:var(--soft);border-top:1px solid var(--rule);padding:6px 0}
-.speclines .k{flex:none;min-width:52px;font-weight:700;color:var(--ink)} .speclines b{color:var(--hi-text)}
+.speclines{display:grid;grid-template-columns:max-content 1fr}
+.speclines div{display:grid;grid-column:1/-1;grid-template-columns:subgrid;column-gap:14px;font-size:14px;line-height:1.5;color:var(--soft);border-top:1px solid var(--rule);padding:6px 0}
+.speclines .k{flex:none;min-width:52px;font-weight:700;color:var(--ink)} .speclines .k .ic{color:var(--zc,var(--c-gray));margin-right:5px} .speclines b{color:var(--hi-text)}
 
 /* ---- header imagery (user-provided only) */
 .hero{position:absolute;pointer-events:none;background-repeat:no-repeat}

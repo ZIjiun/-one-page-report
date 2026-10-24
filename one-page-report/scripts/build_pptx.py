@@ -156,6 +156,7 @@ def native_pptx(spec, style, out, html_path):
     from pptx.enum.chart import XL_CHART_TYPE, XL_LABEL_POSITION
     from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
     from pptx.enum.shapes import MSO_SHAPE
+    from pptx.enum.dml import MSO_LINE
 
     from pptx.oxml.ns import qn
     data, pngs = measure(html_path)
@@ -188,6 +189,10 @@ def native_pptx(spec, style, out, html_path):
     for it in items:
         if it["kind"] != "box":
             continue
+        if it.get("under") and it["under"].get("c"):
+            u = it["under"]
+            bar = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, E(it["x"]), E(it["y"] + it["h"] - u["h"]), E(it["w"]), E(max(1, u["h"])))
+            bar.fill.solid(); bar.fill.fore_color.rgb = rgb(u["c"]); bar.line.fill.background(); bar.shadow.inherit = False
         if not it["fill"] and not it["line"]:
             continue
         shp_t = MSO_SHAPE.OVAL if it.get("circle") else (MSO_SHAPE.ROUNDED_RECTANGLE if it["round"] else MSO_SHAPE.RECTANGLE)
@@ -200,6 +205,8 @@ def native_pptx(spec, style, out, html_path):
             shp.fill.background()
         if it["line"]:
             shp.line.color.rgb = rgb(it["line"]); shp.line.width = Pt(max(0.5, it["lw"] * 0.75))
+            if it.get("dash"):
+                shp.line.dash_style = MSO_LINE.DASH
         else:
             shp.line.fill.background()
         shp.shadow.inherit = False
