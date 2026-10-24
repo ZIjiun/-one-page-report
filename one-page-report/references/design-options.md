@@ -45,8 +45,9 @@ already knows the story and it is only a short reminder.
 
 ## When a zone is shorter than its row (`"fit"` on a zone)
 
-A row is as tall as its tallest zone, so a short zone beside a tall one shows empty space. Do not
-fill it with invented content (core rule 3). Options, in order of preference:
+A row is as tall as its tallest zone, so a short zone beside a tall one shows empty space.
+`review.py --html` flags any zone whose content fills less than 70% of it. Do not fill it with
+invented content (core rule 3). Options, in order of preference:
 
 | Option | How | Watch for |
 |---|---|---|

@@ -66,7 +66,8 @@ which remain); **one thing that works** (protect it).
 - [ ] Design options (if used): one heading style; at most one dashed zone and one aside; open
       zones hold no evidence; arrows show real relations; the summary strip does not repeat the
       title (`references/design-options.md`, self-check)
-- [ ] No large empty space in a zone, and nothing invented to fill one
+- [ ] No large empty space in a zone (`review.py --html` flags under 70% filled), and nothing
+      invented to fill one
 
 ## D. Before handing over
 

@@ -15,6 +15,7 @@ Checks:
   bilingual numbers/dates in the zh and en specs must match (as multisets)
   meta      data date and sources present (company mode, the default: also version, author)
   options   design-option limits: one dashed zone, open zones hold no evidence, 4–6 zones, summary not the title
+  empty     with --html: zones whose content fills under 70% of them
   logic     title is not a bare topic; zones have leads; next steps have owners/dates or say so
   words     vague or "AI feel" phrases (zh and en lists)
   layout    with --html: renders in the browser and reports overlapping text and overflow
@@ -203,10 +204,15 @@ def layout_check(html):
       }
       const zones = [...document.querySelectorAll('.zone')].map(z => {
         const r = z.getBoundingClientRect(), inner = z.querySelector('.blocks');
-        return {zone: z.dataset.zone, overflow: inner.scrollHeight > inner.clientHeight + 4};
+        // how much of the zone the content fills (from the zone top to the bottom of its last element)
+        let bottom = r.top;
+        inner.querySelectorAll(':scope > *').forEach(c => { const b = c.getBoundingClientRect(); if (b.height > 0) bottom = Math.max(bottom, b.bottom); });
+        return {zone: z.dataset.zone, overflow: inner.scrollHeight > inner.clientHeight + 4,
+                fill: r.height > 0 ? (bottom - r.top) / r.height : 1, centered: z.classList.contains('fit-center') || z.classList.contains('fit-content')};
       });
       const leadsCut = [...document.querySelectorAll('.lead')].filter(e => e.scrollWidth > e.clientWidth + 1).map(e => e.closest('.zone').dataset.zone);
       return {overlaps: hits.slice(0, 12), zones_overflowing: zones.filter(z => z.overflow).map(z => z.zone), leads_cut: leadsCut,
+              zones_mostly_empty: zones.filter(z => !z.centered && z.fill < 0.7).map(z => z.zone + ' (' + Math.round(z.fill * 100) + '% filled)'),
               clipped: boxes.filter(b => b.over).map(b => b.t), page_height: document.body.scrollHeight};
     }"""
     with sync_playwright() as p:
@@ -279,7 +285,7 @@ def review(spec, other=None, html=None, sources=None):
     icons = collections.defaultdict(set)
     def collect(o, label=None):
         if isinstance(o, dict):
-            lab = o.get("label") or o.get("tag") or o.get("key") or o.get("problem") or (str(o["text"])[:16] if o.get("text") else None) or label
+            lab = o.get("label") or o.get("tag") or o.get("key") or o.get("problem") or label or (str(o.get("text") or o.get("lead") or "")[:16] or None)
             if o.get("icon"):
                 icons[o["icon"]].add(re.sub(r"[*=!^+]", "", str(lab)))
             for v in o.values():
@@ -353,6 +359,7 @@ def main():
         lay = r.get("layout") or {}
         if lay.get("overlaps"): flags.append(f"{len(lay['overlaps'])} text overlaps")
         if lay.get("zones_overflowing"): flags.append(f"zones overflowing {lay['zones_overflowing']}")
+        if lay.get("zones_mostly_empty"): flags.append(f"zones with large empty space {lay['zones_mostly_empty']}: see references/design-options.md (never invent content)")
         if lay.get("page_overflow"): flags.append("page overflows 1080px")
         if lay.get("leads_cut"): flags.append(f"leads cut with … {lay['leads_cut']}")
         print(f"[{r['lang']}] " + ("no automatic issues" if not flags else "; ".join(flags)), file=log)
