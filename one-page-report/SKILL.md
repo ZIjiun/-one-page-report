@@ -11,6 +11,14 @@ Make one 16:9 page that a busy reader understands in ten seconds, from the user'
 The page is the last step. Most of the value is in the thinking before it: who reads it, what
 they must decide, and the one sentence they should remember.
 
+**Tools, not templates.** The report types, skeletons, diagrams, charts and layouts in this skill
+are tools to pick from, not forms to fill in. The same rules must work for any subject: a project,
+a purchase, a plan, an incident. When the material needs something they do not cover (a mixed
+skeleton, a zone order of its own, a picture no block draws), plan the exception during the
+interview, write it into the requirement summary, and start only after the user says yes. The core
+rules below and the page rules (4–6 zones, 4 font sizes, colour roles, one offline file, Chinese
+and English) are not tools: they always hold.
+
 **Language rule.** Talk with the user in **Traditional Chinese** (interview, storyline check,
 requirement summary, design questions). The final report ships as **two sets with the same
 layout: Chinese and English**, unless the user asks for one language.
@@ -42,6 +50,10 @@ Ask once at the start, unless the user already said: "Is this for home use or fo
 | Finding images | official sites, press kits, store pages | only company-allowed sites or the intranet; otherwise ask the user for the files |
 | If a site cannot be reached | try another public official source | do not route around it: ask the user to attach the file or point to an intranet copy; if neither, go on without it and say what is missing |
 | Company material | stays in this conversation | stays in this conversation; never sent to another service |
+| Footer and decision words | sources and data date; the ask names who decides and when | sources, data date, version, author, confidentiality mark; approver and owner named separately |
+
+Record the answer as `"mode": "home"` or `"company"` in the spec's `meta`; `review.py` checks the
+footer fields that mode needs.
 
 The page itself always opens offline (fonts, icons and images are embedded), in both modes.
 
@@ -57,11 +69,11 @@ and screenshots (evidence photos, numbered marks). Read it before the storyline 
 |---|---|---|
 | 1 Situation | Ask the user to describe the situation in their own words (reader, occasion, what happened) | — |
 | 2 Report type | Propose a type and skeleton with one line of reasoning; the user may accept, switch, mix, or ask for a new one | `references/report-types.md` |
-| 3 Purpose | Interview per core rule 1, with the type's own questions. Give each question a recommended answer (from the material or the usual case), so the user can reply "as suggested" | `references/report-types.md` |
-| 4 Storyline | Read the material (`references/inputs.md`). Distil: messy input → 3 insights → one-sentence conclusion + 2–4 reasons. Proposal types use the decision-memo shape. **Show the storyline (in Chinese) and get a yes before any visual work** | `references/storyline.md` |
-| 5 Diagrams & charts | For each zone name the **shape of its information** (route, calculation, choice, yes/no, before→after, steps, numbers, dates, appearance, layout & size) and draw it: the picture carries the logic, text supports. A photo must show what its zone says, otherwise draw it. One highlight, rest grey; check colours. Show the zone → diagram plan with the storyline if it changes much | `references/diagrams.md`, `references/charts-and-color.md` |
-| 6 Layout | Zones = the reader's questions; position carries meaning; weight follows importance; each number appears once; exactly 4 font sizes | `references/layout.md` |
-| 7 Icons & imagery | Icons: sort categories fast or act as nodes in a diagram; 5-second rule; one concept = one icon; always with text. Imagery and theme colours only when they match the content and keep the squint test | `references/icons.md`, `references/imagery.md` |
+| 3 Purpose | Interview per core rule 1, with the type's own questions. Always ask **how much background the reader already has** (it sets how much context goes under the title). Give each question a recommended answer (from the material or the usual case), so the user can reply "as suggested" | `references/report-types.md` |
+| 4 Storyline | Read the material (`references/inputs.md`). Distil: messy input → 3 insights → one-sentence conclusion + 2–4 reasons. Proposal types use the decision-memo shape. Write the background line(s) for this reader. **Show the storyline (in Chinese) and get a yes before any visual work** | `references/storyline.md` |
+| 5 Diagrams & charts | For each zone name the **shape of its information** (route, calculation, choice, yes/no, before→after, steps, numbers, dates, appearance, layout & size) and draw it: the picture carries the logic, text supports. Each image gets a job (evidence, identification, mood, or a real thing a drawing cannot show) that decides where it goes. One highlight, rest grey; check colours. Show the zone → diagram plan with the storyline if it changes much | `references/diagrams.md`, `references/charts-and-color.md` |
+| 6 Layout | Zones = the reader's questions; position follows the order of those questions; background under the title; weight follows importance; each number appears once; exactly 4 font sizes | `references/layout.md` |
+| 7 Icons & imagery | Icons: sort categories fast or act as nodes in a diagram; 5-second rule; one concept = one icon; always with text. Imagery and theme colours only when they match the content and keep the squint test; place each image by its job | `references/icons.md`, `references/imagery.md` |
 | 8 Draft & choices | Build the Chinese version first, show it, list open design choices (core rule 2) | — |
 | 9 Output | Translate to English with the same spec structure; render both sets | below |
 | 10 Self-review | Run the full checklist; fix; report the result | `references/review-checklist.md` |
@@ -79,6 +91,9 @@ Ask once per report (unless the user already said), as one question with a recom
 - **Imagery — the user decides, always ask first.** Ask whether to use images at all (header
   image, logo, background, photos in zones), and if yes whether the user has official images or
   wants you to find them on official sources. Never add images the user did not agree to.
+  For each image, propose its job and placement in the interview (evidence → inside its zone;
+  identification → small, next to the name; mood → header or faint background), and let the
+  user decide (`references/imagery.md`).
   Show candidates side by side and let the user choose. If a chosen image does not suit the
   chosen theme (e.g. a white studio shot for a dark page), look for a different image that fits
   the theme, or drop it; do not force it — and tell the user which you did.
@@ -95,7 +110,8 @@ The report is written as a JSON spec (`references/spec-format.md`). Examples to 
 `examples/modely-demo.*.json` (product explainer: route, formula, progress, compare, decision, steps),
 `examples/improvement-demo.*.json` (improvement report: bullet, dumbbell, slope, waterfall, variance, stacked, heatmap, KPI tile),
 `examples/progress-demo.*.json` (progress), `examples/proposal-demo.*.json` (proposal). The demo materials they were made from are next to
-them (`*.material.md`, fictional data).
+them (`*.material.md`, fictional data). Each example shows one way to do it; copy the parts that
+fit the user's material, not the whole page.
 
 ```bash
 S=<this skill's folder>

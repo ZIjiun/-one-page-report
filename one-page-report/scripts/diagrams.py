@@ -69,8 +69,8 @@ def wrap(s, size, maxw, max_lines=2):
 _HALO = ["#fff"]
 
 LABELS = {
-    "zh": {"before": "改善前", "after": "改善後", "flat": "（持平）", "worse": "較差", "better": "較好", "left": "前", "right": "後",
-           "low": "低", "high": "高", "pick": "★ 最推", "yes": "是", "no": "否", "other": "其他／未分類", "sum": "合計"},
+    "zh": {"before": "之前", "after": "之後", "flat": "（持平）", "worse": "較差", "better": "較好", "left": "前", "right": "後",
+           "low": "低", "high": "高", "pick": "★ 建議", "yes": "是", "no": "否", "other": "其他／未分類", "sum": "合計"},
     "en": {"before": "Before", "after": "After", "flat": " (flat)", "worse": "Worse", "better": "Better", "left": "Before", "right": "After",
            "low": "Low", "high": "High", "pick": "★ Our pick", "yes": "Yes", "no": "No", "other": "Other / unknown", "sum": "Total"},
 }

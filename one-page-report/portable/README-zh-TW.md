@@ -19,7 +19,7 @@
 - `../references/review-checklist.md`（審稿清單）
 - `../references/diagrams.md`（哪種資訊畫哪種示意圖）
 - `../references/imagery.md`（圖片、主題配色、明暗主題）
-- `../examples/*.json`（四種報告的完整範例）
+- `../examples/*.json`（五組報告的完整範例，每組中英兩份）
 
 ## 和 Claude 完整版的差別
 

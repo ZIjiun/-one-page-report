@@ -5,19 +5,22 @@ Write one spec per language. Copy an example from `examples/` and change it.
 ```json
 {
   "lang": "zh-Hant",               // or "en"
-  "report_type": "results",        // results | progress | proposal | postmortem | comparison | custom
+  "report_type": "results",        // results | improvement | progress | proposal | postmortem | comparison | custom
+                                   // a label only; a mixed or new skeleton is "custom"
   "style": "handdrawn",            // default style; --style overrides
   "theme": "light",                // light | dark; --theme overrides
   "doc_title": "file title",
   "meta": {
+    "mode": "company",              // home | company (SKILL.md, "Where you work"); review.py checks the footer this mode needs
     "kicker": "small line above the title",
     "as_of": "資料統計至 2026/10 中",
     "version": "v1", "author": "name",
-    "confidential": "內部使用",      // optional, shown in red in the footer
+    "confidential": "內部使用",      // company: shown in red in the footer
     "sources": "sources and estimate notes",
     "image_credit": "圖片：… © …（only when images are used）"
   },
   "title": "one-sentence conclusion\nsecond line",
+  "background": "situation. problem.",   // optional; under the title at body size; see references/storyline.md
   "layout": {"columns": "2fr 1fr", "areas": ["a b", "c d", "e e"]},
   "hero": {"src": "img/keyart.jpg", "mode": "side", "dark": {"src": "img/keyart-night.jpg"}},   // optional; "dark": per-theme override or null; see references/imagery.md
   "logo": {"src": "img/logo.png", "src_dark": "img/logo-white.png", "h": 104},

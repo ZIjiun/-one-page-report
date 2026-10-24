@@ -37,9 +37,27 @@ Use this when the user gives notes, minutes, survey results, weekly reports or d
 - Reasons are **MECE**: they do not overlap, and together they prove the conclusion.
   If all reasons are true, the conclusion must be true.
 - Evidence sits **under its own reason**, not in a separate "data" section.
-- Background goes last, or nowhere. The reader rarely needs it.
+- The answer comes first; background never comes before it. See Step C.
 
-## Step C — Decision shape (proposals and anything that needs a yes)
+## Step C — Background: as much as this reader needs
+
+Background = why this report exists and what problem it solves (the situation and the
+complication). It sits **under the title**: the reader gets the answer first, then the reason the
+question came up. How much depends on what the reader already knows, so the interview asks it
+(`references/report-types.md`):
+
+| Reader | Background |
+|---|---|
+| Knows the story (the manager who assigned the work) | one line, or fold it into the kicker |
+| Does not know it (family, another team, a new manager, a client) | two sentences under the title: the situation, then the problem |
+| The background is the point (what happened in a post-mortem) | its own zone |
+
+- Background holds premises only: budget, how something is used, limits, what the reader wants.
+  Never the conclusion's numbers (each number appears once).
+- Facts in it follow core rule 3: only what the user gave or a source shows.
+- One or two sentences do not take a zone; they sit under the title at body size.
+
+## Step D — Decision shape (proposals and anything that needs a yes)
 
 - Title names the **decision**, not the topic ("Move to Linear by 5/30").
 - Complication carries the number that makes it urgent.
@@ -48,7 +66,8 @@ Use this when the user gives notes, minutes, survey results, weekly reports or d
 - Recommendation: the chosen option and the evidence that tips it.
 - Cost in the title = what the reader commits to: one-off **and** recurring (e.g. "60 萬導入＋每年
   180 萬授權"). Never show only the smaller number.
-- Name the **approver** (who says yes) and the **owner** (who executes) separately.
+- At the company, name the **approver** (who says yes) and the **owner** (who executes)
+  separately. At home, say who decides and by when.
 - Top 3 risks, each with a one-line mitigation.
 - **The ask: one line, yes/no, owner, date.** Never "let's discuss".
 
@@ -58,6 +77,7 @@ Show the user, in Chinese:
 
 ```
 標題（一句結論）：……
+背景（標題下方，讀者已知多少：……）：……
 理由 1：…… 證據：……
 理由 2：…… 證據：……
 理由 3：…… 證據：……

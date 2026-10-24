@@ -633,6 +633,7 @@ def build(spec, style):
         data = base64.b64encode(open(style["logo"], "rb").read()).decode()
         logo = f'<img class="logo" src="data:image/{ext};base64,{data}" style="position:absolute;top:14px;right:36px;height:34px" alt="">'
     html_lang = "zh-Hant" if lang == "zh" else "en"
+    ctx = f'<div class="context">{rich(spec["background"])}</div>\n' if spec.get("background") else ""
     return f"""<!doctype html>
 <html lang="{html_lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=1920">
 <title>{esc(re.sub(r'[*=!^]', '', spec.get('doc_title') or spec['title'])[:80])}</title>
@@ -644,7 +645,7 @@ def build(spec, style):
 {logo}{"".join(img)}<div class="wrap">
 <div class="kicker">{rich(m.get('kicker',''))}</div>
 <h1 class="title">{rich(spec['title'])}</h1>
-<div class="grid" style="grid-template-columns:{lay['columns']};grid-template-areas:{areas}">
+{ctx}<div class="grid" style="grid-template-columns:{lay['columns']};grid-template-areas:{areas}">
 {''.join(zones)}
 </div>
 <div class="foot-meta"><span>{' '.join(left)}</span><span>{right}</span></div>

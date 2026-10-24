@@ -13,7 +13,7 @@ Checks:
             numbers worked out from the material: the formula is recomputed and must match
             the value (to its shown precision); its inputs must be in the sources
   bilingual numbers/dates in the zh and en specs must match (as multisets)
-  meta      data date, version, author, sources present
+  meta      data date and sources present (company mode, the default: also version, author)
   logic     title is not a bare topic; zones have leads; next steps have owners/dates or say so
   words     vague or "AI feel" phrases (zh and en lists)
   layout    with --html: renders in the browser and reports overlapping text and overflow
@@ -227,7 +227,9 @@ def layout_check(html):
 def review(spec, other=None, html=None, sources=None):
     rep = {"lang": spec.get("lang")}
     meta = spec.get("meta", {})
-    rep["meta_missing"] = [k for k in ("as_of", "version", "author", "sources") if not meta.get(k)]
+    # home reports need only sources and the data date; company reports (the default) also version and author
+    need = ("as_of", "sources") if str(meta.get("mode", "")).lower() == "home" else ("as_of", "version", "author", "sources")
+    rep["meta_missing"] = [k for k in need if not meta.get(k)]
     title = re.sub(r"[*=!^+]", "", spec.get("title", ""))
     rep["title_is_topic"] = len(title) < 18 and any(w in title.lower() for w in TOPIC_TITLES)
     def width(t):

@@ -53,18 +53,32 @@ colour of the chosen theme (`--surface`, `--mode dark` for dark).
 
 Match the era: a report about a remaster uses the remaster's key art and colours, not the original's.
 
-## An image must show what its zone says
+## An image's job decides where it goes
 
-Before placing a photo, say in one line what the zone claims, then ask: does this picture show
-that? A lifestyle shot (a family walking, a car on a coast road) in a zone about seats and boot
-size shows none of it, and reads as decoration (圖文不符). Then, in order:
+Before placing any image, say in one line what it does on this page. The job decides the place.
+In the interview, propose the job and place of each image with a recommendation; the user decides
+(core rule 2). "No image" is always a fine answer.
 
-1. Find an official image that shows the claim (the open boot, the third row, the charging port).
-2. If there is none, **draw it** with a diagram (`seatmap`, `route`, `transform`…) — drawn from
-   real dimensions and numbers, never an imitation of the product's design.
-3. Keep the mood pictures for the header (`hero` band) or the background, where they set the scene
-   and do not pretend to be evidence. Two options can share one band: place the two official
-   photos side by side with a soft blend, and label "left / right" in the kicker.
+| Job | Ask | Typical content | Where it goes |
+|---|---|---|---|
+| **Evidence** | Does the picture itself prove this zone's claim? | a screen, damage, before / after, the real object | inside that zone, edge to edge (`photo`, card `photo`); numbered marks to point at parts |
+| **Identification** | Does the reader need to know *which* thing we mean? | a product, an option, a person, a place | small, next to its name: a card `photo` strip on that option's card, or one shared header band labelled left / right; never larger than the data |
+| **Mood** | Does it only set the scene, with no information? | key art, a landscape, a brand look (games, brands, travel) | header (`hero`) or a faint `backdrop`; never behind numbers |
+| **A real thing a drawing cannot show** | Is a photo faster to read than any diagram? | a site, a design detail, a colour or material | treat it as evidence or identification, depending on the zone's claim |
+
+A lifestyle shot (a family walking, a car on a coast road) is mood, not evidence: in a zone about
+seats or boot size it shows none of the claim and reads as decoration (圖文不符). Move it to the
+header, or leave it out.
+
+### When to draw instead
+
+Drawn means a diagram built from real numbers and dimensions, never an imitation of a product's design.
+
+| Situation | Do |
+|---|---|
+| The point is structure, size, quantity, a flow or a relationship that a photo cannot show | draw it (`references/diagrams.md`; size and layout of a vehicle: `seatmap`) |
+| No image shows what the zone says | draw it, or use no image |
+| The image does not suit the topic or the theme (a white studio shot on a dark page) | find another official image; if there is none, draw it or leave it out |
 
 ## Where images go
 
@@ -75,7 +89,8 @@ size shows none of it, and reads as decoration (圖文不符). Then, in order:
 | Header, full width behind the title | a calm landscape; the title gets a soft shade | `"hero": {"src", "mode": "band", "h", "opacity"}` |
 | Top-left logo | product or brand logo (user-provided) | `"logo": {"src", "src_dark", "h"}` |
 | Page background, faint | the key art's own background (mist, texture) | `"backdrop": {"src", "opacity"}` |
-| Inside a zone, edge to edge | a photo that is evidence (the open trunk, the new screen) | `photo` block / card `photo` |
+| Inside a zone, edge to edge | evidence (the open trunk, the new screen) | `photo` block / card `photo` |
+| Card strip, under one option's name | identification (which product or option this card is about) | card `photo` |
 
 Rules:
 
@@ -112,6 +127,7 @@ ask the user to attach the image or point to an intranet copy, or go on without 
 ## Self-check
 
 - [ ] Squint test passes with the images on: title first, then the zone conclusions
+- [ ] Every image has a job (evidence, identification, mood) and sits where that job puts it
 - [ ] Every image matches the content (right product, right version, right era)
 - [ ] No image behind data; no visible image edges; no framed thumbnails
 - [ ] Characters and products recognisable where they appear

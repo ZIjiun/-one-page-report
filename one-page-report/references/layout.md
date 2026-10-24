@@ -6,17 +6,31 @@
 - Top: a short kicker line (report type | project | owner), then the **title = one-sentence
   conclusion** (one or two lines). Mark the key phrase: `^^marker^^`, good news `==green==`,
   the problem or ask `!!red!!`.
-- Body: 4–6 zones on a grid. Footer: sources, estimates note, data date, version, author,
-  confidentiality mark.
+- Under the title, the **background** when the reader needs it (`references/storyline.md`): one
+  line to two sentences at body size (spec `"background"`). It is not a zone.
+- Body: 4–6 zones on a grid. Footer: sources, estimates note, data date; at the company also
+  version, author and confidentiality mark (SKILL.md, "Where you work").
 
 ## Zones = the reader's questions
 
-Each zone has a coloured tab with an icon and a short label, and at the right a **lead line
+Each zone has a coloured tab with an icon or a number (core rule 2: the user picks) and a short
+label, and at the right a **lead line
 with the zone's conclusion**. Add the reader's question ("Results — was it worth it?") only
 where it helps; a question on every tab reads like a template.
 Reading only the tabs and leads should tell the whole story (horizontal logic).
 
-## Position carries meaning
+## Position follows the reader's questions
+
+The reader goes top-left first, then right, then down. Put the zones in the order the reader asks
+their questions. The grid below is **one arrangement, for a results report**; other reports ask in
+another order:
+
+- Comparison: the options on the same criteria (largest) → the recommendation and the one
+  trade-off that decides it.
+- Proposal: problem → options → recommendation and cost → the ask (last, often full width).
+- Post-mortem: what happened (time order) → impact → root cause → fixes and prevention.
+
+Results report example:
 
 ```
 ┌───────────────────────┬────────────┐
@@ -31,8 +45,8 @@ Reading only the tabs and leads should tell the whole story (horizontal logic).
 ```
 
 Spec: `"layout": {"columns": "2fr 1fr", "areas": ["outcome problems", "method next", "timeline timeline"]}`.
-Other grids are fine (e.g. 3 columns for a comparison). Keep the order of reading = the order
-of the reader's questions.
+Other grids are fine (e.g. 3 columns for a comparison). If no arrangement here fits, plan one in
+the interview and include it in the requirement summary.
 
 ## Weight follows importance
 
