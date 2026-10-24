@@ -15,7 +15,7 @@
   const zoomOf = (el) => { let z = 1, e = el; while (e && e.nodeType === 1) { const v = parseFloat(getComputedStyle(e).zoom); if (v) z *= v; e = e.parentElement; } return z; };
 
   // 1. boxes: zones, cards, tabs, chips, issues, steps, notes, table cells
-  const boxSel = '.zone, .card, .tab, .chip, .cat .k, .callout, .steps li, .steps li .n, .st, .summary';
+  const boxSel = '.zone, .card, .tab, .tab .zn, .chip, .cat .k, .callout, .steps li, .steps li .n, .st, .summary, .aside';
   document.querySelectorAll(boxSel).forEach((el) => {
     const cs = getComputedStyle(el), r = rect(el);
     if (r.w < 2 || r.h < 2) return;

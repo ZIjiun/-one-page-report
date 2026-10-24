@@ -50,14 +50,18 @@ enterprise-ai-skills, MIT): the title is the recommendation, the background zone
 Write it as a `speclines` block, one row per item, each with an icon (`references/icons.md`). Use
 only the rows the material supports; never fill a row by guessing (core rule 3).
 
-| Row | Says | Example |
+| Row | Says | Examples (a work report / a personal choice) |
 |---|---|---|
-| Situation (現況) | where things stand now, with the baseline numbers | current car, budget, how often it is used |
-| Change (變化) | what changed and why it matters now; the cost of doing nothing | a child is coming; the old car needs more repairs |
-| Decision (要決定) | the specific question the reader must answer, and by when | pick one of two cars by the end of next month |
-| Limits (限制) | what cannot move: rules, budget, time, space | no home charger; narrow parking |
-| Who (誰參與) | who decides, who is affected, who may object (company mode; adapted from stakeholder-map) | the two of you decide; parents ride often |
-| Ruled out (排除過) | options already dropped and why | Model Y: same charging problem |
+| Situation (現況) | where things stand now, with the baseline numbers | first reply takes 6.5 h on average / the current laptop is 7 years old |
+| Change (變化) | what changed and why it matters now; the cost of doing nothing | ticket volume up 30% before peak season / starting a design course that needs more power |
+| Decision (要決定) | the specific question the reader must answer, and by when | approve the rollout by 10/28 / pick one of two models this month |
+| Limits (限制) | what cannot move: rules, budget, time, space | no new headcount / budget under a set amount |
+| Who (誰參與) | who decides, who is affected, who may object (always at the company; adapted from stakeholder-map) | VP Ops approves, team leads run it, senior agents may push back / decided together with the family |
+| Ruled out (排除過) | options already dropped and why | outsourcing: data cannot leave the company / a tablet: the software does not run on it |
+
+Suggested icons (`references/icons.md`; they avoid the icons used for status, goal and the ask, so
+a page can carry both): background `book-open`, situation `compass`, change `refresh-cw`, decision
+`circle-help`, limits `ban`, who `handshake`, ruled out `circle-x`.
 
 Keep "change" and "decision" apart: the change is what happened, the decision is what the reader
 must now answer.

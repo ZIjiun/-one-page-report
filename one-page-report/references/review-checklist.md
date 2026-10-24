@@ -30,8 +30,9 @@ which remain); **one thing that works** (protect it).
 - [ ] Horizontal reading: tabs + leads + title alone tell the story
 - [ ] Vertical reading: every zone's content proves its lead; nothing off-topic
 - [ ] 30-second test: you can say the whole page in 30 seconds
-- [ ] Background fits the reader: a reader who does not know the story learns why the report
-      exists from the lines under the title; no conclusion numbers in it
+- [ ] Background fits the reader: a reader who does not know the story learns from the background
+      zone why the report exists, what changed and what must be decided; no conclusion numbers in it;
+      no row filled by guessing
 - [ ] No orphan numbers: each says what it means and vs what
 - [ ] Next steps say who, what, by when (or say "date not set")
 
@@ -62,6 +63,10 @@ which remain); **one thing that works** (protect it).
 - [ ] Text contrast ≥ 4.5:1 for body text; meaning never by colour alone
 - [ ] No text overlaps or overflows (`render.py` warns; also look at the PNG)
 - [ ] Icons: one concept = one icon; all with text; none decorative
+- [ ] Design options (if used): one heading style; at most one dashed zone and one aside; open
+      zones hold no evidence; arrows show real relations; the summary strip does not repeat the
+      title (`references/design-options.md`, self-check)
+- [ ] No large empty space in a zone, and nothing invented to fill one
 
 ## D. Before handing over
 

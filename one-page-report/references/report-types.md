@@ -154,7 +154,7 @@ column; state the one trade-off that decides it.
 
 Name each option so the reader can tell which thing is meant (a short label in the column
 header or card title is usually enough). Why the reader is choosing at all (budget, how it will be
-used, limits) is background and goes under the title (`references/storyline.md`). How to show the
+used, limits) is background and goes in the background zone (`references/storyline.md`). How to show the
 options depends on what decides the choice: a table for several criteria, `compare` for one
 question, a chart for numbers, a drawing for size or layout (`references/diagrams.md`).
 

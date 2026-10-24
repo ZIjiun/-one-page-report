@@ -14,6 +14,7 @@ Checks:
             the value (to its shown precision); its inputs must be in the sources
   bilingual numbers/dates in the zh and en specs must match (as multisets)
   meta      data date and sources present (company mode, the default: also version, author)
+  options   design-option limits: one dashed zone, open zones hold no evidence, 4–6 zones, summary not the title
   logic     title is not a bare topic; zones have leads; next steps have owners/dates or say so
   words     vague or "AI feel" phrases (zh and en lists)
   layout    with --html: renders in the browser and reports overlapping text and overflow
@@ -247,12 +248,38 @@ def review(spec, other=None, html=None, sources=None):
                     if not (it.get("owner") or it.get("due") or re.search(r"\d|未公布|TBA|TBD|未定|not set", json.dumps(it, ensure_ascii=False))):
                         steps_no_owner.append(it["title"])
     rep["steps_without_owner_or_date"] = steps_no_owner
+    # design options (references/design-options.md): limits that keep them tools, not decoration
+    opt = []
+    if sum(1 for z in spec["zones"] if z.get("frame") == "dashed") > 1:
+        opt.append("more than one dashed zone (keep it for the one zone the reader must act on)")
+    for z in spec["zones"]:
+        def kinds(o):   # block types anywhere inside a zone (columns, cards)
+            if isinstance(o, dict):
+                yield from ([o["type"]] if "type" in o else [])
+                if o.get("chart"): yield "chart"
+                for v in o.values(): yield from kinds(v)
+            elif isinstance(o, list):
+                for v in o: yield from kinds(v)
+        evidence = {"chart", "bullet", "dumbbell", "slope", "waterfall", "variance", "stacked", "heatmap", "gauge", "stattile", "stat", "table"}
+        if z.get("frame") == "open" and evidence & set(kinds(z.get("blocks", []))):
+            opt.append(f"zone {z['id']} has no frame but holds evidence (charts or numbers); give it a frame")
+    if len(spec.get("links", [])) > 3:
+        opt.append("more than 3 arrows between zones")
+    sm = spec.get("summary") or {}
+    plain = lambda t: re.sub(r"[*=!^+\s，,。.;；：:]", "", t or "")
+    if sm and plain(sm.get("lead") or sm.get("text")) and plain(sm.get("lead") or sm.get("text")) in plain(spec.get("title", "")):
+        opt.append("the summary strip repeats the title")
+    if spec.get("aside") and re.search(r"\d", spec["aside"].get("text", "")):
+        opt.append("the aside holds a number: evidence belongs in a zone")
+    if len(spec["zones"]) > 6 or len(spec["zones"]) < 4:
+        opt.append(f"{len(spec['zones'])} zones (keep 4–6, background zone included)")
+    rep["design_options"] = opt
     text = " ".join(t for _, t in walk(spec)).lower()
     rep["vague_words"] = sorted({w for w in VAGUE if w.lower() in text})
     icons = collections.defaultdict(set)
     def collect(o, label=None):
         if isinstance(o, dict):
-            lab = o.get("label") or o.get("tag") or o.get("key") or o.get("problem") or label
+            lab = o.get("label") or o.get("tag") or o.get("key") or o.get("problem") or (str(o["text"])[:16] if o.get("text") else None) or label
             if o.get("icon"):
                 icons[o["icon"]].add(re.sub(r"[*=!^+]", "", str(lab)))
             for v in o.values():
@@ -312,6 +339,7 @@ def main():
     for r in out:
         flags = []
         if r["meta_missing"]: flags.append(f"meta missing {r['meta_missing']}")
+        if r.get("design_options"): flags.append("design options: " + "; ".join(r["design_options"]))
         if r["title_is_topic"]: flags.append("title reads like a topic")
         if r["zones_without_lead"]: flags.append(f"zones without lead {r['zones_without_lead']}")
         if r.get("leads_too_long") and not r.get("layout"): flags.append(f"leads may be too long (run with --html to measure) {r['leads_too_long']}")

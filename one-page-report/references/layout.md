@@ -6,16 +6,16 @@
 - Top: a short kicker line (report type | project | owner), then the **title = one-sentence
   conclusion** (one or two lines). Mark the key phrase: `^^marker^^`, good news `==green==`,
   the problem or ask `!!red!!`.
-- Under the title, the **background** when the reader needs it (`references/storyline.md`): one
-  line to two sentences at body size (spec `"background"`). It is not a zone.
-- Body: 4–6 zones on a grid. Footer: sources, estimates note, data date; at the company also
+- The **background** gets its own zone, first after the title (`references/storyline.md`, Step C).
+  When the reader knows the story, it shrinks to one line under the title (spec `"background"`).
+- Body: 4–6 zones on a grid, the background zone included. Footer: sources, estimates note, data date; at the company also
   version, author and confidentiality mark (SKILL.md, "Where you work").
 
 ## Zones = the reader's questions
 
-Each zone has a coloured tab with an icon or a number (core rule 2: the user picks) and a short
-label, and at the right a **lead line
-with the zone's conclusion**. Add the reader's question ("Results — was it worth it?") only
+Each zone has a heading (a tab on the frame by default; numbered, bar, underlined label or ribbon
+are options, `references/design-options.md`) with an icon or a number and a short label, and at the
+right a **lead line with the zone's conclusion**. Add the reader's question ("Results — was it worth it?") only
 where it helps; a question on every tab reads like a template.
 Reading only the tabs and leads should tell the whole story (horizontal logic).
 
@@ -45,8 +45,11 @@ Results report example:
 ```
 
 Spec: `"layout": {"columns": "2fr 1fr", "areas": ["outcome problems", "method next", "timeline timeline"]}`.
-Other grids are fine (e.g. 3 columns for a comparison). If no arrangement here fits, plan one in
-the interview and include it in the requirement summary.
+Other grids are fine (e.g. 3 columns for a comparison, or a finer 6-column bento grid where zones
+take different sizes). If no arrangement here fits, plan one in the interview and include it in the
+requirement summary. Layout styles, frames, arrows between zones, a summary strip and what to do
+with empty space or too many zones: `references/design-options.md`. Every one of them is offered
+with a recommendation, tried on the page first, and chosen by the user (core rule 2).
 
 ## Weight follows importance
 
@@ -82,7 +85,8 @@ The reader never has to match a number to a claim across the page.
   so a short page does not leave a blank strip; if `render.py` says the content is thin, the
   zones were stretched: add evidence or use fewer zones.
 - A zone spanning two rows next to a short zone gets tall. Fill it with evidence (a chart, a
-  table) or rearrange the grid so zones of similar length share a row.
+  table) or rearrange the grid so zones of similar length share a row. Never invent content to fill
+  space; the options for a zone shorter than its row are in `references/design-options.md`.
 - Prefer white space over squeezing. One page holds about 250–450 Chinese characters of body
   text, or 180–320 English words.
 

@@ -26,8 +26,9 @@ Screenshot with numbered marks: [docs/samples/screenshot-marks.png](docs/samples
 2. **Reads your material**: meeting notes, Excel / CSV data (numbers computed in code, every
    worked-out figure recorded), existing decks and documents, a spoken summary, screenshots.
 3. Picks a **skeleton**: results, improvement, progress, proposal, post-mortem, comparison.
-4. **Distils a storyline**: one-sentence conclusion, the background this reader needs (under the
-   title), 2–4 reasons, evidence under each. You confirm it before any design.
+4. **Distils a storyline**: one-sentence conclusion, a background zone that says what is going on,
+   what changed and what must be decided, 2–4 reasons, evidence under each. You confirm it before
+   any design.
 5. Names each zone's **shape of information** and draws it: route, calculation, choice, yes/no,
    before → after, steps — and report charts for results and improvement: KPI tile with sparkline,
    bullet (actual vs target vs before), dumbbell, slope, waterfall, variance, stacked, heatmap.
@@ -36,6 +37,8 @@ Screenshot with numbered marks: [docs/samples/screenshot-marks.png](docs/samples
    replaced or dropped, never forced.
 7. Lays out **zones by the reader's questions** with exactly 4 font sizes, builds both languages,
    renders all formats.
+   Design options are offered with a recommendation and tried first: heading styles, frames,
+   bento layout, arrows between zones, a summary strip, a speech-bubble aside.
 8. **Self-reviews**: logic, every number traced to your files (.csv .xlsx .pptx .docx read directly)
    and every calculation recomputed, totals that must add up, zh/en match, overlap and overflow,
    "AI feel", and a stranger test.
@@ -76,7 +79,7 @@ opens offline.
 | Path | What |
 |---|---|
 | `one-page-report/SKILL.md` | The skill (start here) |
-| `one-page-report/references/` | Method: report types, storyline, inputs, diagrams & report charts, charts & colour, imagery & themes, layout, icons, review, spec format, brand style |
+| `one-page-report/references/` | Method: report types, storyline, inputs, diagrams & report charts, charts & colour, imagery & themes, layout, design options, icons, review, spec format, brand style |
 | `one-page-report/scripts/` | `build_report.py`, `diagrams.py`, `render.py`, `build_pptx.py`, `review.py`, `check_colors.py`, `extract_brand.py` |
 | `one-page-report/assets/` | Styles (hand-drawn, business, brand template — each light and dark), 173 Lucide icons, fonts |
 | `one-page-report/examples/` | Complete specs (zh + en): improvement, results, product explainer, progress, proposal |
