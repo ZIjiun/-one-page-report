@@ -15,7 +15,7 @@
   const zoomOf = (el) => { let z = 1, e = el; while (e && e.nodeType === 1) { const v = parseFloat(getComputedStyle(e).zoom); if (v) z *= v; e = e.parentElement; } return z; };
 
   // 1. boxes: zones, cards, tabs, chips, issues, steps, notes, table cells
-  const boxSel = '.zone, .card, .tab, .chip, .cat .k, .callout, .steps li, .steps li .n, .st';
+  const boxSel = '.zone, .card, .tab, .tab .zn, .chip, .cat .k, .callout, .steps li, .steps li .n, .st, .summary, .aside';
   document.querySelectorAll(boxSel).forEach((el) => {
     const cs = getComputedStyle(el), r = rect(el);
     if (r.w < 2 || r.h < 2) return;
@@ -23,14 +23,19 @@
     const ring = cs.boxShadow && cs.boxShadow.match(/rgba?\([^)]+\)/);
     if (cs.borderTopStyle !== 'none' && px(cs.borderTopWidth) > 0) { line = color(cs.borderTopColor); lw = px(cs.borderTopWidth); }
     else if (ring) { line = color(ring[0]); lw = 1.5; }
+    let dash = cs.borderTopStyle === 'dashed';
     if (el.classList.contains('zone')) {
       const b = getComputedStyle(el, '::before'); line = color(b.borderTopColor); lw = px(b.borderTopWidth) * zoomOf(el);
+      dash = b.borderTopStyle === 'dashed';
     }
+    // an underlined label heading: draw its underline as a thin bar under the text
+    let under = null;
+    if (!line && cs.borderBottomStyle !== 'none' && px(cs.borderBottomWidth) > 0) under = { c: color(cs.borderBottomColor), h: px(cs.borderBottomWidth) * zoomOf(el) };
     let accent = null;
     if (px(cs.borderLeftWidth) >= 3 && cs.borderLeftStyle !== 'none') accent = color(cs.borderLeftColor);
     const round = px(cs.borderTopLeftRadius) > 0 || el.classList.contains('zone');
     out.push({ kind: 'box', cls: el.className.toString().split(' ')[0], ...r, fill, line, lw, round, accent,
-               circle: el.classList.contains('n') });
+               circle: el.classList.contains('n'), dash, under });
   });
 
   // 2. text: collect styled fragments per text node and visual line, then merge fragments

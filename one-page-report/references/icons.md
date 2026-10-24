@@ -83,6 +83,14 @@ make the page look machine-made.
 | 延遲 late | `clock` (+ red text) |
 | 想法 idea | `lightbulb` |
 | 流程 process | `workflow` |
+| 背景 background | `book-open` |
+| 現況 situation | `compass` |
+| 變化 change | `refresh-cw` |
+| 要決定 the decision to make | `circle-help` |
+| 限制 limits | `ban` |
+| 誰參與 who decides / is affected | `handshake` |
+| 排除過 ruled out | `circle-x` |
+| 下一步清單 action list (summary strip) | `list-checks` |
 
 ## Placement in the spec
 

@@ -6,13 +6,19 @@ skeleton. A skeleton is an order of zones; each zone answers one reader question
 questions and picture tables below are starting points, not forms (SKILL.md, "Tools, not
 templates").
 
+The skeletons list the zones **after** the background zone. With the background in its own zone,
+a skeleton of five becomes six; if it would pass six, merge as `references/layout.md` describes.
+Some zones overlap the background and fold into it: a proposal's "Problem", a post-mortem's
+"What happened" (its timeline can sit inside the background zone).
+
 ## Universal questions (ask only what the material does not answer)
 
 Ask one at a time, most important first:
 
 1. Who reads it? (boss, senior management, client, cross-team, whole company, family)
-2. How much background does the reader already have? (knows the story / knows nothing / the
-   background is the point) → how much context goes under the title (`references/storyline.md`)
+2. How much background does the reader already have? Suggested answer: "not much: give it its own
+   zone". If the reader knows the story, the background shrinks to one line. Then ask the
+   background questions below.
 3. After reading, what should they do? (approve, choose, support, just know)
 4. If they read for ten seconds, what one sentence must they remember?
 5. What must not be touched? (confidential numbers, names, wording, brand rules)
@@ -22,6 +28,24 @@ Ask one at a time, most important first:
 
 Stop asking when you know what they want, what must not be touched, and how they judge
 success. Then restate everything and wait for a yes.
+
+## Background questions (ask until the background zone can be written)
+
+Thin background usually means the interview did not ask enough. Ask these one at a time, each with
+a suggested answer drawn from the material, skipping what the material already says. Each answer
+fills one row of the background zone (`references/storyline.md`, Step C).
+
+| Row | Ask |
+|---|---|
+| Situation | Where do things stand now? What is the baseline (numbers, current way of working, current product)? |
+| Change | What changed recently? Why does this need settling now? What happens if nothing is done? |
+| Decision | What exactly must the reader decide or know, and by when? Is "neither" or "later" an option? |
+| Limits | What cannot move (budget, rules, time, space, people)? |
+| Who | Who decides, who is affected, who might object, and what does each care about? (always at the company; at home only if others are involved) |
+| Ruled out | What was considered and dropped, and why? |
+
+The change and the decision are different questions: the change is what happened, the decision is
+what the reader must now answer. If an answer is a guess, label it in the report or leave the row out.
 
 ## 1. Results report (project finished) — reader asks "was it worth it?"
 
@@ -130,7 +154,7 @@ column; state the one trade-off that decides it.
 
 Name each option so the reader can tell which thing is meant (a short label in the column
 header or card title is usually enough). Why the reader is choosing at all (budget, how it will be
-used, limits) is background and goes under the title (`references/storyline.md`). How to show the
+used, limits) is background and goes in the background zone (`references/storyline.md`). How to show the
 options depends on what decides the choice: a table for several criteria, `compare` for one
 question, a chart for numbers, a drawing for size or layout (`references/diagrams.md`).
 
@@ -138,4 +162,11 @@ question, a chart for numbers, a drawing for size or layout (`references/diagram
 
 - Mixing is fine: e.g. a progress report with one proposal zone at the end ("we need X").
 - For a new skeleton, write the 3–6 reader questions in order, then give each a zone.
-- Keep 4–6 zones. More than 6 means the page is two pages.
+- Two well-known shapes to borrow from (references, not templates):
+  - **A3 report** (Toyota problem solving): the page splits in two. Left: background → current
+    condition → goal → root cause. Right: countermeasures → plan → follow-up. Good for improvement
+    and problem-solving reports where the background matters.
+  - **SCQA / SCPR** (pyramid principle): situation and complication go in the background zone,
+    the question is the decision row, the answer or recommendation is the title.
+- Keep 4–6 zones, the background zone included. More than 6 means the page is two pages; see
+  `references/layout.md` ("When the zones do not fit") for the ways to merge, offered to the user.

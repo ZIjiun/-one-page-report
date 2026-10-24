@@ -1,6 +1,6 @@
 # 通用版：給 ChatGPT、Copilot、Gemini、公司自建 AI 使用
 
-`one-page-report-instructions.md` 是同一套方法的**單一指令檔**（約 7,600 字元，在多數平台 8,000 字的限制內）。
+`one-page-report-instructions.md` 是同一套方法的**單一指令檔**（約 7,800 字元，在多數平台 8,000 字的限制內）。
 指令用英文寫，因為各家 AI 對英文指令的遵守度最穩定；它會用繁體中文跟你對話。
 
 ## 怎麼設定

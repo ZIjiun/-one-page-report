@@ -20,14 +20,21 @@ Write one spec per language. Copy an example from `examples/` and change it.
     "image_credit": "圖片：… © …（only when images are used）"
   },
   "title": "one-sentence conclusion\nsecond line",
-  "background": "situation. problem.",   // optional; under the title at body size; see references/storyline.md
+  "background": "situation. problem.",   // only when the reader knows the story: one line under the title; otherwise a background zone (references/storyline.md)
   "layout": {"columns": "2fr 1fr", "areas": ["a b", "c d", "e e"]},
+  "zone_heading": "tab",           // tab | number | bar | label | ribbon (references/design-options.md)
+  "links": [{"from": "a", "to": "b", "label": "so we compare these"}],   // optional arrows between zones
+  "summary": {"icon": "list-checks", "color": "green", "lead": "Next:", "items": ["…"], "result": "…"},   // optional strip above the footer
+  "aside": {"icon": "eye", "text": "one remark to the reader"},           // optional speech bubble beside the title
   "hero": {"src": "img/keyart.jpg", "mode": "side", "dark": {"src": "img/keyart-night.jpg"}},   // optional; "dark": per-theme override or null; see references/imagery.md
   "logo": {"src": "img/logo.png", "src_dark": "img/logo-white.png", "h": 104},
   "backdrop": {"src": "img/bg.jpg", "opacity": 0.3},
   "derived": [{"value": "−60%", "formula": "(2.6-6.5)/6.5*100", "from": ["6.5", "2.6"]}],   // every worked-out number; review.py recomputes it
   "zones": [ { "id": "a", "color": "blue", "icon": "trophy", "label": "成果",
-               "question": "這次更新值得嗎？", "lead": "結論：…", "blocks": [ ... ] } ]
+               "question": "這次更新值得嗎？", "lead": "結論：…",
+               "frame": "solid",            // solid | dashed (the one zone to act on) | open (no frame, text only)
+               "fit": "stretch",            // stretch | center | content (a zone shorter than its row)
+               "blocks": [ ... ] } ]
 }
 ```
 

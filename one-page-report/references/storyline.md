@@ -39,23 +39,43 @@ Use this when the user gives notes, minutes, survey results, weekly reports or d
 - Evidence sits **under its own reason**, not in a separate "data" section.
 - The answer comes first; background never comes before it. See Step C.
 
-## Step C — Background: as much as this reader needs
+## Step C — Background: its own zone, explained clearly
 
-Background = why this report exists and what problem it solves (the situation and the
-complication). It sits **under the title**: the reader gets the answer first, then the reason the
-question came up. How much depends on what the reader already knows, so the interview asks it
-(`references/report-types.md`):
+Background = why this report exists and what it must settle. Most readers were not in the room, so
+by default the background gets **its own zone, the first one after the title**: the reader gets the
+answer in the title, then the reason the question came up. The structure follows SCPR (situation,
+complication, problem, recommendation; adapted from the scpr-framework skill in
+enterprise-ai-skills, MIT): the title is the recommendation, the background zone carries the rest.
+
+Write it as a `speclines` block, one row per item, each with an icon (`references/icons.md`). Use
+only the rows the material supports; never fill a row by guessing (core rule 3).
+
+| Row | Says | Examples (a work report / a personal choice) |
+|---|---|---|
+| Situation (現況) | where things stand now, with the baseline numbers | first reply takes 6.5 h on average / the current laptop is 7 years old |
+| Change (變化) | what changed and why it matters now; the cost of doing nothing | ticket volume up 30% before peak season / starting a design course that needs more power |
+| Decision (要決定) | the specific question the reader must answer, and by when | approve the rollout by 10/28 / pick one of two models this month |
+| Limits (限制) | what cannot move: rules, budget, time, space | no new headcount / budget under a set amount |
+| Who (誰參與) | who decides, who is affected, who may object (always at the company; adapted from stakeholder-map) | VP Ops approves, team leads run it, senior agents may push back / decided together with the family |
+| Ruled out (排除過) | options already dropped and why | outsourcing: data cannot leave the company / a tablet: the software does not run on it |
+
+Suggested icons (`references/icons.md`; they avoid the icons used for status, goal and the ask, so
+a page can carry both): background `book-open`, situation `compass`, change `refresh-cw`, decision
+`circle-help`, limits `ban`, who `handshake`, ruled out `circle-x`.
+
+Keep "change" and "decision" apart: the change is what happened, the decision is what the reader
+must now answer.
+
+Exceptions, agreed in the interview:
 
 | Reader | Background |
 |---|---|
-| Knows the story (the manager who assigned the work) | one line, or fold it into the kicker |
-| Does not know it (family, another team, a new manager, a client) | two sentences under the title: the situation, then the problem |
-| The background is the point (what happened in a post-mortem) | its own zone |
+| Does not know the story (default: another team, a client, family, a new manager) | its own zone, first after the title |
+| Knows the story (the manager who assigned the work) | one line under the title (spec `"background"`), or fold it into the kicker |
 
-- Background holds premises only: budget, how something is used, limits, what the reader wants.
-  Never the conclusion's numbers (each number appears once).
-- Facts in it follow core rule 3: only what the user gave or a source shows.
-- One or two sentences do not take a zone; they sit under the title at body size.
+- Background holds premises only: never the conclusion's numbers (each number appears once).
+- The background zone counts toward the 4–6 zones. When the page does not fit, see
+  `references/layout.md` ("When the zones do not fit").
 
 ## Step D — Decision shape (proposals and anything that needs a yes)
 
@@ -77,7 +97,7 @@ Show the user, in Chinese:
 
 ```
 標題（一句結論）：……
-背景（標題下方，讀者已知多少：……）：……
+背景（第一格；讀者已知多少：……）：現況……／變化……／要決定……／限制……／誰參與……／排除過……
 理由 1：…… 證據：……
 理由 2：…… 證據：……
 理由 3：…… 證據：……

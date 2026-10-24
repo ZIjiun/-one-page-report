@@ -32,16 +32,27 @@
           "path": "mckinsey-charts",
           "last_commit": "0aa561395517912e45a6db4c271280f3ce282aa5",
           "tree": "63a67dfb0dbf9a6a78aeea7cd8d2be24b58d3652"
+        },
+        {
+          "path": "scpr-framework",
+          "last_commit": "159d32307eb4c487bfb74dbc9edc138f67a7b231",
+          "tree": "c4ac564a9ec533bdc6c3d121fd82b5567bf64444"
+        },
+        {
+          "path": "stakeholder-map",
+          "last_commit": "0aa561395517912e45a6db4c271280f3ce282aa5",
+          "tree": "c44c1727da92f4051838c61416402eccd00bad5d"
         }
       ],
       "used_in": [
         "references/storyline.md",
         "references/review-checklist.md",
         "references/charts-and-color.md",
-        "scripts/build_pptx.py"
+        "scripts/build_pptx.py",
+        "references/report-types.md"
       ],
       "reviewed_commit": "ae8fe60a765cc766e0c598bfe8a7a33fd5faac1b",
-      "reviewed_at": "2026-10-23"
+      "reviewed_at": "2026-10-25"
     },
     {
       "name": "storytelling-with-data",

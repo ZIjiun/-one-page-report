@@ -5,7 +5,7 @@ description: "Turn project or business material (notes, Excel/CSV data, existing
 
 # One-page report
 
-Version 1.3.1 · source: https://github.com/ZIjiun/-one-page-report · see `CHANGELOG.md` in the repo
+Version 1.3.2 · source: https://github.com/ZIjiun/-one-page-report · see `CHANGELOG.md` in the repo
 
 Make one 16:9 page that a busy reader understands in ten seconds, from the user's own material.
 The page is the last step. Most of the value is in the thinking before it: who reads it, what
@@ -69,12 +69,12 @@ and screenshots (evidence photos, numbered marks). Read it before the storyline 
 |---|---|---|
 | 1 Situation | Ask the user to describe the situation in their own words (reader, occasion, what happened) | — |
 | 2 Report type | Propose a type and skeleton with one line of reasoning; the user may accept, switch, mix, or ask for a new one | `references/report-types.md` |
-| 3 Purpose | Interview per core rule 1, with the type's own questions. Always ask **how much background the reader already has** (it sets how much context goes under the title). Give each question a recommended answer (from the material or the usual case), so the user can reply "as suggested" | `references/report-types.md` |
-| 4 Storyline | Read the material (`references/inputs.md`). Distil: messy input → 3 insights → one-sentence conclusion + 2–4 reasons. Proposal types use the decision-memo shape. Write the background line(s) for this reader. **Show the storyline (in Chinese) and get a yes before any visual work** | `references/storyline.md` |
+| 3 Purpose | Interview per core rule 1, with the type's own questions. Always ask **how much background the reader already has**, then the background questions (situation, change, decision, limits, who, ruled out) until the background zone can be written; thin background means the interview did not ask enough. Give each question a recommended answer (from the material or the usual case), so the user can reply "as suggested" | `references/report-types.md` |
+| 4 Storyline | Read the material (`references/inputs.md`). Distil: messy input → 3 insights → one-sentence conclusion + 2–4 reasons. Proposal types use the decision-memo shape. Write the background zone (its own zone by default; one line only when the reader knows the story). **Show the storyline (in Chinese) and get a yes before any visual work** | `references/storyline.md` |
 | 5 Diagrams & charts | For each zone name the **shape of its information** (route, calculation, choice, yes/no, before→after, steps, numbers, dates, appearance, layout & size) and draw it: the picture carries the logic, text supports. Each image gets a job (evidence, identification, mood, or a real thing a drawing cannot show) that decides where it goes. One highlight, rest grey; check colours. Show the zone → diagram plan with the storyline if it changes much | `references/diagrams.md`, `references/charts-and-color.md` |
-| 6 Layout | Zones = the reader's questions; position follows the order of those questions; background under the title; weight follows importance; each number appears once; exactly 4 font sizes | `references/layout.md` |
+| 6 Layout | Zones = the reader's questions; position follows the order of those questions; background zone first; weight follows importance; each number appears once; exactly 4 font sizes | `references/layout.md` |
 | 7 Icons & imagery | Icons: sort categories fast or act as nodes in a diagram; 5-second rule; one concept = one icon; always with text. Imagery and theme colours only when they match the content and keep the squint test; place each image by its job | `references/icons.md`, `references/imagery.md` |
-| 8 Draft & choices | Build the Chinese version first, show it, list open design choices (core rule 2) | — |
+| 8 Draft & choices | Build the Chinese version first, show it, list open design choices (core rule 2): heading style, frames, layout style, arrows, summary strip, aside, and what to do with empty space or too many zones. Try each on the page before recommending it; quality first | `references/design-options.md` |
 | 9 Output | Translate to English with the same spec structure; render both sets | below |
 | 10 Self-review | Run the full checklist; fix; report the result | `references/review-checklist.md` |
 
@@ -132,7 +132,8 @@ python3 $S/scripts/review.py report.zh.json report.en.json --html out/report.zh.
   say so, and keep the PNG as the version to present.
 - `render.py` fits the page by zooming 0.75–1.15 and stretching rows to fill it. A `warning`
   means too dense (cut) or too thin. **Thin = cards stretched with empty middles: add evidence
-  (a chart, a comparison, a table) or use fewer zones.** Never ship an overflow.
+  (a chart, a comparison, a table) or use fewer zones.** Never ship an overflow. Aim for zoom 0.9 or
+  more; under that, offer the ways to merge or move content (`references/design-options.md`).
 - Bundled fonts (LXGW WenKai TC, Patrick Hand, Inter) are embedded into the HTML automatically,
   trimmed to the characters used.
 - Images in the spec (`hero`, `logo`, `backdrop`, `photo`) are local files, embedded into the
@@ -151,7 +152,8 @@ validator. Otherwise run the offline stand-in, which gives the same pass/fail re
 1. Send the PNGs first (Chinese, then English), then PDF, HTML and PPTX.
 2. In Chinese, say in a few lines: the one-sentence conclusion, the self-review grade and the
    top fixes still open, anything estimated or unverified, the PPT mode used, and the open
-   design choices (style, theme, tab style, highlight, images). If official images were used,
+   design choices (style, theme, heading style, frames, highlight, images, and any arrows, summary
+   strip or aside). If official images were used,
    say once that the page is for internal use unless the user holds the rights.
 3. Do not recap the steps.
 
@@ -162,6 +164,7 @@ validator. Otherwise run the offline stand-in, which gives the same pass/fail re
 - `assets/styles/` style files, each with a light and a `dark` block; `assets/icons.json` 173 Lucide icons (ISC); `assets/fonts/*.json` bundled fonts (OFL), packed into a few JSON files to keep the file count small
 - `examples/` complete specs for five report types, both languages
 - `references/inputs.md` how to read each kind of material, including screenshots
+- `references/design-options.md` the optional design tools (headings, frames, layout style, arrows, summary strip, aside, empty space, too many zones), when each fits, and the self-check
 - `scripts/diagrams.py` the diagram blocks (standard library only)
 - `portable/` the same method as one instruction file for other AI tools
 - `licenses/` third-party licences and credits

@@ -1,5 +1,32 @@
 # Changelog
 
+## 1.3.2 — 2026-10-25 (background first, design options you choose)
+
+**Background**
+- The background gets its own zone by default, first after the title, written as rows with icons:
+  situation, change, decision, limits, who, ruled out (SCPR; who-decides from stakeholder-map, both
+  adapted from enterprise-ai-skills, MIT). It shrinks to one line only when the reader knows the story.
+- The interview asks the background questions one at a time until each row can be written; a row is
+  never filled by guessing.
+- A3 and SCQA are listed as reference skeletons.
+
+**Design options** (`references/design-options.md`; every one optional, recommended with a reason,
+tried on the page first, and chosen by the user; quality first)
+- Zone headings: `tab` (default), `number`, `bar`, `label`, `ribbon`; one per page.
+- Zone frames: `solid` (evidence), `dashed` (the one zone to act on), `open` (short text that is not
+  evidence), with a three-question test for when a zone goes without a frame.
+- A zone shorter than its row: `fit` `stretch` (default), `center`, `content`, plus the layout
+  fixes to try first (shorten the tall neighbour, move a related picture in, change widths).
+- Too many zones: merge, two pictures in one zone, move detail out, or another skeleton.
+- Layout style: even grid or bento (sizes by importance, edges on the grid). Staggered zones are
+  not offered.
+- `links` (arrows between zones, drawn in the gap; the gap widens), `summary` (a strip above the
+  footer), `aside` (one speech bubble beside the title).
+- `speclines` rows take an `icon`; the label column is aligned.
+- The editable PPT keeps dashed frames, underlined headings, arrows and their labels.
+
+Nothing changes for an existing spec: all five examples render as before.
+
 ## 1.3.1 — 2026-10-24 (works for any subject: tools, not templates)
 
 **Rules that hold for any subject**

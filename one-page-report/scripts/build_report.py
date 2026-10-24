@@ -421,7 +421,7 @@ def block(b, st, lang):
                     f'<ol class="marks">{"".join(notes)}</ol></figure>')
         return f'{head}<div class="photo" role="img" aria-label="{esc(b.get("alt", ""))}" style="{hgt}background-image:url({uri});background-position:{esc(b.get("position", "center"))}">{cap}</div>'
     if t == "speclines":
-        rows = "".join(f'<div><span class="k">{rich(r.get("label",""))}</span><span class="v">{rich(r.get("text",""))}</span></div>' for r in b["rows"])
+        rows = "".join(f'<div><span class="k">{icon(r.get("icon"))}{rich(r.get("label",""))}</span><span class="v">{rich(r.get("text",""))}</span></div>' for r in b["rows"])
         head = f'<div class="btitle">{rich(b["title"])}</div>' if b.get("title") else ""
         return f'{head}<div class="speclines">{rows}</div>'
     if t == "columns":
@@ -521,6 +521,58 @@ def all_text(o):
     return str(o) if isinstance(o, str) else ""
 
 
+LINKS_JS = """<script>
+// Arrows between zones, drawn in the gap after layout and redrawn when the page is fitted or resized.
+(function(){
+  var NS = 'http://www.w3.org/2000/svg';
+  function box(el){ return {x: el.offsetLeft, y: el.offsetTop, w: el.offsetWidth, h: el.offsetHeight}; }
+  function draw(){
+    var grid = document.querySelector('.grid'); if (!grid) return;
+    grid.querySelectorAll('.link-arrow,.link-label').forEach(function(e){ e.remove(); });
+    var paper = getComputedStyle(document.body).backgroundColor;
+    (window.LINKS || []).forEach(function(l){
+      var a = grid.querySelector('[data-zone="' + l.from + '"]'), b = grid.querySelector('[data-zone="' + l.to + '"]');
+      if (!a || !b) return;
+      var A = box(a), B = box(b), S = 34, cx, cy, rot, horiz;
+      if (B.x >= A.x + A.w - 2 || A.x >= B.x + B.w - 2) {          // side by side
+        horiz = true; rot = B.x > A.x ? 0 : 180;
+        cx = (B.x > A.x ? (A.x + A.w + B.x) : (B.x + B.w + A.x)) / 2;
+        var t = Math.max(A.y, B.y), btm = Math.min(A.y + A.h, B.y + B.h);
+        cy = btm > t ? (t + btm) / 2 : (A.y + A.h / 2 + B.y + B.h / 2) / 2;
+      } else {                                                        // stacked
+        horiz = false; rot = B.y > A.y ? 90 : -90;
+        cy = (B.y > A.y ? (A.y + A.h + B.y) : (B.y + B.h + A.y)) / 2;
+        var lf = Math.max(A.x, B.x), rt = Math.min(A.x + A.w, B.x + B.w);
+        cx = rt > lf ? (lf + rt) / 2 : (A.x + A.w / 2 + B.x + B.w / 2) / 2;
+      }
+      var col = getComputedStyle(a).getPropertyValue('--zc').trim() || 'currentColor';
+      var svg = document.createElementNS(NS, 'svg');
+      svg.setAttribute('class', 'ic link-arrow'); svg.setAttribute('viewBox', '0 0 24 24');
+      svg.setAttribute('width', S); svg.setAttribute('height', S);
+      svg.style.cssText = 'position:absolute;z-index:4;left:' + (cx - S / 2) + 'px;top:' + (cy - S / 2) + 'px;width:' + S + 'px;height:' + S + 'px;color:' + col;
+      svg.innerHTML = '<circle cx="12" cy="12" r="11" fill="' + paper + '" stroke="currentColor" stroke-width="1.6"/>' +
+        '<g transform="rotate(' + rot + ' 12 12)" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">' +
+        '<path d="M6.5 12h10"/><path d="M12.5 8l4 4-4 4"/></g>';
+      grid.appendChild(svg);
+      if (l.label) {
+        var lb = document.createElement('div'); lb.className = 'link-label'; lb.innerHTML = l.label;
+        lb.style.color = col;
+        if (!horiz) { lb.style.maxWidth = 'none'; lb.style.whiteSpace = 'nowrap'; lb.style.background = paper; lb.style.padding = '0 6px'; }
+        grid.appendChild(lb);
+        var w = lb.offsetWidth, h = lb.offsetHeight;
+        lb.style.left = (horiz ? cx - w / 2 : cx + S / 2 + 6) + 'px';
+        lb.style.top = (horiz ? cy + S / 2 + 4 : cy - h / 2) + 'px';
+      }
+    });
+  }
+  window.addEventListener('load', draw);
+  if (document.fonts) document.fonts.ready.then(draw);
+  if (window.ResizeObserver) new ResizeObserver(draw).observe(document.querySelector('.grid'));
+  draw();
+})();
+</script>"""
+
+
 TIMELINE_JS = """<script>
 // Re-centre each timeline icon + label with the real text width (fonts differ by language and style).
 (function(){
@@ -555,13 +607,23 @@ def build(spec, style):
     lay = spec["layout"]
     areas = " ".join(f"'{r}'" for r in lay["areas"])
     zones = []
-    for z in spec["zones"]:
+    numbered = spec.get("zone_heading") == "number"
+    for zi, z in enumerate(spec["zones"], 1):
         lead = f'<div class="lead">{rich(z["lead"])}</div>' if z.get("lead") else ""
         q = f'<i>{rich(z["question"])}</i>' if z.get("question") else ""
         blocks = "".join(block(b, style, lang) for b in z.get("blocks", []))
         pad = ' style="padding:22px 16px 6px"' if any(b["type"] == "timeline" for b in z.get("blocks", [])) else ""
-        zones.append(f'<section class="zone c-{z.get("color","blue")}" style="grid-area:{z["id"]}" data-zone="{esc(z["id"])}"{pad}>'
-                     f'<div class="zhead"><div class="tab">{icon(z.get("icon"))}{rich(z["label"])}{q}</div>{lead}</div><div class="blocks">{blocks}</div></section>')
+        frame = z.get("frame", "solid")   # solid (default) | dashed (look here) | open (no frame, content on the page)
+        if frame not in ("solid", "dashed", "open"):
+            raise ValueError(f'zone {z["id"]}: frame must be solid, dashed or open (got {frame!r})')
+        fcls = "" if frame == "solid" else f" f-{frame}"
+        # when a zone is shorter than its row: stretch (default, content at the top), center, or end the frame at the content
+        fit = z.get("fit", "stretch")
+        if fit not in ("stretch", "center", "content"):
+            raise ValueError(f'zone {z["id"]}: fit must be stretch, center or content (got {fit!r})')
+        fcls += "" if fit == "stretch" else f" fit-{fit}"
+        zones.append(f'<section class="zone c-{z.get("color","blue")}{fcls}" style="grid-area:{z["id"]}" data-zone="{esc(z["id"])}"{pad}>'
+                     f'<div class="zhead"><div class="tab">{f"<span class=zn>{zi:02d}</span>" if numbered else icon(z.get("icon"))}{rich(z["label"])}{q}</div>{lead}</div><div class="blocks">{blocks}</div></section>')
     left = []
     if m.get("confidential"):
         left.append(f'<span class="conf">{rich(m["confidential"])}</span>')
@@ -634,6 +696,35 @@ def build(spec, style):
         logo = f'<img class="logo" src="data:image/{ext};base64,{data}" style="position:absolute;top:14px;right:36px;height:34px" alt="">'
     html_lang = "zh-Hant" if lang == "zh" else "en"
     ctx = f'<div class="context">{rich(spec["background"])}</div>\n' if spec.get("background") else ""
+    # zone headings: "tab" (default, a label on the frame line) or "label" (an underlined heading above the content)
+    heading = spec.get("zone_heading", "tab")
+    if heading not in ("tab", "label", "ribbon", "number", "bar"):
+        raise ValueError(f'zone_heading must be tab, label, ribbon, number or bar (got {heading!r})')
+    if heading != "tab":
+        body_cls = (body_cls + " h-" + heading).strip()
+    # an aside: one short remark to the reader (a tip or an opinion, not evidence), in a speech bubble
+    # beside the title. No frame of its own beyond the bubble, never over data. {"text", "icon"}
+    aside = spec.get("aside")
+    aside_html = (f'<div class="aside">{icon(aside.get("icon"))}<span>{rich(aside["text"])}</span></div>' if aside else "")
+    # arrows between zones: [{"from": id, "to": id, "label": "..."}]; drawn after layout (LINKS_JS)
+    ids = {z["id"] for z in spec["zones"]}
+    links = []
+    for ln in spec.get("links", []):
+        if ln.get("from") not in ids or ln.get("to") not in ids:
+            raise ValueError(f'links: unknown zone in {ln} (zones: {sorted(ids)})')
+        links.append({"from": ln["from"], "to": ln["to"], "label": rich(ln.get("label", ""))})
+    if links:
+        body_cls = (body_cls + " has-links").strip()
+    links_js = ("<script>window.LINKS=" + json.dumps(links, ensure_ascii=False).replace("</", "<\\/") + ";</script>" + LINKS_JS) if links else ""
+    # a summary strip above the footer: {"icon", "text"} or {"icon", "lead", "items": [...], "result"}
+    sm = spec.get("summary")
+    summary = ""
+    if sm:
+        parts = [f'<span class="s-lead">{rich(sm.get("lead") or sm.get("text", ""))}</span>']
+        parts += [f'<span class="s-item"><b class="s-ok">✓</b>{rich(x)}</span>' for x in sm.get("items", [])]
+        if sm.get("result"):
+            parts.append(f'<span class="s-eq">=</span><span class="s-res">{rich(sm["result"])}</span>')
+        summary = f'<div class="summary c-{sm.get("color", "blue")}">{icon(sm.get("icon"))}{"".join(parts)}</div>\n'
     return f"""<!doctype html>
 <html lang="{html_lang}"><head><meta charset="utf-8"><meta name="viewport" content="width=1920">
 <title>{esc(re.sub(r'[*=!^]', '', spec.get('doc_title') or spec['title'])[:80])}</title>
@@ -644,13 +735,13 @@ def build(spec, style):
 <svg width="0" height="0" style="position:absolute"><filter id="wobble"><feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="2" seed="3"/><feDisplacementMap in="SourceGraphic" scale="3"/></filter></svg>
 {logo}{"".join(img)}<div class="wrap">
 <div class="kicker">{rich(m.get('kicker',''))}</div>
-<h1 class="title">{rich(spec['title'])}</h1>
+<div class="titlebox"><h1 class="title">{rich(spec['title'])}</h1>{aside_html}</div>
 {ctx}<div class="grid" style="grid-template-columns:{lay['columns']};grid-template-areas:{areas}">
 {''.join(zones)}
 </div>
-<div class="foot-meta"><span>{' '.join(left)}</span><span>{right}</span></div>
+{summary}<div class="foot-meta"><span>{' '.join(left)}</span><span>{right}</span></div>
 </div>
-{TIMELINE_JS}</body></html>"""
+{TIMELINE_JS}{links_js}</body></html>"""
 
 
 def main():
