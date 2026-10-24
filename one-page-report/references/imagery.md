@@ -53,6 +53,19 @@ colour of the chosen theme (`--surface`, `--mode dark` for dark).
 
 Match the era: a report about a remaster uses the remaster's key art and colours, not the original's.
 
+## An image must show what its zone says
+
+Before placing a photo, say in one line what the zone claims, then ask: does this picture show
+that? A lifestyle shot (a family walking, a car on a coast road) in a zone about seats and boot
+size shows none of it, and reads as decoration (圖文不符). Then, in order:
+
+1. Find an official image that shows the claim (the open boot, the third row, the charging port).
+2. If there is none, **draw it** with a diagram (`seatmap`, `route`, `transform`…) — drawn from
+   real dimensions and numbers, never an imitation of the product's design.
+3. Keep the mood pictures for the header (`hero` band) or the background, where they set the scene
+   and do not pretend to be evidence. Two options can share one band: place the two official
+   photos side by side with a soft blend, and label "left / right" in the kicker.
+
 ## Where images go
 
 | Place | Use for | Spec |

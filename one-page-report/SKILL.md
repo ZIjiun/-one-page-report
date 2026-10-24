@@ -5,7 +5,7 @@ description: "Turn project or business material (notes, Excel/CSV data, existing
 
 # One-page report
 
-Version 1.3.0 · source: https://github.com/ZIjiun/-one-page-report · see `CHANGELOG.md` in the repo
+Version 1.3.1 · source: https://github.com/ZIjiun/-one-page-report · see `CHANGELOG.md` in the repo
 
 Make one 16:9 page that a busy reader understands in ten seconds, from the user's own material.
 The page is the last step. Most of the value is in the thinking before it: who reads it, what
@@ -59,7 +59,7 @@ and screenshots (evidence photos, numbered marks). Read it before the storyline 
 | 2 Report type | Propose a type and skeleton with one line of reasoning; the user may accept, switch, mix, or ask for a new one | `references/report-types.md` |
 | 3 Purpose | Interview per core rule 1, with the type's own questions. Give each question a recommended answer (from the material or the usual case), so the user can reply "as suggested" | `references/report-types.md` |
 | 4 Storyline | Read the material (`references/inputs.md`). Distil: messy input → 3 insights → one-sentence conclusion + 2–4 reasons. Proposal types use the decision-memo shape. **Show the storyline (in Chinese) and get a yes before any visual work** | `references/storyline.md` |
-| 5 Diagrams & charts | For each zone name the **shape of its information** (route, calculation, choice, yes/no, before→after, steps, numbers, dates, appearance) and draw it: the picture carries the logic, text supports. One highlight, rest grey; check colours. Show the zone → diagram plan with the storyline if it changes much | `references/diagrams.md`, `references/charts-and-color.md` |
+| 5 Diagrams & charts | For each zone name the **shape of its information** (route, calculation, choice, yes/no, before→after, steps, numbers, dates, appearance, layout & size) and draw it: the picture carries the logic, text supports. A photo must show what its zone says, otherwise draw it. One highlight, rest grey; check colours. Show the zone → diagram plan with the storyline if it changes much | `references/diagrams.md`, `references/charts-and-color.md` |
 | 6 Layout | Zones = the reader's questions; position carries meaning; weight follows importance; each number appears once; exactly 4 font sizes | `references/layout.md` |
 | 7 Icons & imagery | Icons: sort categories fast or act as nodes in a diagram; 5-second rule; one concept = one icon; always with text. Imagery and theme colours only when they match the content and keep the squint test | `references/icons.md`, `references/imagery.md` |
 | 8 Draft & choices | Build the Chinese version first, show it, list open design choices (core rule 2) | — |

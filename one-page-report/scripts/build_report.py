@@ -293,7 +293,9 @@ def block(b, st, lang):
             if it.get("sub"):
                 h.append(f'<div class="sub">{rich(it["sub"])}</div>')
             if it.get("photo"):
-                ph = it["photo"]; uri = image_uri(ph.get("src"), SPEC_DIR)
+                ph = dict(it["photo"]); uri = image_uri(ph.get("src"), SPEC_DIR)
+                if isinstance(ph.get("caption"), list):  # same list form as the photo block
+                    ph["caption"] = "　".join(f'**{c.get("value","")}**{c.get("unit","")} {c.get("label","")}' if isinstance(c, dict) else str(c) for c in ph["caption"])
                 if uri:
                     h.append(f'<div class="cardphoto" style="background-image:url({uri});background-position:{esc(ph.get("position", "center"))}">'
                              f'{"<span>"+rich(ph["caption"])+"</span>" if ph.get("caption") else ""}</div>')

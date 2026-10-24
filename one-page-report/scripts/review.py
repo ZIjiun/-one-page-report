@@ -30,9 +30,18 @@ VAGUE = ["大幅", "顯著", "全面", "賦能", "打造", "優化了", "提升�
 TOPIC_TITLES = ["報告", "說明", "概況", "簡介", "update", "report", "overview", "summary"]
 
 
+# Layout and drawing settings are not facts: their numbers are not traced to the sources.
+CONFIG_KEYS = {"scale", "opacity", "h", "w", "width", "height", "length_mm", "width_mm", "folded", "highlight",
+               "title_pad", "zoom", "max", "min", "layout", "hero", "logo", "backdrop", "position", "theme", "style"}
+
+
 def walk(o, path=""):
     if isinstance(o, dict):
         for k, v in o.items():
+            if k in CONFIG_KEYS and not isinstance(v, str) or k in ("layout", "hero", "logo", "backdrop"):
+                continue
+            if k == "rows" and isinstance(v, list) and all(isinstance(x, (int, float)) for x in v):
+                continue   # seat counts per row in a seatmap
             yield from walk(v, f"{path}.{k}" if path else k)
     elif isinstance(o, list):
         for i, v in enumerate(o):
@@ -45,7 +54,7 @@ def walk(o, path=""):
 
 UNIT = {"萬": 1e4, "万": 1e4, "億": 1e8, "K": 1e3, "k": 1e3, "M": 1e6, "B": 1e9}
 DATE = re.compile(r"(?<![\d.])(\d{1,2})/(\d{1,2})(?:[–-](\d{1,2})(?:/(\d{1,2}))?)?(?![\d.])")
-VER = re.compile(r"(?<![\d.])\d+\.\d+\.\d+(?:\.\d+)?|(?<=[A-Za-z ])\d+\.\d{2}(?![\d%])")
+VER = re.compile(r"(?<![\d.])\d+\.\d+\.\d+(?:\.\d+)?|(?<=[A-Za-z])\d+\.\d{2}(?![\d%])")
 
 
 def norm_num(s):
