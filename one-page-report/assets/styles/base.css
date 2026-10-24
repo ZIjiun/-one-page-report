@@ -47,6 +47,17 @@ b,strong{font-weight:700}
 .h-label .zone.f-open{padding-left:2px;padding-right:2px}
 /* arrows between zones (LINKS_JS) and the summary strip */
 .has-links .grid{column-gap:64px}
+/* zones shorter than their row */
+.zone.fit-center>.blocks{justify-content:center}
+.zone.fit-content{align-self:start}
+/* zone headings numbered in reading order: 01, 02 … */
+.h-number .tab{background:var(--paper);color:var(--zc);padding:1px 10px 2px 4px;gap:8px}
+.h-number .zn{background:var(--zc);color:var(--on-accent,#fff);border-radius:6px;padding:0 7px;font-variant-numeric:tabular-nums}
+.h-number .tab i{color:var(--soft)}
+/* zone headings with a bar on the left: the quietest */
+.h-bar .tab{background:var(--paper);color:var(--ink);border-radius:0;border-left:5px solid var(--zc);padding:1px 12px 2px 10px}
+.h-bar .tab .ic{color:var(--zc)}
+.h-bar .tab i{color:var(--soft)}
 /* zone headings as a ribbon: outlined banner with notched ends */
 .h-ribbon .tab{background:var(--paper);color:var(--zc);border:2px solid var(--zc);border-radius:2px;padding:2px 18px 3px;margin-left:10px}
 .h-ribbon .tab::before,.h-ribbon .tab::after{content:"";position:absolute;top:6px;width:12px;height:100%;background:var(--zc);opacity:.35;z-index:-1;clip-path:polygon(0 0,100% 0,100% 100%,0 100%,40% 50%)}

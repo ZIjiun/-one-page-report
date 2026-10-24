@@ -607,7 +607,8 @@ def build(spec, style):
     lay = spec["layout"]
     areas = " ".join(f"'{r}'" for r in lay["areas"])
     zones = []
-    for z in spec["zones"]:
+    numbered = spec.get("zone_heading") == "number"
+    for zi, z in enumerate(spec["zones"], 1):
         lead = f'<div class="lead">{rich(z["lead"])}</div>' if z.get("lead") else ""
         q = f'<i>{rich(z["question"])}</i>' if z.get("question") else ""
         blocks = "".join(block(b, style, lang) for b in z.get("blocks", []))
@@ -616,8 +617,13 @@ def build(spec, style):
         if frame not in ("solid", "dashed", "open"):
             raise ValueError(f'zone {z["id"]}: frame must be solid, dashed or open (got {frame!r})')
         fcls = "" if frame == "solid" else f" f-{frame}"
+        # when a zone is shorter than its row: stretch (default, content at the top), center, or end the frame at the content
+        fit = z.get("fit", "stretch")
+        if fit not in ("stretch", "center", "content"):
+            raise ValueError(f'zone {z["id"]}: fit must be stretch, center or content (got {fit!r})')
+        fcls += "" if fit == "stretch" else f" fit-{fit}"
         zones.append(f'<section class="zone c-{z.get("color","blue")}{fcls}" style="grid-area:{z["id"]}" data-zone="{esc(z["id"])}"{pad}>'
-                     f'<div class="zhead"><div class="tab">{icon(z.get("icon"))}{rich(z["label"])}{q}</div>{lead}</div><div class="blocks">{blocks}</div></section>')
+                     f'<div class="zhead"><div class="tab">{f"<span class=zn>{zi:02d}</span>" if numbered else icon(z.get("icon"))}{rich(z["label"])}{q}</div>{lead}</div><div class="blocks">{blocks}</div></section>')
     left = []
     if m.get("confidential"):
         left.append(f'<span class="conf">{rich(m["confidential"])}</span>')
@@ -692,8 +698,8 @@ def build(spec, style):
     ctx = f'<div class="context">{rich(spec["background"])}</div>\n' if spec.get("background") else ""
     # zone headings: "tab" (default, a label on the frame line) or "label" (an underlined heading above the content)
     heading = spec.get("zone_heading", "tab")
-    if heading not in ("tab", "label", "ribbon"):
-        raise ValueError(f'zone_heading must be tab, label or ribbon (got {heading!r})')
+    if heading not in ("tab", "label", "ribbon", "number", "bar"):
+        raise ValueError(f'zone_heading must be tab, label, ribbon, number or bar (got {heading!r})')
     if heading != "tab":
         body_cls = (body_cls + " h-" + heading).strip()
     # an aside: one short remark to the reader (a tip or an opinion, not evidence), in a speech bubble
