@@ -125,6 +125,24 @@ def measure(html_path):
                 pg2.set_content(f'<html><body style="margin:0;background:transparent">{it["svg"]}</body></html>')
                 pngs[k] = pg2.screenshot(omit_background=True, clip={"x": 0, "y": 0, "width": it["w"], "height": it["h"]})
                 pg2.close()
+        # diagrams and images: screenshot their area of the page at 3x (text inside diagrams stays in the picture)
+        shots = [k for k, it in enumerate(data["items"]) if it["kind"] in ("diagram", "image")]
+        if shots:
+            pg3 = b.new_page(viewport={"width": 1920, "height": 1080}, device_scale_factor=3)
+            pg3.goto("file://" + os.path.abspath(html_path))
+            pg3.evaluate("document.fonts.ready"); pg3.wait_for_timeout(400)
+            pg3.evaluate(render.FIT_JS); pg3.wait_for_timeout(300)
+            hidden = False
+            for k in sorted(shots, key=lambda k: data["items"][k]["kind"] == "image"):   # diagrams first
+                it = data["items"][k]
+                if it["kind"] == "image" and not hidden:   # hide text and boxes on top so nothing is doubled under the native shapes
+                    pg3.add_style_tag(content="body *{color:transparent!important;text-shadow:none!important;border-color:transparent!important;box-shadow:none!important} "
+                                              ".zone,.card,.tab,.chip,.callout,.lead{background:transparent!important} .zone::before{border-color:transparent!important} svg{visibility:hidden}")
+                    hidden = True
+                clip = {"x": max(0, it["x"]), "y": max(0, it["y"]), "width": min(it["w"], 1920 - max(0, it["x"])), "height": min(it["h"], 1080 - max(0, it["y"]))}
+                if clip["width"] > 1 and clip["height"] > 1:
+                    pngs[k] = pg3.screenshot(clip=clip)
+            pg3.close()
         b.close()
     return data, pngs
 
@@ -159,7 +177,14 @@ def native_pptx(spec, style, out, html_path):
     bg = s.background.fill; bg.solid(); bg.fore_color.rgb = rgb(data["page"]["bg"])
     items = data["items"]
 
-    # boxes first (zones under cards under chips), in document order which is already back-to-front
+    # images first (backdrop, hero, logo, photos): user-provided, kept as pictures
+    def add_images(in_zone):
+        for k, it in enumerate(items):
+            if it["kind"] == "image" and k in pngs and (("photo" in it.get("cls", "")) == in_zone):
+                s.shapes.add_picture(io.BytesIO(pngs[k]), E(max(0, it["x"])), E(max(0, it["y"])), E(min(it["w"], 1920)), E(min(it["h"], 1080)))
+    add_images(False)   # page-level: backdrop, hero, logo
+
+    # boxes next (zones under cards under chips), in document order which is already back-to-front
     for it in items:
         if it["kind"] != "box":
             continue
@@ -181,6 +206,8 @@ def native_pptx(spec, style, out, html_path):
         if it.get("accent"):
             bar = s.shapes.add_shape(MSO_SHAPE.RECTANGLE, E(it["x"]), E(it["y"]), E(4), E(it["h"]))
             bar.fill.solid(); bar.fill.fore_color.rgb = rgb(it["accent"]); bar.line.fill.background(); bar.shadow.inherit = False
+
+    add_images(True)    # photos inside zones and cards sit on top of their boxes
 
     # charts: native, editable
     for k, it in enumerate(items):
@@ -226,7 +253,7 @@ def native_pptx(spec, style, out, html_path):
         cx, cy = t["x"] + t["w"] / 2, t["y"] + t["h"] / 2
         return any(c["x"] <= cx <= c["x"] + c["w"] and c["y"] <= cy <= c["y"] + c["h"] for c in chart_boxes)
     for k, it in enumerate(items):
-        if it["kind"] in ("icon", "timeline") and k in pngs:
+        if it["kind"] in ("icon", "timeline", "diagram") and k in pngs:
             s.shapes.add_picture(io.BytesIO(pngs[k]), E(it["x"]), E(it["y"]), E(it["w"]), E(it["h"]))
 
     # text, one box per visual line, exactly where the browser put it

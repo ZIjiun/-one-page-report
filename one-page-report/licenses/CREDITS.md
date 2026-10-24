@@ -6,7 +6,7 @@ It bundles or adapts the following.
 | Item | Where | Licence | How it is used |
 |---|---|---|---|
 | enterprise-ai-skills by Sruthi Reddy (github.com/sruthir28/enterprise-ai-skills, commit ae8fe60) | `references/storyline.md`, `references/review-checklist.md`, `scripts/build_pptx.py` | MIT (`enterprise-ai-skills-MIT.txt`) | Methods from synthesis, top-down-memo, decision-memo-builder, mckinsey-critic and mckinsey-charts rewritten in our own words; no files copied |
-| Lucide icons (lucide.dev) | `assets/icons.json` (163 icons) | ISC (`Lucide-ISC.txt`) | SVG markup copied unchanged into one JSON file |
+| Lucide icons (lucide.dev) | `assets/icons.json` (173 icons; 10 added in v1.1.0 from lucide-static 0.460.0) | ISC (`Lucide-ISC.txt`) | SVG markup copied unchanged into one JSON file |
 | LXGW WenKai TC (霞鶩文楷 TC) by LXGW | `assets/fonts/lxgw-wenkai-tc-*.json` | SIL OFL 1.1 (`LXGW-WenKai-TC-OFL.txt`) | Web font pieces and CSS copied unchanged (base64) into one JSON file per weight; reports embed only the glyphs used |
 | Inter by Rasmus Andersson | `assets/fonts/inter.json` | SIL OFL 1.1 (`Inter-OFL.txt`) | Latin web font files |
 | Patrick Hand by Patrick Wagesreiter | `assets/fonts/patrick-hand.json` | SIL OFL 1.1 (`Patrick-Hand-OFL.txt`) | Latin web font file |
@@ -32,3 +32,19 @@ the built-in `dataviz` skill files that `scripts/check_colors.py` was checked ag
 The Witcher 3 example uses public news reporting (sources listed in the example) for
 demonstration only; it is not an official CD PROJEKT RED report. The progress and proposal
 examples use fictional data.
+
+## Added in v1.1.0 (ideas only, no code or text copied)
+
+- Diagram categories checked against AntV Infographic (antvis/Infographic, MIT) and the
+  answer-me-with-html skill's component table.
+- Type details (tracking and leading by size), soft shadows instead of hard borders, no stacked
+  translucent layers, worst-case text testing and side-by-side options: ideas from
+  emilkowalski/skills (MIT), written in our own words.
+- Example images are not bundled. The examples run without images; image fields are documented
+  in references/imagery.md and must point to files the user supplies.
+
+## Added in v1.2.0 (ideas only)
+
+- Report-chart forms follow the built-in dataviz skill's form table; actual / target / previous
+  notation, variance bars and bridges follow the IBCS reporting standard. Described in our own
+  words; no code or text copied. The improvement example uses fictional data.

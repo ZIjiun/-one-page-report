@@ -1,0 +1,416 @@
+{
+ "lang": "en",
+ "report_type": "results",
+ "style": "business",
+ "theme": "light",
+ "doc_title": "Customer-service AI reply pilot: results (demo)",
+ "meta": {
+  "kicker": "Improvement report | Customer Service AI reply-assist pilot (returns + shipping) | For: VP Operations",
+  "as_of": "Data as of 2026/10/20",
+  "version": "v1",
+  "author": "Customer Service",
+  "confidential": "Internal",
+  "sources": "Sources: ticket system (2026/7–10), satisfaction survey (300 sampled weekly), staffing roster · Fictional demo data · Amounts in NT$"
+ },
+ "title": "8-week AI pilot: first reply from 6.5 h to ^^2.6 h^^, satisfaction ==3.6 → 4.3==, all three targets met;\nwe propose rolling out to **all ticket types** in November, before peak season",
+ "layout": {
+  "columns": "1.25fr 1fr 1fr",
+  "areas": [
+   "a b c",
+   "d e f"
+  ]
+ },
+ "zones": [
+  {
+   "id": "a",
+   "color": "blue",
+   "icon": "trophy",
+   "label": "Results",
+   "question": "Did we hit target?",
+   "lead": "All three beat target",
+   "blocks": [
+    {
+     "type": "bullet",
+     "higher_is_better": false,
+     "legend": [
+      "Actual",
+      "Target",
+      "Before"
+     ],
+     "rows": [
+      {
+       "label": "First reply",
+       "actual": 2.6,
+       "target": 3,
+       "compare": 6.5,
+       "max": 8,
+       "ranges": [
+        3,
+        5,
+        8
+       ],
+       "display": "2.6 h"
+      },
+      {
+       "label": "Time to close",
+       "actual": 1.4,
+       "target": 1.5,
+       "compare": 2.3,
+       "max": 3,
+       "ranges": [
+        1.5,
+        2.2,
+        3
+       ],
+       "display": "1.4 d"
+      }
+     ]
+    },
+    {
+     "type": "bullet",
+     "legend": [],
+     "rows": [
+      {
+       "label": "Satisfaction",
+       "actual": 4.3,
+       "target": 4.0,
+       "compare": 3.6,
+       "max": 5,
+       "ranges": [
+        3.5,
+        4.0,
+        5
+       ],
+       "display": "4.3 / 5"
+      }
+     ]
+    },
+    {
+     "type": "stattile",
+     "value": "−18%",
+     "label": "Overtime vs last year",
+     "delta": "210 h less a month",
+     "vs": "",
+     "good": true,
+     "arrow": "▼",
+     "spark": [
+      1180,
+      1150,
+      1120,
+      1050,
+      1010,
+      990,
+      970
+     ],
+     "spark_label": [
+      "Jul",
+      "Oct"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "b",
+   "color": "blue",
+   "icon": "trending-up",
+   "label": "What improved",
+   "lead": "Each metric, before vs after",
+   "blocks": [
+    {
+     "type": "dumbbell",
+     "higher_is_better": false,
+     "legend": [
+      "Before (Jul)",
+      "After (Oct)"
+     ],
+     "rows": [
+      {
+       "label": "First reply (h)",
+       "before": 6.5,
+       "after": 2.6
+      },
+      {
+       "label": "Close time (d)",
+       "before": 2.3,
+       "after": 1.4
+      },
+      {
+       "label": "Reopened (%)",
+       "before": 12,
+       "after": 7
+      },
+      {
+       "label": "Escalated (%)",
+       "before": 9,
+       "after": 6
+      }
+     ]
+    },
+    {
+     "type": "slope",
+     "title": "Satisfaction by channel (of 5)",
+     "left": "Before",
+     "right": "After",
+     "higher_is_better": true,
+     "items": [
+      {
+       "label": "Email",
+       "before": 3.4,
+       "after": 4.4,
+       "highlight": true
+      },
+      {
+       "label": "Live chat",
+       "before": 3.5,
+       "after": 4.3
+      },
+      {
+       "label": "Phone",
+       "before": 3.8,
+       "after": 4.2
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c",
+   "color": "red",
+   "icon": "triangle-alert",
+   "label": "Watch",
+   "lead": "Monday morning still peaks",
+   "blocks": [
+    {
+     "type": "heatmap",
+     "cols": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+     ],
+     "unit": "tickets/h",
+     "higher_is_worse": true,
+     "mark": "max",
+     "legend": [
+      "Few",
+      "Many"
+     ],
+     "mark_label": "Monday AM peak",
+     "rows": [
+      {
+       "label": "AM",
+       "values": [
+        58,
+        41,
+        38,
+        36,
+        40,
+        22,
+        18
+       ]
+      },
+      {
+       "label": "PM",
+       "values": [
+        44,
+        39,
+        35,
+        34,
+        37,
+        25,
+        20
+       ]
+      },
+      {
+       "label": "Evening",
+       "values": [
+        21,
+        18,
+        17,
+        16,
+        19,
+        14,
+        12
+       ]
+      }
+     ]
+    },
+    {
+     "type": "issues",
+     "items": [
+      {
+       "icon": "circle-dollar-sign",
+       "problem": "AI drafts still get refund amounts wrong",
+       "detail": "(about 4 a week)",
+       "fix": "Agents confirm every amount before sending"
+      },
+      {
+       "icon": "user-cog",
+       "problem": "Senior agents use drafts only 52% of the time",
+       "fix": "From November, seniors review the AI templates"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d",
+   "color": "gray",
+   "icon": "wrench",
+   "label": "What we did",
+   "lead": "Three changes cut reply time",
+   "blocks": [
+    {
+     "type": "waterfall",
+     "higher_is_better": false,
+     "unit": " h",
+     "start": {
+      "label": "Before",
+      "value": 6.5
+     },
+     "steps": [
+      {
+       "label": "AI drafts",
+       "value": -2.4
+      },
+      {
+       "label": "Auto routing",
+       "value": -1.0
+      },
+      {
+       "label": "FAQ templates",
+       "value": -0.8
+      },
+      {
+       "label": "Peak volume",
+       "value": 0.3
+      }
+     ],
+     "end": {
+      "label": "After",
+      "value": 2.6
+     }
+    }
+   ]
+  },
+  {
+   "id": "e",
+   "color": "gray",
+   "icon": "chart-pie",
+   "label": "How work is split",
+   "lead": "Almost half start with an AI draft",
+   "blocks": [
+    {
+     "type": "stacked",
+     "percent": true,
+     "highlight": 0,
+     "series": [
+      "AI-drafted",
+      "Fully manual"
+     ],
+     "rows": [
+      {
+       "label": "Before",
+       "values": [
+        0,
+        100
+       ]
+      },
+      {
+       "label": "Week 4",
+       "values": [
+        31,
+        69
+       ]
+      },
+      {
+       "label": "Week 8",
+       "values": [
+        46,
+        54
+       ]
+      }
+     ]
+    },
+    {
+     "type": "variance",
+     "title": "Draft use vs 60% target",
+     "higher_is_better": true,
+     "worse": "Below target",
+     "better": "Above target",
+     "baseline": "0 = 60% target",
+     "rows": [
+      {
+       "label": "New agents",
+       "delta": 14,
+       "display": "+14 pt"
+      },
+      {
+       "label": "Agents",
+       "delta": 10,
+       "display": "+10 pt"
+      },
+      {
+       "label": "Senior agents",
+       "delta": -8,
+       "display": "−8 pt"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "f",
+   "color": "green",
+   "icon": "flag",
+   "label": "Next steps",
+   "lead": "Please approve the rollout",
+   "blocks": [
+    {
+     "type": "flowsteps",
+     "items": [
+      {
+       "icon": "circle-check",
+       "title": "Approve rollout to all ticket types",
+       "sub": "VP Operations · 10/28 managers' meeting",
+       "owner": "VP"
+      },
+      {
+       "icon": "users",
+       "title": "Seniors review AI templates",
+       "sub": "Lift senior draft use to 60%",
+       "owner": "CS lead"
+      },
+      {
+       "icon": "calendar-check",
+       "title": "Live everywhere by 11/30",
+       "sub": "Ahead of the December peak",
+       "owner": "CS team"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "derived": [
+  {
+   "value": "−18%",
+   "formula": "(970-1180)/1180*100",
+   "from": [
+    "1180",
+    "970"
+   ]
+  },
+  {
+   "value": "210",
+   "formula": "1180-970",
+   "from": [
+    "1180",
+    "970"
+   ]
+  }
+ ]
+}

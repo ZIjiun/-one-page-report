@@ -45,6 +45,24 @@ Sometimes the answer is not a chart. A single bar is a number. A two-slice pie i
 Status colours never carry meaning alone: always an icon and a word too. About 8% of men have
 red-green colour blindness.
 
+## Report charts: colour rules
+
+- `bullet`, `dumbbell`, `slope`, `waterfall` end bar, `stattile`, `stacked` highlighted part:
+  highlight blue; everything else grey.
+- Better / worse marks (✓ / !, green / red bars in `waterfall` and `variance`) are status colours
+  and always come with a sign, a symbol or the word.
+- `heatmap` is magnitude, so it is **one hue light → dark** (the highlight blue mixed into the card
+  colour), never a rainbow and never red-to-green. The one cell that matters gets an outline
+  (red when high is bad) and a `mark_label` that says it in words.
+- Times, costs, error rates: set `higher_is_better: false` so "better" is still green and to the right.
+
+## Light and dark
+
+Each style has a `dark` block with the same roles at dark-page lightness. Check a changed palette
+on the theme's own page colour: `check_colors.py "<colours>" --surface <card colour> --mode dark`.
+In both themes red and green differ only a little for colour-blind readers, so they always carry
+✓ / ! and a word.
+
 ## Check before shipping
 
 ```bash

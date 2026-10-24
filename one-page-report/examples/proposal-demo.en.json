@@ -27,7 +27,7 @@
    "icon": "triangle-alert",
    "label": "Problem",
    "question": "Why now?",
-   "lead": "Replies are slow; peak season makes it worse",
+   "lead": "Slow replies, worse at peak",
    "blocks": [
     {
      "type": "cards",

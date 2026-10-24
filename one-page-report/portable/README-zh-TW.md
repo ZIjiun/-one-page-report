@@ -1,6 +1,6 @@
 # 通用版：給 ChatGPT、Copilot、Gemini、公司自建 AI 使用
 
-`one-page-report-instructions.md` 是同一套方法的**單一指令檔**（約 6,700 字元，在多數平台 8,000 字的限制內）。
+`one-page-report-instructions.md` 是同一套方法的**單一指令檔**（約 7,600 字元，在多數平台 8,000 字的限制內）。
 指令用英文寫，因為各家 AI 對英文指令的遵守度最穩定；它會用繁體中文跟你對話。
 
 ## 怎麼設定
@@ -17,7 +17,9 @@
 - `../references/report-types.md`（各類報告的骨架與提問）
 - `../references/storyline.md`（提煉邏輯的方法）
 - `../references/review-checklist.md`（審稿清單）
-- `../examples/*.json`（三種報告的完整範例）
+- `../references/diagrams.md`（哪種資訊畫哪種示意圖）
+- `../references/imagery.md`（圖片、主題配色、明暗主題）
+- `../examples/*.json`（四種報告的完整範例）
 
 ## 和 Claude 完整版的差別
 
@@ -28,6 +30,8 @@
 | PNG、PDF | ✓ 自動輸出 | 你用瀏覽器開 HTML → 列印 → 另存 PDF，或截圖 |
 | 可編輯 PPT | ✓ | 看平台能不能執行程式（ChatGPT 的進階資料分析可以） |
 | 色盲檢查、自動審稿 | ✓ 腳本 | 文字規則，由 AI 自評 |
+| 示意圖（路線、算式、決策樹、選項對照、步驟） | ✓ 腳本自動排版 | 由 AI 直接畫 SVG，品質看 AI |
+| 明暗主題 | ✓ 每種風格都有淺色、深色 | 依指令由 AI 配色 |
 | 陌生人測試 | ✓ 另開審稿 AI | AI 給你一段提示詞，你貼到新對話 |
 | 手寫字體 | ✓ 內嵌 | 用系統字體（例如微軟正黑體） |
 

@@ -1,0 +1,412 @@
+{
+ "lang": "zh-Hant",
+ "report_type": "custom",
+ "style": "business",
+ "theme": "light",
+ "doc_title": "Model Y 產品介紹（示範）",
+ "meta": {
+  "kicker": "產品介紹｜Tesla Model Y（2026 年款・台灣）｜給正在考慮電動休旅的你",
+  "as_of": "資料查詢至 2026/10/23",
+  "version": "示範",
+  "sources": "示範用，非 Tesla 官方文件 · 來源：U-CAR（試駕、售價、車型）、聯合新聞網（售價、超充費率、銷量）、車潮誌（掛牌）、科技新報（超充站、FSD）、Euro NCAP、TVBS（稅制）· 售價為 2026/5 報導；530 元為推算",
+  "image_credit": "",
+  "author": "示範"
+ },
+ "title": "Model Y：^^190 萬起^^、6 月全台 ==銷量第 3==——跑得遠、充電方便、電費便宜；\n三款裡最推 **長續航版**：續航最長、價格居中",
+ "layout": {
+  "columns": "2fr 1fr 1fr",
+  "areas": [
+   "a a b",
+   "c d e"
+  ]
+ },
+ "zones": [
+  {
+   "id": "a",
+   "color": "blue",
+   "icon": "star",
+   "label": "四個買它的理由",
+   "question": "憑什麼讓我心動？",
+   "lead": "跑得遠、養得起、充得到、夠安全",
+   "blocks": [
+    {
+     "type": "cards",
+     "items": [
+      {
+       "icon": "map",
+       "tag": "跑得遠",
+       "title": "台北—嘉義來回，還剩 10% 電",
+       "diagram": {
+        "type": "route",
+        "from": "台北",
+        "to": "嘉義",
+        "value": "465.6",
+        "unit": "公里",
+        "icon": "car",
+        "start": {
+         "pct": 100,
+         "label": "出發 100%"
+        },
+        "end": {
+         "pct": 10,
+         "label": "回來剩 10%"
+        },
+        "bars": [
+         {
+          "label": "官方 WLTP",
+          "value": 603,
+          "display": "603"
+         },
+         {
+          "label": "高速實測",
+          "value": 517,
+          "display": "517（85%）",
+          "highlight": true
+         }
+        ]
+       },
+       "foot": "U-CAR 實測：31.7–33.6°C、全程開冷氣"
+      },
+      {
+       "icon": "wallet",
+       "tag": "養得起",
+       "title": "同一趟來回，電費約一頓晚餐",
+       "diagram": {
+        "type": "formula",
+        "terms": [
+         {
+          "icon": "battery-charging",
+          "value": "75.5",
+          "label": "度・充一次"
+         },
+         {
+          "icon": "tag",
+          "value": "7 元",
+          "label": "每度・平日"
+         }
+        ],
+        "result": {
+         "icon": "receipt",
+         "value": "≈530",
+         "label": "元・來回"
+        },
+        "aside": {
+         "icon": "utensils",
+         "text": "≈ 一頓晚餐"
+        },
+        "scale": {
+         "title": "每度電價看時段",
+         "min": 5,
+         "max": 14,
+         "points": [
+          {
+           "value": 6,
+           "label": "離峰 6",
+           "kind": "good"
+          },
+          {
+           "value": 7,
+           "label": "平日 7",
+           "kind": "hi"
+          },
+          {
+           "value": 13,
+           "label": "尖峰 13 元",
+           "kind": "bad"
+          }
+         ]
+        }
+       },
+       "foot": "另外：電動車免牌照稅到 2030 年底"
+      },
+      {
+       "icon": "plug",
+       "tag": "充得到",
+       "title": "全台超充站還在持續增加",
+       "diagram": {
+        "type": "progress",
+        "current": 115,
+        "target": 125,
+        "current_label": "現在",
+        "unit": "站",
+        "target_label": "2026 年底目標 125 站",
+        "sub": "700 支超充電座",
+        "then": {
+         "from_icon": "timer",
+         "from_label": "充 5 分鐘",
+         "to_icon": "route",
+         "prefix": "多跑",
+         "value": "120",
+         "unit": "公里",
+         "sub": "高速路上補電很快"
+        }
+       },
+       "foot": "另有 1,200 支以上目的地充電樁"
+      },
+      {
+       "icon": "shield-check",
+       "tag": "夠安全",
+       "title": "歐洲最嚴格的撞擊測試拿五星",
+       "chart": {
+        "kind": "bar",
+        "data": [
+         {
+          "label": "成人乘員",
+          "value": 91,
+          "display": "91%"
+         },
+         {
+          "label": "兒童乘員",
+          "value": 93,
+          "display": "93%",
+          "highlight": true
+         },
+         {
+          "label": "行人與單車",
+          "value": 86,
+          "display": "86%"
+         },
+         {
+          "label": "主動安全",
+          "value": 92,
+          "display": "92%"
+         }
+        ]
+       },
+       "sub": "★★★★★ Euro NCAP 五星（2025/11）",
+       "foot": "**對家庭**：兒童保護是四項中最高分"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "b",
+   "color": "gray",
+   "icon": "users",
+   "label": "人氣",
+   "lead": "台灣最多人買的電動車",
+   "blocks": [
+    {
+     "type": "stat",
+     "value": "8,524",
+     "unit": "輛",
+     "label": "2026 上半年台灣掛牌",
+     "compare": "約略數字，車潮誌整理"
+    },
+    {
+     "type": "chart",
+     "kind": "bar",
+     "title": "2026/6 單月掛牌（純電車）",
+     "data": [
+      {
+       "label": "Model Y",
+       "value": 2201,
+       "display": "2,201 輛・第 1",
+       "highlight": true
+      },
+      {
+       "label": "Toyota bZ4X",
+       "value": 310,
+       "display": "310 輛・第 4"
+      }
+     ]
+    },
+    {
+     "type": "note",
+     "icon": "trophy",
+     "text": "含油車在內，6 月全台所有車款第 3 名；同月 Tesla 占純電車 75%。"
+    }
+   ]
+  },
+  {
+   "id": "c",
+   "color": "gray",
+   "icon": "scale",
+   "label": "三款怎麼選",
+   "lead": "多數家庭：長續航最均衡",
+   "blocks": [
+    {
+     "type": "columns",
+     "cols": "1.7fr 1fr",
+     "children": [
+      [
+       {
+        "type": "compare",
+        "title": "看你怎麼開，選一款",
+        "question": "你最常怎麼開？",
+        "badge": "★ 最推",
+        "options": [
+         {
+          "name": "後驅",
+          "price": "189.99 萬",
+          "why": "市區通勤・預算優先",
+          "specs": [
+           {
+            "icon": "milestone",
+            "text": "534 公里"
+           },
+           {
+            "icon": "zap",
+            "text": "0–100 5.9 秒"
+           }
+          ]
+         },
+         {
+          "name": "長續航",
+          "price": "229.99 萬",
+          "why": "常跑長途・全家出遊",
+          "recommended": true,
+          "specs": [
+           {
+            "icon": "milestone",
+            "text": "641 公里"
+           },
+           {
+            "icon": "zap",
+            "text": "0–100 4.8 秒"
+           }
+          ]
+         },
+         {
+          "name": "Performance",
+          "price": "249.99 萬",
+          "why": "要加速・主動懸吊",
+          "specs": [
+           {
+            "icon": "milestone",
+            "text": "598 公里"
+           },
+           {
+            "icon": "zap",
+            "text": "0–100 3.5 秒"
+           }
+          ]
+         }
+        ]
+       }
+      ],
+      [
+       {
+        "type": "chart",
+        "kind": "bar",
+        "title": "行李放哪裡（公升）",
+        "data": [
+         {
+          "label": "前車廂",
+          "value": 117,
+          "display": "117"
+         },
+         {
+          "label": "後車廂",
+          "value": 854,
+          "display": "854"
+         },
+         {
+          "label": "後座放倒",
+          "value": 2041,
+          "display": "2,041",
+          "highlight": true
+         }
+        ]
+       }
+      ]
+     ]
+    },
+    {
+     "type": "speclines",
+     "rows": [
+      {
+       "label": "舒適",
+       "text": "**前座通風椅**・**後座 8 吋螢幕**・15.4 吋中控・256 色氛圍燈・15+1 支喇叭（長續航以上）"
+      },
+      {
+       "label": "性能版",
+       "text": "主動式懸吊・21 吋輪圈"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "d",
+   "color": "red",
+   "icon": "triangle-alert",
+   "label": "買之前確認",
+   "lead": "最重要：家裡能不能充電",
+   "blocks": [
+    {
+     "type": "decision",
+     "icon": "house",
+     "question": [
+      "家裡或公司",
+      "能裝充電樁嗎？"
+     ],
+     "yes": {
+      "label": "能",
+      "text": "✓ 可以買，後驅就夠"
+     },
+     "no": {
+      "label": "不能",
+      "text": "先問管委會；不能裝，就查附近超充站再決定"
+     }
+    },
+    {
+     "type": "issues",
+     "items": [
+      {
+       "icon": "gauge",
+       "problem": "高速實際續航約為 WLTP 的 85%",
+       "fix": "排長途行程時，以官方數字打 85 折估算"
+      },
+      {
+       "icon": "cpu",
+       "problem": "FSD 自動輔助駕駛在台灣還沒開放",
+       "detail": "（2026/6 送審）",
+       "fix": "別把它當成現在就能用的功能"
+      },
+      {
+       "icon": "sun",
+       "problem": "全景天窗在夏天仍偏熱",
+       "fix": "考慮加貼隔熱膜"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "e",
+   "color": "green",
+   "icon": "flag",
+   "label": "下一步",
+   "lead": "四件事，都由你來做",
+   "blocks": [
+    {
+     "type": "flowsteps",
+     "items": [
+      {
+       "icon": "calendar",
+       "title": "到官網預約試駕",
+       "sub": "親自坐坐後座、打開後車廂"
+      },
+      {
+       "icon": "house",
+       "title": "確認家裡能不能充電",
+       "sub": "能在家充，後驅版就很夠用"
+      },
+      {
+       "icon": "map-pin",
+       "title": "查住家附近的超充站",
+       "sub": "週末充電最便宜"
+      },
+      {
+       "icon": "circle-dollar-sign",
+       "title": "到官網確認售價與交車時間",
+       "sub": "本頁售價為 2026/5 報導"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -27,3 +27,12 @@ Then:
 
 Rules: do not upload the company file anywhere else; do not keep its content; use it only for
 colours, fonts and logo.
+
+## Dark theme
+
+The style file has a `dark` block used with `--theme dark`. `extract_brand.py` copies the default
+dark colours. To use the brand colour in dark reports, set `dark.tokens.c-blue`, `dark.tokens.hi`
+and `dark.chart.highlight` to a lighter version of it and check:
+`python3 scripts/check_colors.py "<brand>,<context grey>" --surface "<dark card colour>" --mode dark`.
+If the brand has a logo for dark backgrounds, keep it next to the style file and pass it as
+`logo.src_dark` in the spec.

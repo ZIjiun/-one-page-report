@@ -7,16 +7,22 @@ Write one spec per language. Copy an example from `examples/` and change it.
   "lang": "zh-Hant",               // or "en"
   "report_type": "results",        // results | progress | proposal | postmortem | comparison | custom
   "style": "handdrawn",            // default style; --style overrides
+  "theme": "light",                // light | dark; --theme overrides
   "doc_title": "file title",
   "meta": {
     "kicker": "small line above the title",
     "as_of": "資料統計至 2026/10 中",
     "version": "v1", "author": "name",
     "confidential": "內部使用",      // optional, shown in red in the footer
-    "sources": "sources and estimate notes"
+    "sources": "sources and estimate notes",
+    "image_credit": "圖片：… © …（only when images are used）"
   },
   "title": "one-sentence conclusion\nsecond line",
   "layout": {"columns": "2fr 1fr", "areas": ["a b", "c d", "e e"]},
+  "hero": {"src": "img/keyart.jpg", "mode": "side", "dark": {"src": "img/keyart-night.jpg"}},   // optional; "dark": per-theme override or null; see references/imagery.md
+  "logo": {"src": "img/logo.png", "src_dark": "img/logo-white.png", "h": 104},
+  "backdrop": {"src": "img/bg.jpg", "opacity": 0.3},
+  "derived": [{"value": "−60%", "formula": "(2.6-6.5)/6.5*100", "from": ["6.5", "2.6"]}],   // every worked-out number; review.py recomputes it
   "zones": [ { "id": "a", "color": "blue", "icon": "trophy", "label": "成果",
                "question": "這次更新值得嗎？", "lead": "結論：…", "blocks": [ ... ] } ]
 }
@@ -34,8 +40,9 @@ Zone colours: `blue` (main message), `red` (problems), `gray` (details), `green`
 
 | type | fields (**bold** = required) |
 |---|---|
-| `cards` | **`items`**: `[{icon, tag, title, big, big_note, chart, sub, foot}]`, optional `cols` |
-| `chart` | **`kind`** bar/column/line, **`data`**: `[{label, value, display, highlight}]`, `title`, `note`, `caption`; line: `reference {value,label}`, `y_min`, `y_max` |
+| `cards` | **`items`**: `[{icon, tag, title, big, big_note, chart, diagram, photo, sub, foot}]`, optional `cols`. `diagram` = any diagram block; `photo` = `{src, position, caption}` (fills the card bottom) |
+| diagrams | `route`, `formula`, `progress`, `gauge`, `compare`, `decision`, `transform`, `flowsteps`, `photo`, `speclines` — fields in `references/diagrams.md` |
+| `chart` | **`kind`** bar/column/line (column: `icon` per bar, `top_note`), **`data`**: `[{label, value, display, highlight}]`, `title`, `note`, `caption`; line: `reference {value,label}`, `y_min`, `y_max` |
 | `issues` | **`items`**: `[{problem, icon, detail, fix}]` (`fix` optional but strongly recommended), `title` |
 | `chips` | **`rows`**: `[{label, icon, items: ["*key item", "item"]}]`, `title`, `note` |
 | `table` | key/value: **`rows`**: `[{key, value, icon}]`; grid: **`header`**, **`rows`**: `[[...]]`, `recommend`: column index; cells may start with `ok`, `no`, `warn` |

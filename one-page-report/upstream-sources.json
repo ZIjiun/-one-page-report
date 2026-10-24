@@ -74,10 +74,108 @@
       ],
       "used_in": [
         "scripts/check_colors.py",
-        "references/charts-and-color.md"
+        "references/charts-and-color.md",
+        "references/diagrams.md (report charts)",
+        "scripts/diagrams.py (report charts)"
       ],
       "sha256": "0bdb4b6c10e42d6fa2be9f8b1b2529be529e33163a8640f55181077e30fa12fb",
       "reviewed_at": "2026-10-23"
+    },
+    {
+      "name": "AntV Infographic",
+      "type": "github",
+      "repo": "https://github.com/antvis/Infographic",
+      "licence": "MIT",
+      "paths": [
+        {
+          "path": "skills/infographic-creator",
+          "last_commit": null,
+          "tree": null,
+          "reviewed": "2026-10-24 (npm @antv/infographic 0.2.20)"
+        }
+      ],
+      "used_in": [
+        "references/diagrams.md"
+      ],
+      "what": "information-shape categories (sequence, list, compare, hierarchy, relation, chart) and the idea of separating structure from item style; no code used"
+    },
+    {
+      "name": "answer-me-with-html",
+      "type": "skill",
+      "repo": "installed skill (claude.ai)",
+      "licence": "see the skill's licences/",
+      "paths": [
+        {
+          "path": "SKILL.md section 4",
+          "last_commit": null,
+          "tree": null,
+          "reviewed": "2026-10-24"
+        }
+      ],
+      "used_in": [
+        "references/diagrams.md",
+        "references/imagery.md"
+      ],
+      "what": "shape-of-information → component table; images only for what a diagram cannot show; say each fact once"
+    },
+    {
+      "name": "emilkowalski/skills",
+      "type": "github",
+      "repo": "https://github.com/emilkowalski/skills",
+      "licence": "MIT",
+      "paths": [
+        {
+          "path": "skills/apple-design",
+          "last_commit": null,
+          "tree": null,
+          "reviewed": "2026-10-24"
+        },
+        {
+          "path": "skills/emil-design-eng",
+          "last_commit": null,
+          "tree": null,
+          "reviewed": "2026-10-24"
+        },
+        {
+          "path": "skills/break-ui",
+          "last_commit": null,
+          "tree": null,
+          "reviewed": "2026-10-24"
+        },
+        {
+          "path": "skills/prototype",
+          "last_commit": null,
+          "tree": null,
+          "reviewed": "2026-10-24"
+        }
+      ],
+      "used_in": [
+        "references/layout.md",
+        "assets/styles/base.css",
+        "references/review-checklist.md",
+        "SKILL.md"
+      ],
+      "what": "tracking and leading by size, soft shadow over hard borders, no stacked translucent layers, restraint; stress-testing with worst-case text; showing design options side by side"
+    },
+    {
+      "name": "IBCS reporting standard",
+      "type": "web",
+      "repo": "https://www.ibcs.com/",
+      "licence": "standard (ideas only)",
+      "paths": [
+        {
+          "path": "IBCS standards: notation, variance, bridge",
+          "last_commit": null,
+          "tree": null,
+          "reviewed": "2026-10-24"
+        }
+      ],
+      "used_in": [
+        "references/diagrams.md",
+        "references/charts-and-color.md",
+        "scripts/diagrams.py"
+      ],
+      "what": "actual / target / previous notation, variance bars, waterfall (bridge); described in our own words"
     }
   ]
 }

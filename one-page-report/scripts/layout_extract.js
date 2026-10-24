@@ -35,7 +35,7 @@
 
   // 2. text: collect styled fragments per text node and visual line, then merge fragments
   //    that sit on the same line inside the same block into one line with several runs.
-  const skip = (el) => el.closest('svg');
+  const skip = (el) => el.closest('svg') || el.closest('.shot');
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
     acceptNode: (n) => (n.nodeValue.trim() && !skip(n.parentElement)) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT,
   });
@@ -87,6 +87,11 @@
     const item = { kind: svg.classList.contains('ic') ? 'icon' : (svg.classList.contains('chart') ? 'chart' : 'timeline'), ...r, svg: s };
     if (item.kind === 'chart') item.data = svg.getAttribute('data-chart');
     out.push(item);
+  });
+  // 4. diagrams and images (user-provided photos, hero, logo, backdrop): captured as pictures by build_pptx.py
+  document.querySelectorAll('svg.diagram, .shot, .photo, .cardphoto, .hero, .page-logo, .backdrop').forEach((el) => {
+    const r = rect(el); if (r.w < 2 || r.h < 2) return;
+    out.push({ kind: el.matches('svg.diagram, .shot') ? 'diagram' : 'image', cls: el.className.baseVal || el.className.toString(), ...r });
   });
   return { page: { w: 1920, h: 1080, bg: color(getComputedStyle(document.body).backgroundColor) || '#ffffff' }, items: out };
 }
