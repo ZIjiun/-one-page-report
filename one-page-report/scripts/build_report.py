@@ -556,7 +556,9 @@ LINKS_JS = """<script>
       grid.appendChild(svg);
       if (l.label) {
         var lb = document.createElement('div'); lb.className = 'link-label'; lb.innerHTML = l.label;
-        lb.style.color = col; grid.appendChild(lb);
+        lb.style.color = col;
+        if (!horiz) { lb.style.maxWidth = 'none'; lb.style.whiteSpace = 'nowrap'; lb.style.background = paper; lb.style.padding = '0 6px'; }
+        grid.appendChild(lb);
         var w = lb.offsetWidth, h = lb.offsetHeight;
         lb.style.left = (horiz ? cx - w / 2 : cx + S / 2 + 6) + 'px';
         lb.style.top = (horiz ? cy + S / 2 + 4 : cy - h / 2) + 'px';
@@ -701,6 +703,8 @@ def build(spec, style):
         if ln.get("from") not in ids or ln.get("to") not in ids:
             raise ValueError(f'links: unknown zone in {ln} (zones: {sorted(ids)})')
         links.append({"from": ln["from"], "to": ln["to"], "label": rich(ln.get("label", ""))})
+    if links:
+        body_cls = (body_cls + " has-links").strip()
     links_js = ("<script>window.LINKS=" + json.dumps(links, ensure_ascii=False).replace("</", "<\\/") + ";</script>" + LINKS_JS) if links else ""
     # a summary strip above the footer: {"icon", "text"} or {"icon", "lead", "items": [...], "result"}
     sm = spec.get("summary")
