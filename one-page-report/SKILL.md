@@ -5,7 +5,7 @@ description: "Turn project or business material (notes, Excel/CSV data, existing
 
 # One-page report
 
-Version 1.3.2 · source: https://github.com/ZIjiun/-one-page-report · see `CHANGELOG.md` in the repo
+Version 1.4.0 · source: https://github.com/ZIjiun/-one-page-report · see `CHANGELOG.md` in the repo
 
 Make one 16:9 page that a busy reader understands in ten seconds, from the user's own material.
 The page is the last step. Most of the value is in the thinking before it: who reads it, what
@@ -73,10 +73,10 @@ and screenshots (evidence photos, numbered marks). Read it before the storyline 
 | 4 Storyline | Read the material (`references/inputs.md`). Distil: messy input → 3 insights → one-sentence conclusion + 2–4 reasons. Proposal types use the decision-memo shape. Write the background zone (its own zone by default; one line only when the reader knows the story). **Show the storyline (in Chinese) and get a yes before any visual work** | `references/storyline.md` |
 | 5 Diagrams & charts | For each zone name the **shape of its information** (route, calculation, choice, yes/no, before→after, steps, numbers, dates, appearance, layout & size) and draw it: the picture carries the logic, text supports. Each image gets a job (evidence, identification, mood, or a real thing a drawing cannot show) that decides where it goes. One highlight, rest grey; check colours. Show the zone → diagram plan with the storyline if it changes much | `references/diagrams.md`, `references/charts-and-color.md` |
 | 6 Layout | Zones = the reader's questions; position follows the order of those questions; background zone first; weight follows importance; each number appears once; exactly 4 font sizes | `references/layout.md` |
-| 7 Icons & imagery | Icons: sort categories fast or act as nodes in a diagram; 5-second rule; one concept = one icon; always with text. Imagery and theme colours only when they match the content and keep the squint test; place each image by its job | `references/icons.md`, `references/imagery.md` |
-| 8 Draft & choices | Build the Chinese version first, show it, list open design choices (core rule 2): heading style, frames, layout style, arrows, summary strip, aside, and what to do with empty space or too many zones. Try each on the page before recommending it; quality first | `references/design-options.md` |
+| 7 Icons & imagery | Icons: sort categories fast or act as nodes in a diagram; 5-second rule; one concept = one icon; always with text. Then check coverage: every place the reader sorts categories (zone tabs, the first column of a table, steps, timeline events, issues, card tags) has an icon, or the block says `"icons": false` and you tell the user why. Imagery and theme colours only when they match the content and keep the squint test; place each image by its job | `references/icons.md`, `references/imagery.md` |
+| 8 Draft & choices | Build the Chinese version first, show it, list open design choices (core rule 2): heading style, frames, layout style, arrows, summary strip, aside, and what to do with empty space or too many zones. Try each on the page before recommending it; quality first. Do not skip this round and hand over a finished page instead | `references/design-options.md` |
 | 9 Output | Translate to English with the same spec structure; render both sets | below |
-| 10 Self-review | Run the full checklist; fix; report the result | `references/review-checklist.md` |
+| 10 Self-review | Run `review.py`, then go through every checklist item it cannot measure; fix; report the result with the step log (Delivery) | `references/review-checklist.md` |
 
 ### Style, theme and imagery
 
@@ -90,7 +90,9 @@ Ask once per report (unless the user already said), as one question with a recom
   Recommend light for print and PDF, dark for screens and dark key art.
 - **Imagery — the user decides, always ask first.** Ask whether to use images at all (header
   image, logo, background, photos in zones), and if yes whether the user has official images or
-  wants you to find them on official sources. Never add images the user did not agree to.
+  wants you to find them on official sources. Before offering to find them, try one download from
+  an official source: if this environment cannot fetch images, say so in the same question and
+  offer only "you attach them" or "no images". Never add images the user did not agree to.
   For each image, propose its job and placement in the interview (evidence → inside its zone;
   identification → small, next to the name; mood → header or faint background), and let the
   user decide (`references/imagery.md`).
@@ -155,7 +157,11 @@ validator. Otherwise run the offline stand-in, which gives the same pass/fail re
    design choices (style, theme, heading style, frames, highlight, images, and any arrows, summary
    strip or aside). If official images were used,
    say once that the page is for internal use unless the user holds the rights.
-3. Do not recap the steps.
+3. A **step log**: one short line per workflow step 1–10: done, skipped (and why), or not
+   verified. A step that was not run is never reported as done. `review.py` passing is not the
+   self-review: it measures only part of the checklist, so say which remaining items you checked
+   by eye and which you could not check.
+4. Do not recap the steps.
 
 ## Files
 

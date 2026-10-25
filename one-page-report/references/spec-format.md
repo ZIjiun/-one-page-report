@@ -41,6 +41,9 @@ Write one spec per language. Copy an example from `examples/` and change it.
 Zone colours: `blue` (main message), `red` (problems), `gray` (details), `green` (next / ask),
 `orange` (timeline), `purple`, `teal`.
 
+Any block can take `"icons": false` to record that it has no icons on purpose (`references/icons.md`,
+step 7); `review.py` then skips it in the icon-gap check.
+
 ## Text markup (any text field)
 
 `**bold**`, `==good (green)==`, `!!bad (red)!!`, `^^marker highlight^^`, `++up arrow green++`,
@@ -56,7 +59,7 @@ Zone colours: `blue` (main message), `red` (problems), `gray` (details), `green`
 | `issues` | **`items`**: `[{problem, icon, detail, fix}]` (`fix` optional but strongly recommended), `title` |
 | `chips` | **`rows`**: `[{label, icon, items: ["*key item", "item"]}]`, `title`, `note` |
 | `table` | key/value: **`rows`**: `[{key, value, icon}]`; grid: **`header`**, **`rows`**: `[[...]]`, `recommend`: column index; cells may start with `ok`, `no`, `warn` |
-| `steps` | **`items`**: `[{title, sub, owner, due}]` — `owner` and `due` show as a small tag; use them for every action |
+| `steps` | **`items`**: `[{title, sub, owner, due, icon}]` — `owner` and `due` show as a small tag; use them for every action |
 | `note` | **`text`**, `icon` |
 | `timeline` | **`events`**: `[{date, label, sub, icon, status, highlight}]`; `status`: `done` (✓ solid line), `doing` (… amber), `plan` (○ dashed). The line is solid up to the last `done` event |
 | `status` | **`items`**: `[{state, name, note}]`; `state`: `good` 正常 / On track, `warning` 注意 / Watch, `serious` 落後 / Behind, `critical` 嚴重 / Critical. Override the words with `labels: {"good": "已達標"}` |

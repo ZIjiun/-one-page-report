@@ -3,6 +3,10 @@
 Run `scripts/review.py` for the automatic part, look at the PNGs, then grade the page.
 Report the grade and the open fixes to the user in Chinese.
 
+**Passing `review.py` is not the review.** It measures only part of this list (marked
+"review.py" below). Go through every other item yourself, and in the delivery say which items you
+could not check (the step log, `SKILL.md` → Delivery).
+
 ## Grade (adapted from mckinsey-critic in enterprise-ai-skills, MIT)
 
 | Grade | Meaning |
@@ -47,13 +51,16 @@ which remain); **one thing that works** (protect it).
 - [ ] Home or company mode respected: no blocked site worked around; missing items named
 - [ ] Estimates are labelled
 - [ ] One name per thing across the page
+- [ ] Each number appears once, next to what it proves; the title may restate the headline figure
+      (review.py flags a number shown in more than one zone)
 - [ ] **zh and en versions: identical numbers, dates and names** (`review.py` compares them)
 
 ## C. Design
 
 - [ ] Squint test: the most visible thing is the most important thing
 - [ ] Zones align to one grid; even gaps
-- [ ] Exactly 4 font sizes (46 / 34 / 18 / 14), diagrams included
+- [ ] Exactly 4 font sizes (46 / 34 / 18 / 14), diagrams included (review.py `--html` measures the
+      rendered sizes: a chart scaled up, or squeezed under 12 px)
 - [ ] Every zone: is its main element a picture of the relationship (diagram, chart, photo) where the
       content has a shape? Text describing a flow, choice, route or calculation → draw it
 - [ ] Light / dark: built in the theme the user chose; dark-theme logo and photos checked
@@ -63,6 +70,10 @@ which remain); **one thing that works** (protect it).
 - [ ] Text contrast ≥ 4.5:1 for body text; meaning never by colour alone
 - [ ] No text overlaps or overflows (`render.py` warns; also look at the PNG)
 - [ ] Icons: one concept = one icon; all with text; none decorative
+- [ ] Icons are **where they should be**: zone tabs, the first column of a table, steps, timeline
+      events, issues and card tags each have one, or the block says `"icons": false` and the user
+      was told why (review.py lists the gaps)
+- [ ] One highlight per chart (review.py flags charts with more)
 - [ ] Design options (if used): one heading style; at most one dashed zone and one aside; open
       zones hold no evidence; arrows show real relations; the summary strip does not repeat the
       title (`references/design-options.md`, self-check)
@@ -81,6 +92,7 @@ which remain); **one thing that works** (protect it).
         a new chat with the PNG, and say in the delivery that the stranger test is still open.
 - [ ] Footer for the mode (`meta.mode`): home = sources and data date; company = also version,
       author and a confidentiality mark if the material is internal
+- [ ] Step log ready: each workflow step 1–10 done, skipped (why) or not verified
 
 ## "AI feel" self-check (then the user decides)
 
@@ -98,8 +110,8 @@ Flag and fix these:
 - A question on every zone tab: keep the question only where the reader would really ask it;
   otherwise the label alone is enough
 - Stock phrases in leads such as 「三項都有對策」 / "all covered": say what the fixes are instead
-- Table cells that say 「素材未提供」 / "not given": a hole looks unfinished. Ask the user, or drop
-  the row or column
+- Table cells that say 「素材未提供」「未公開」「待補」 / "not given": a hole looks unfinished. Ask the
+  user, or drop the row or column (review.py flags these)
 
 ## Decision clarity (proposals and asks)
 

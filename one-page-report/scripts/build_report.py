@@ -107,7 +107,8 @@ def icon(name, cls="ic"):
         body = icon_names().get(name)
         if body is None:
             print(f"! icon not found: {name} (skipped)", file=sys.stderr)
-        _icon_cache[name] = body
+        # one line: rich() turns "\n" into <br>, which would cut a multi-shape icon short inside {{icon:...}}
+        _icon_cache[name] = re.sub(r">\s+<", "><", body).strip() if body else body
     body = _icon_cache[name]
     if body is None:
         return ""
@@ -200,7 +201,7 @@ def chart_svg(b, st):
         hi = b.get("y_max", max(vals + ([ref["value"]] if ref else [])) + 3)
         def X(i): return L + (W - L - R) * (i / max(1, len(data) - 1))
         def Y(v): return T + (H - T - B) * (1 - (v - lo) / ((hi - lo) or 1))
-        out = [f'<svg class="chart" viewBox="0 0 {W} {H+6}" style="width:100%;height:auto" data-chart="{esc(json.dumps(b, ensure_ascii=False))}">']
+        out = [f'<svg class="chart" viewBox="0 0 {W} {H+6}" style="width:100%;max-width:{W}px;height:auto" data-chart="{esc(json.dumps(b, ensure_ascii=False))}">']
         out.append(f'<path d="M{L-10} {H-B+2} h{W-L-R+20}" stroke="{c["axis"]}" stroke-width="1.5"/>')
         if ref:
             ry = Y(ref["value"])
@@ -353,7 +354,7 @@ def block(b, st, lang):
             if it.get("owner") or it.get("due"):
                 who = f'<span class="who">{rich(" · ".join(x for x in [it.get("owner"), it.get("due")] if x))}</span>'
             sub = f'<span>{rich(it["sub"])}</span>' if it.get("sub") else ""
-            lis.append(f'<li><span class="n">{i}</span>{rich(it["title"])}{who}{sub}</li>')
+            lis.append(f'<li><span class="n">{i}</span>{icon(it.get("icon"))}{rich(it["title"])}{who}{sub}</li>')
         return '<ol class="steps">' + "".join(lis) + "</ol>"
     if t == "note":
         return f'<div class="callout">{icon(b.get("icon"))}{rich(b["text"])}</div>'

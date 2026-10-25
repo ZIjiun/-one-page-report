@@ -434,6 +434,10 @@ def stattile(b, st, icons):
     p = Pal(st); W = 320
     val = str(b.get("value", "")); vz = fit_size(val, 190, (46, 34, 18))
     good = b.get("good", True); dc = p.good if good else p.bad; arrow = "▲" if good == (not b.get("down", False)) else "▼"
+    # An arrow only belongs to a change ("+24 pt", "−18%", "8 weeks down"). A plain note ("excl. opex")
+    # gets no arrow and no good/bad colour, so it cannot read as an improvement.
+    if not re.match(r"\s*[+\-−±▲▼↑↓]|\s*\d", str(b.get("delta", ""))):
+        arrow, dc = "", p.soft
     if "arrow" in b:
         arrow = b["arrow"]
     o = [T(2, 46 if vz == 46 else 38, esc(val), vz, p.hi, "start", 700, "big")]

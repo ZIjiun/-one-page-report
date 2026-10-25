@@ -41,7 +41,9 @@ Screenshot with numbered marks: [docs/samples/screenshot-marks.png](docs/samples
    bento layout, arrows between zones, a summary strip, a speech-bubble aside.
 8. **Self-reviews**: logic, every number traced to your files (.csv .xlsx .pptx .docx read directly)
    and every calculation recomputed, totals that must add up, zh/en match, overlap and overflow,
-   "AI feel", and a stranger test.
+   rendered font sizes, missing icons, numbers shown twice, empty "not given" cells, "AI feel",
+   and a stranger test. The delivery ends with a **step log** (done / skipped / not verified), so a
+   skipped step is never reported as done.
 
 Report types, charts and layouts are tools, not templates: the same rules work for a project, a
 purchase, a plan or an incident, and exceptions are agreed in the interview.

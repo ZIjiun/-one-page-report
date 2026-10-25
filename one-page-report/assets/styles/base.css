@@ -140,6 +140,7 @@ th.rec{color:var(--hi-text)}
 .steps li:last-child{border-bottom:none}
 .steps li .n{position:absolute;left:4px;top:9px;width:22px;height:22px;border-radius:50%;background:var(--zc);color:var(--on-accent,#fff);font-size:14px;display:flex;align-items:center;justify-content:center;font-weight:700}
 .steps li span{display:block;font-size:14px;color:var(--soft);line-height:1.5;margin-top:2px}
+.steps li>.ic{color:var(--zc);margin-right:6px}
 .steps li .who{display:inline;font-size:14px;color:var(--zc);font-weight:700;margin-left:6px}
 
 /* note / callout */

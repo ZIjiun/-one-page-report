@@ -85,7 +85,7 @@ One zone, one main picture. A second element is fine when it is a different shap
 | `flowsteps` | **`items`** `[{icon, title, sub, owner}]` |
 | `photo` | **`src`** (local file), `title`, `alt`, `position` (CSS, e.g. "40% 45%"), `height`, `caption` `["text" or {value, unit, label}]`, `marks` `[{x, y, w, h, label}]` (screenshots: numbered pins / boxes, x y w h in % of the image, whole image shown) |
 | `speclines` | **`rows`** `[{icon, label, text}]` — a quiet replacement for long chip rows; `icon` is optional (category rows, `references/icons.md`) |
-| `stattile` | **`value`**, `label`, `delta`, `vs`, `good` (true), `arrow`, `spark` `[numbers]`, `spark_label` `[first, last]` |
+| `stattile` | **`value`**, `label`, `delta`, `vs`, `good` (true), `arrow`, `spark` `[numbers]`, `spark_label` `[first, last]` — the ▲/▼ arrow and good/bad colour appear only when `delta` is a change ("+24 pt", "−18%"); a plain note gets neither unless `arrow` is set |
 | `bullet` | **`rows`** `[{label, actual, target, compare, max, ranges:[poor, ok, good], display, note}]`, `higher_is_better`, `legend` `[actual, target, compare]` |
 | `dumbbell` | **`rows`** `[{label, before, after, before_display, after_display}]`, `higher_is_better`, `legend` `[before, after]`, `zero` (true) |
 | `slope` | **`items`** `[{label, before, after, highlight, unit}]` (1–6), `left`, `right`, `higher_is_better` |

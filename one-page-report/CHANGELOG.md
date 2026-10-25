@@ -1,5 +1,51 @@
 # Changelog
 
+## 1.4.0 — 2026-10-25 (the review checks what was skipped, not only what was done)
+
+Found by running the full workflow on a real request: every item `review.py` measured passed, and
+every item it did not measure was missed (icons left out of table rows and steps, a figure repeated,
+a 「未公開」 cell). The fix is to measure more, and to make the delivery say what was not checked.
+
+**review.py: new checks**
+- `icon_gaps`: category rows with no icon (the first column of a table, steps, timeline events,
+  issues, card tags, chips, spec lines). A block can say `"icons": false` to record the choice.
+- `repeated_numbers`: a number shown in more than one zone (the title may restate the headline
+  figure). Repeats inside one zone are listed apart, as information.
+- `holes`: cells such as 「素材未提供」「未公開」「待補」, "not given", "N/A".
+- `focus`: a chart with more than one highlighted item (one highlight per chart).
+- `fonts` (with `--html`): rendered text sizes off the 46 / 34 / 18 / 14 scale: a chart scaled up,
+  or a diagram squeezed under 12 px.
+- `colours`: contrast of the style's highlight and zone colours on its page (graphics 3:1, text
+  4.5:1); custom and company styles also get the highlight checked by `check_colors.py`.
+
+**Fixes**
+- `{{icon:name}}` inside text: 159 of the 173 icons were cut to their first shape, because the
+  line breaks in the icon's SVG were turned into `<br>`. The icons now go in as one line. (No
+  example used the markup, so it had not shown; zone tabs and `icon` fields were never affected.)
+- Line charts no longer grow past their natural width (every other chart already stopped there),
+  so their labels stay at the page's font sizes.
+- `review.py`: a derived number's inputs with 萬 / 億 / K / M (e.g. "40 萬") are now matched
+  against the sources in the same units.
+- `review.py`: the two lines of one diagram label are no longer reported as overlapping text.
+- `stattile`: the ▲/▼ arrow and good/bad colour appear only when `delta` is a change ("+24 pt");
+  a plain note ("excl. opex") gets neither, so it cannot read as an improvement.
+- `steps` items take an `icon`.
+
+**Workflow**
+- Delivery adds a **step log**: each workflow step 1–10 done, skipped (why) or not verified.
+  Passing `review.py` is not the self-review; the delivery says which other checklist items were
+  checked by eye and which could not be checked.
+- Icons (`references/icons.md`, step 7): a coverage check after building; grid tables take
+  `{{icon:name}}` in the first cell; changing a block (a timeline into steps) can drop its icons.
+- Step 8 is not skipped: the draft and its design choices go to the user before the finished page.
+- Imagery: before offering to find images, try one download; if the environment cannot fetch
+  images, offer only "you attach them" or "no images".
+- `portable/`: the same rules in short (icons not missing, each number once, no 「未提供」 cells,
+  the step log).
+
+Existing specs build as before. The examples now show advisories they always had (for example the
+proposal demo's 「素材未提供」 cells and 60 萬 shown in three zones); they are left as they are.
+
 ## 1.3.2 — 2026-10-25 (background first, design options you choose)
 
 **Background**

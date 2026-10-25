@@ -30,6 +30,11 @@ make the page look machine-made.
 5. **Always with text.** Icons never carry meaning alone.
 6. If an icon needs a moment of thought (e.g. "swords" for a fantasy game), list it as a design
    choice for the user (core rule 2).
+7. **Coverage check after building.** Steps 1–6 decide whether an icon is right; this step checks
+   that none is missing. Go through the page: every zone tab, the first column of each table, each
+   step, timeline event, issue and card tag gets an icon, unless the 5-second rule fails. When a
+   block deliberately has none, add `"icons": false` to it and tell the user why. `review.py`
+   lists the gaps. Changing a block (a timeline into steps, say) can drop its icons: check again.
 
 ## Concept → icon (Lucide)
 
@@ -78,6 +83,7 @@ make the page look machine-made.
 | 主機、電視 console, TV | `tv` |
 | 掌機、平板 handheld | `tablet` |
 | 手機 phone | `smartphone` |
+| 車輛、車款 vehicle, model | `car` |
 | 已完成 done | `circle-check` |
 | 進行中 in progress | `hourglass` |
 | 延遲 late | `clock` (+ red text) |
@@ -96,5 +102,7 @@ make the page look machine-made.
 
 - Zone tab: `"icon": "trophy"`.
 - Card tag: `"icon": "star"`.
-- Chip row / table row / issue / timeline event: `"icon": "..."`.
+- Chip row / key–value table row / issue / timeline event / step: `"icon": "..."`.
+- Grid table (header + rows): start the first cell with `{{icon:name}}`, e.g. `"{{icon:tag}} **售價**"`.
+- A block that deliberately has no icons: `"icons": false` (review.py then skips it).
 - Inside any text: `{{icon:name}}` (use sparingly).
